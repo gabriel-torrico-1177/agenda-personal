@@ -88,3 +88,4 @@ CREATE TABLE evento (
 - Si el proyecto usa Git, al terminar cada historia propón un commit con un mensaje en español, por ejemplo: "HU-01: registrar contacto".
 - Al terminar cada paso, agrega una línea a `docs/bitacora.md` con la fecha, la historia, qué se hizo y qué problemas hubo (la uso para la sección 5.2 del informe).
 - Una historia está terminada (Done) cuando pasa **todas** sus pruebas de aceptación de `docs/historias-de-usuario.md`.
+- Git: la rama main siempre debe compilar y funcionar. Para cada historia de usuario crea una rama feature/hu-XX-nombre desde main y haz commits pequeños en español. Cada vez que termines un paso que compila, haz commit y súbelo a GitHub (git push) en esa rama. Cuando la historia pase todas sus pruebas de aceptación: pídeme permiso, une la rama a main con git merge --no-ff y el mensaje "Merge HU-XX: nombre", sube main a GitHub y borra la rama en local y en GitHub.
