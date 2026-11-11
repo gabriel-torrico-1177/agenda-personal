@@ -2,3 +2,4 @@
 
 | Fecha | Historia | Qué se hizo | Problemas y cómo se resolvieron |
 |---|---|---|---|
+| 11/11/2026 | Configuración | Se inició el repositorio Git, se creó README.md, commit "Proyecto inicial", rama main y se subió a GitHub (gabriel-torrico-1177/agenda-personal) por SSH. Se agregó la regla de trabajo con ramas feature/hu-XX a CLAUDE.md. | Git no tenía nombre ni correo: se configuró con git config --global. SSH fallaba ("Host key verification failed" y luego "Permission denied (publickey)"): se aceptó la huella de GitHub, se creó una clave ed25519 y se agregó en GitHub → Settings → SSH keys. |
