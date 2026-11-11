@@ -14,6 +14,7 @@
 
     <!-- Formulario de contacto (P3) -->
     <string name="titulo_nuevo_contacto">Nuevo contacto</string>
+    <string name="titulo_editar_contacto">Editar contacto</string>
     <string name="etiqueta_nombre">Nombre *</string>
     <string name="etiqueta_telefono">Teléfono *</string>
     <string name="etiqueta_correo">Correo (opcional)</string>
