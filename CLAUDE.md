@@ -56,7 +56,7 @@ CREATE TABLE evento (
 - Contactos ordenados por nombre (A-Z). Eventos ordenados por hora.
 
 ## Métodos acordados (diagramas de clases del informe)
-- ControladorContacto: `registrar(nombre, telefono, correo)`, `listar()`, `buscar(texto)`, `obtener(id)`, `actualizar(contacto)`, `eliminar(id)`, `validar(nombre, telefono)` (privado).
+- ControladorContacto: `registrar(nombre, telefono, correo)`, `listar()`, `buscar(texto)`, `obtener(id)`, `actualizar(contacto)`, `eliminar(id)`, `validar(nombre, telefono, correo)` (privado).
 - ContactoDAO: `insertar(c)`, `obtenerTodos()`, `buscarPorNombre(texto)`, `buscarPorId(id)`, `actualizar(c)`, `eliminar(id)`.
 - ControladorEvento: `registrar(evento)`, `listarPorFecha(fecha)`, `obtener(id)`, `actualizar(evento)`, `eliminar(id)`, `validar(evento)` (privado).
 - EventoDAO: `insertar(e)`, `buscarPorFecha(fecha)`, `buscarPorId(id)`, `actualizar(e)`, `eliminar(id)`.
