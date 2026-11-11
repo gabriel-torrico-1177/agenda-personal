@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Agenda Personal</string>
+
+    <!-- Panel principal -->
+    <string name="btn_nuevo_contacto">+ Nuevo contacto</string>
+
+    <!-- Formulario de contacto (P3) -->
+    <string name="titulo_nuevo_contacto">Nuevo contacto</string>
+    <string name="etiqueta_nombre">Nombre *</string>
+    <string name="etiqueta_telefono">Teléfono *</string>
+    <string name="etiqueta_correo">Correo (opcional)</string>
+    <string name="pista_nombre">Nombre y apellido</string>
+    <string name="pista_telefono">71234567</string>
+    <string name="pista_correo">ana@correo.com</string>
+
+    <!-- Botones comunes -->
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_guardar">Guardar</string>
 </resources>

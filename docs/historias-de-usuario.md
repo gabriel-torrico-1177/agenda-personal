@@ -8,9 +8,9 @@ Prioridad de 100 a 500: un número mayor se desarrolla antes. Estimación en pun
 Como usuario de la agenda, quiero registrar un contacto con su nombre, teléfono y correo, para tener sus datos guardados en un solo lugar.
 Pruebas de aceptación:
 - [ ] Introducir el nombre "Ana Pérez" y el teléfono "71234567", presionar "Guardar" y comprobar que aparece "Contacto guardado" y que Ana Pérez está en la lista.
-- [ ] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio" y no se guarda nada.
-- [ ] Introducir un teléfono que no tiene 7 u 8 dígitos y comprobar que se indica "Ingrese un teléfono válido".
-- [ ] Introducir un nombre y un teléfono correctos sin correo y comprobar que el contacto se guarda igual.
+- [x] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio" y no se guarda nada.
+- [x] Introducir un teléfono que no tiene 7 u 8 dígitos y comprobar que se indica "Ingrese un teléfono válido".
+- [x] Introducir un nombre y un teléfono correctos sin correo y comprobar que el contacto se guarda igual.
 
 ### HU-02 Ver y buscar contactos · prioridad 450 · 3 puntos · depende de: HU-01
 Como usuario de la agenda, quiero ver mis contactos ordenados alfabéticamente y buscarlos por nombre, para encontrar rápido a la persona que necesito.

@@ -1,6 +1,8 @@
 package com.gabriel.agenda.vista;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -25,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        // Botón "+ Nuevo contacto": abre el formulario con un Intent
+        Button btnNuevoContacto = findViewById(R.id.btnNuevoContacto);
+        btnNuevoContacto.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ContactoFormActivity.class);
+            startActivity(intent);
         });
     }
 }
