@@ -1,5 +1,6 @@
 package com.gabriel.agenda.vista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,7 +10,9 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -53,8 +56,15 @@ public class ContactosActivity extends AppCompatActivity {
 
         controlador = new ControladorContacto(this);
 
-        // El adaptador empieza con una lista vacía; se llena en onResume
-        adaptador = new ContactoAdapter(this, new ArrayList<Contacto>());
+        // El adaptador empieza con una lista vacía; se llena en onResume.
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        adaptador = new ContactoAdapter(this, new ArrayList<Contacto>(),
+                new ContactoAdapter.OnEliminarListener() {
+                    @Override
+                    public void onEliminar(Contacto contacto) {
+                        confirmarEliminar(contacto);
+                    }
+                });
         lvContactos.setAdapter(adaptador);
         // Si el adaptador no tiene filas, el ListView muestra tvVacio en su lugar
         lvContactos.setEmptyView(tvVacio);
@@ -103,6 +113,33 @@ public class ContactosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         cargarLista();
+    }
+
+    // Muestra el diálogo "¿Eliminar a {nombre}?" con los botones Sí y No
+    private void confirmarEliminar(final Contacto contacto) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.titulo_eliminar_contacto)
+                .setMessage(getString(R.string.pregunta_eliminar_contacto, contacto.getNombre()))
+                // Sí: borra el contacto y recarga la lista
+                .setPositiveButton(R.string.btn_si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogo, int boton) {
+                        if (controlador.eliminar(contacto.getId())) {
+                            Toast.makeText(ContactosActivity.this,
+                                    ControladorContacto.CONTACTO_ELIMINADO,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        cargarLista();
+                    }
+                })
+                // No: solo cierra el diálogo
+                .setNegativeButton(R.string.btn_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogo, int boton) {
+                        dialogo.dismiss();
+                    }
+                })
+                .show();
     }
 
     // Pide los contactos al controlador según el buscador y los muestra
