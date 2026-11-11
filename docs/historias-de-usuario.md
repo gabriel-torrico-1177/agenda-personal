@@ -18,7 +18,7 @@ Pruebas de aceptación:
 - [x] Abrir "Contactos" con contactos guardados y comprobar que la lista está ordenada de la A a la Z, con nombre y teléfono.
 - [x] Escribir "ana" en el buscador y comprobar que solo aparece "Ana Pérez", sin importar mayúsculas o minúsculas.
 - [x] Buscar un nombre que no existe y comprobar que se indica "No se encontraron contactos".
-- [ ] Abrir "Contactos" sin ningún contacto guardado y comprobar que se indica "Aún no tienes contactos".
+- [x] Abrir "Contactos" sin ningún contacto guardado y comprobar que se indica "Aún no tienes contactos".
 
 ### HU-03 Editar contacto · prioridad 250 · 2 puntos · depende de: HU-01, HU-02
 Como usuario de la agenda, quiero modificar los datos de un contacto, para mantener su información actualizada.
