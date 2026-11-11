@@ -23,9 +23,9 @@ Pruebas de aceptación:
 ### HU-03 Editar contacto · prioridad 250 · 2 puntos · depende de: HU-01, HU-02
 Como usuario de la agenda, quiero modificar los datos de un contacto, para mantener su información actualizada.
 Pruebas de aceptación:
-- [ ] Seleccionar a "Ana Pérez", cambiar su teléfono a "76543210", presionar "Guardar" y comprobar que la lista muestra el teléfono nuevo y aparece "Contacto actualizado".
-- [ ] Borrar el nombre, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio" y se conservan los datos anteriores.
-- [ ] Presionar "Cancelar" y comprobar que los datos del contacto no cambian.
+- [x] Seleccionar a "Ana Pérez", cambiar su teléfono a "76543210", presionar "Guardar" y comprobar que la lista muestra el teléfono nuevo y aparece "Contacto actualizado".
+- [x] Borrar el nombre, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio" y se conservan los datos anteriores.
+- [x] Presionar "Cancelar" y comprobar que los datos del contacto no cambian.
 
 ### HU-04 Eliminar contacto · prioridad 150 · 1 punto · depende de: HU-02
 Como usuario de la agenda, quiero eliminar un contacto que ya no necesito, para mantener mi lista ordenada.
