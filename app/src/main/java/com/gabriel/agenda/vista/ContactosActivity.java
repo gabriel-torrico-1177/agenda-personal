@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -76,7 +77,18 @@ public class ContactosActivity extends AppCompatActivity {
             }
         });
 
-        // Botón +: abre el formulario para un contacto nuevo
+        // Tocar un contacto: abre el formulario en modo edición con su id
+        lvContactos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
+                // id = getItemId(posicion) del adaptador = id del contacto en la base de datos
+                Intent intent = new Intent(ContactosActivity.this, ContactoFormActivity.class);
+                intent.putExtra(ContactoFormActivity.EXTRA_ID, (int) id);
+                startActivity(intent);
+            }
+        });
+
+        // Botón +: abre el formulario para un contacto nuevo (sin id)
         fabAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
