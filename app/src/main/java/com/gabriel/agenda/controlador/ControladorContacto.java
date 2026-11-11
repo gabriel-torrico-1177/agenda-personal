@@ -1,0 +1,113 @@
+package com.gabriel.agenda.controlador;
+
+import android.content.Context;
+
+import com.gabriel.agenda.datos.ContactoDAO;
+import com.gabriel.agenda.modelo.Contacto;
+
+import java.util.List;
+
+// Controlador: valida los datos de un contacto y le pide al DAO que los guarde o los lea
+public class ControladorContacto {
+
+    // Mensajes que la pantalla muestra (públicos para poder compararlos desde la vista)
+    public static final String ERROR_NOMBRE = "El nombre es obligatorio";
+    public static final String ERROR_TELEFONO = "Ingrese un teléfono válido";
+    public static final String ERROR_CORREO = "Ingrese un correo válido";
+    public static final String CONTACTO_GUARDADO = "Contacto guardado";
+    public static final String CONTACTO_ACTUALIZADO = "Contacto actualizado";
+    public static final String CONTACTO_ELIMINADO = "Contacto eliminado";
+    public static final String ERROR_GUARDAR = "No se pudo guardar";
+
+    private final ContactoDAO contactoDAO;
+
+    // Constructor: crea el DAO con el que se habla con la base de datos
+    public ControladorContacto(Context context) {
+        contactoDAO = new ContactoDAO(context);
+    }
+
+    // Valida y guarda un contacto nuevo. Devuelve el mensaje para la pantalla
+    public String registrar(String nombre, String telefono, String correo) {
+        nombre = limpiar(nombre);
+        telefono = limpiar(telefono);
+        correo = limpiar(correo);
+
+        String error = validar(nombre, telefono, correo);
+        if (error != null) {
+            return error; // no se guarda nada
+        }
+
+        Contacto contacto = new Contacto(nombre, telefono, correo);
+        long id = contactoDAO.insertar(contacto);
+        if (id == -1) {
+            return ERROR_GUARDAR;
+        }
+        return CONTACTO_GUARDADO;
+    }
+
+    // Devuelve todos los contactos ordenados A-Z
+    public List<Contacto> listar() {
+        return contactoDAO.obtenerTodos();
+    }
+
+    // Busca por nombre; si el texto está vacío devuelve todos
+    public List<Contacto> buscar(String texto) {
+        texto = limpiar(texto);
+        if (texto.isEmpty()) {
+            return contactoDAO.obtenerTodos();
+        }
+        return contactoDAO.buscarPorNombre(texto);
+    }
+
+    // Devuelve el contacto con ese id, o null si no existe
+    public Contacto obtener(int id) {
+        return contactoDAO.buscarPorId(id);
+    }
+
+    // Valida y actualiza un contacto existente. Devuelve el mensaje para la pantalla
+    public String actualizar(Contacto contacto) {
+        contacto.setNombre(limpiar(contacto.getNombre()));
+        contacto.setTelefono(limpiar(contacto.getTelefono()));
+        contacto.setCorreo(limpiar(contacto.getCorreo()));
+
+        String error = validar(contacto.getNombre(), contacto.getTelefono(), contacto.getCorreo());
+        if (error != null) {
+            return error; // no se cambia nada
+        }
+
+        int filas = contactoDAO.actualizar(contacto);
+        if (filas == 0) {
+            return ERROR_GUARDAR;
+        }
+        return CONTACTO_ACTUALIZADO;
+    }
+
+    // Borra el contacto. Devuelve true si se borró
+    public boolean eliminar(int id) {
+        return contactoDAO.eliminar(id) > 0;
+    }
+
+    // Revisa las reglas. Devuelve el mensaje de error, o null si todo está bien
+    private String validar(String nombre, String telefono, String correo) {
+        if (nombre.isEmpty()) {
+            return ERROR_NOMBRE;
+        }
+        // \\d{7,8} = solo dígitos, entre 7 y 8
+        if (!telefono.matches("\\d{7,8}")) {
+            return ERROR_TELEFONO;
+        }
+        // El correo es opcional: solo se revisa si se escribió algo
+        if (!correo.isEmpty() && !correo.contains("@")) {
+            return ERROR_CORREO;
+        }
+        return null;
+    }
+
+    // Quita los espacios de los extremos y convierte null en texto vacío
+    private String limpiar(String texto) {
+        if (texto == null) {
+            return "";
+        }
+        return texto.trim();
+    }
+}
