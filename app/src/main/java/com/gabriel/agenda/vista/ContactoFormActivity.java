@@ -1,6 +1,7 @@
 package com.gabriel.agenda.vista;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,8 +50,18 @@ public class ContactoFormActivity extends AppCompatActivity {
         controlador = new ControladorContacto(this);
 
         // Qué hacer al tocar cada botón
-        btnGuardar.setOnClickListener(v -> guardar());
-        btnCancelar.setOnClickListener(v -> finish()); // cerrar sin guardar
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardar();
+            }
+        });
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // cerrar sin guardar
+            }
+        });
     }
 
     // Lee los campos, pide al controlador que registre y muestra el resultado

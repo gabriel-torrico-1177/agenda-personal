@@ -2,6 +2,7 @@ package com.gabriel.agenda.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,9 +32,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Botón "+ Nuevo contacto": abre el formulario con un Intent
         Button btnNuevoContacto = findViewById(R.id.btnNuevoContacto);
-        btnNuevoContacto.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ContactoFormActivity.class);
-            startActivity(intent);
+        btnNuevoContacto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ContactoFormActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Botón "Contactos": abre la lista de contactos
+        Button btnContactos = findViewById(R.id.btnContactos);
+        btnContactos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ContactosActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

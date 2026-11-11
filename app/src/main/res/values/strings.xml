@@ -3,6 +3,14 @@
 
     <!-- Panel principal -->
     <string name="btn_nuevo_contacto">+ Nuevo contacto</string>
+    <string name="btn_contactos">Contactos</string>
+
+    <!-- Lista de contactos (P2) -->
+    <string name="titulo_contactos">Contactos</string>
+    <string name="pista_buscar">Buscar por nombre…</string>
+    <string name="btn_agregar_contacto">Agregar contacto</string>
+    <string name="lista_contactos_vacia">Aún no tienes contactos</string>
+    <string name="busqueda_sin_resultados">No se encontraron contactos</string>
 
     <!-- Formulario de contacto (P3) -->
     <string name="titulo_nuevo_contacto">Nuevo contacto</string>
