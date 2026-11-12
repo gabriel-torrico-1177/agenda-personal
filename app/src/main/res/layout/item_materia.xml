@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Diseño de UNA fila de la lista de materias: círculo de color, nombre y docente -->
+<!-- Diseño de UNA fila de la lista de materias: círculo de color, nombre, docente y botón ✕ -->
+<!-- blocksDescendants: el botón ✕ no "roba" el foco, así tocar la fila sigue abriendo la edición -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:gravity="center_vertical"
     android:minHeight="56dp"
     android:orientation="horizontal"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="10dp">
+    android:paddingVertical="10dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="8dp">
 
     <!-- Círculo de color: el adaptador le pone la forma redonda y el color de la materia -->
     <View
@@ -36,4 +39,13 @@
             android:layout_height="wrap_content"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <!-- Botón ✕ para eliminar (48dp mínimo) -->
+    <ImageButton
+        android:id="@+id/btnEliminar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/btn_eliminar_materia"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
 </LinearLayout>

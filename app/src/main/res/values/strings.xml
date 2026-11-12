@@ -35,6 +35,11 @@
     <string name="lista_materias_vacia">Aún no tienes materias</string>
     <string name="btn_agregar_materia">Agregar materia</string>
     <string name="sin_docente">—</string>
+    <string name="btn_eliminar_materia">Eliminar materia</string>
+
+    <!-- Diálogo para eliminar una materia. %1$s se reemplaza por el nombre -->
+    <string name="titulo_eliminar_materia">Eliminar materia</string>
+    <string name="pregunta_eliminar_materia">¿Eliminar %1$s? También se borrarán sus sesiones</string>
 
     <!-- Formulario de materia (P5) -->
     <string name="titulo_nueva_materia">Nueva materia</string>
