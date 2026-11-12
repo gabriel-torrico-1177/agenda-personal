@@ -101,6 +101,7 @@
 
     <!-- Formulario de sesión (P3) -->
     <string name="titulo_nueva_sesion">Registrar sesión</string>
+    <string name="titulo_editar_sesion">Editar sesión</string>
     <string name="etiqueta_materia">Materia *</string>
     <string name="opcion_elija_materia">— Elija una materia —</string>
     <string name="etiqueta_fecha">Fecha *</string>

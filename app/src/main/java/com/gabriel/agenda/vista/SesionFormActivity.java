@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -35,6 +36,13 @@ public class SesionFormActivity extends AppCompatActivity {
 
     // Nombre del dato "fecha" que puede llegar en el Intent (lo manda CalendarioActivity)
     public static final String EXTRA_FECHA = "fecha_sesion";
+    // Nombre del dato "id" que viaja en el Intent al editar una sesión
+    public static final String EXTRA_ID = "id_sesion";
+    // Valor que significa "no llegó ningún id" → sesión nueva
+    private static final int SIN_ID = -1;
+
+    // Id de la sesión que se edita, o SIN_ID si es una nueva
+    private int idSesion;
 
     // Elementos del formulario
     private Spinner spMateria;
@@ -84,6 +92,7 @@ public class SesionFormActivity extends AppCompatActivity {
         }
 
         // Conecta las variables con los elementos del layout por su id
+        TextView tvTitulo = findViewById(R.id.tvTitulo);
         spMateria = findViewById(R.id.spMateria);
         etFecha = findViewById(R.id.etFecha);
         etInicio = findViewById(R.id.etInicio);
@@ -95,6 +104,15 @@ public class SesionFormActivity extends AppCompatActivity {
 
         llenarSpinner();
         ponerValoresIniciales();
+
+        // Lee el id que mandó la pantalla anterior; si no mandó nada, queda SIN_ID
+        idSesion = getIntent().getIntExtra(EXTRA_ID, SIN_ID);
+
+        // Modo edición: cambia el título y reemplaza los valores iniciales por los guardados
+        if (idSesion != SIN_ID) {
+            tvTitulo.setText(R.string.titulo_editar_sesion);
+            cargarSesion();
+        }
 
         // Tocar la fecha abre el calendario; tocar una hora abre el reloj
         etFecha.setOnClickListener(new View.OnClickListener() {
@@ -154,13 +172,7 @@ public class SesionFormActivity extends AppCompatActivity {
         dia = hoy.get(Calendar.DAY_OF_MONTH);
 
         // getStringExtra devuelve null si la pantalla anterior no mandó la fecha
-        String fechaRecibida = getIntent().getStringExtra(EXTRA_FECHA);
-        if (fechaRecibida != null && fechaRecibida.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            String[] partes = fechaRecibida.split("-");  // "2026-11-13" → ["2026", "11", "13"]
-            anio = Integer.parseInt(partes[0]);
-            mes = Integer.parseInt(partes[1]) - 1;        // - 1: para Calendar noviembre es 10
-            dia = Integer.parseInt(partes[2]);
-        }
+        leerFecha(getIntent().getStringExtra(EXTRA_FECHA));
 
         // Math.min(..., 22): así el fin nunca pasa de las 23:00
         horaInicio = Math.min(hoy.get(Calendar.HOUR_OF_DAY) + 1, 22);
@@ -171,6 +183,62 @@ public class SesionFormActivity extends AppCompatActivity {
         mostrarFecha();
         etInicio.setText(formatoHora(horaInicio, minutoInicio));
         etFin.setText(formatoHora(horaFin, minutoFin));
+    }
+
+    // Pide la sesión al controlador y pone sus datos en el formulario
+    private void cargarSesion() {
+        SesionEstudio sesion = controlador.obtener(idSesion);
+        if (sesion == null) {
+            finish(); // la sesión ya no existe: no hay nada que editar
+            return;
+        }
+
+        // Materia: busca su posición en la lista y la elige en el Spinner
+        // (+ 1 porque la posición 0 del Spinner es "Elija una materia")
+        for (int i = 0; i < materias.size(); i++) {
+            if (materias.get(i).getId() == sesion.getMateriaId()) {
+                spMateria.setSelection(i + 1);
+            }
+        }
+
+        // Fecha y horas: de texto ("2026-11-13", "19:00") a números para los selectores
+        leerFecha(sesion.getFecha());
+        mostrarFecha();
+        int[] inicio = leerHora(sesion.getHoraInicio());
+        horaInicio = inicio[0];
+        minutoInicio = inicio[1];
+        int[] fin = leerHora(sesion.getHoraFin());
+        horaFin = fin[0];
+        minutoFin = fin[1];
+        etInicio.setText(formatoHora(horaInicio, minutoInicio));
+        etFin.setText(formatoHora(horaFin, minutoFin));
+
+        // Estado: marca el RadioButton que corresponde
+        if (sesion.getEstado().equals(SesionEstudio.ESTADO_COMPLETADA)) {
+            rgEstado.check(R.id.rbCompletada);
+        } else if (sesion.getEstado().equals(SesionEstudio.ESTADO_REPROGRAMADA)) {
+            rgEstado.check(R.id.rbReprogramada);
+        } else {
+            rgEstado.check(R.id.rbPendiente);
+        }
+
+        etNotas.setText(sesion.getNotas());
+    }
+
+    // Convierte "2026-11-13" en anio, mes y dia. Si la fecha es null o no tiene ese formato, no cambia nada
+    private void leerFecha(String fecha) {
+        if (fecha != null && fecha.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            String[] partes = fecha.split("-");      // "2026-11-13" → ["2026", "11", "13"]
+            anio = Integer.parseInt(partes[0]);
+            mes = Integer.parseInt(partes[1]) - 1;   // - 1: para Calendar noviembre es 10
+            dia = Integer.parseInt(partes[2]);
+        }
+    }
+
+    // Convierte "19:30" en {19, 30} (hora y minuto)
+    private int[] leerHora(String hora) {
+        String[] partes = hora.split(":");
+        return new int[]{Integer.parseInt(partes[0]), Integer.parseInt(partes[1])};
     }
 
     // Abre el calendario con la fecha elegida; al aceptar, guarda la nueva fecha
@@ -267,7 +335,15 @@ public class SesionFormActivity extends AppCompatActivity {
                 estadoElegido(),
                 etNotas.getText().toString());
 
-        String mensaje = controlador.registrar(sesion);
+        String mensaje;
+        if (idSesion == SIN_ID) {
+            // Sesión nueva
+            mensaje = controlador.registrar(sesion);
+        } else {
+            // Sesión existente: se le pone su id para que el DAO sepa qué fila cambiar
+            sesion.setId(idSesion);
+            mensaje = controlador.actualizar(sesion);
+        }
 
         if (mensaje.equals(ControladorSesion.ERROR_HORAS)) {
             // Error de horas: icono de error en el campo Fin y Toast con el mensaje
@@ -277,8 +353,9 @@ public class SesionFormActivity extends AppCompatActivity {
         } else {
             // Errores del Spinner o de los selectores, y los mensajes de éxito: con Toast
             Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-            if (mensaje.equals(ControladorSesion.SESION_GUARDADA)) {
-                finish(); // vuelve a la pantalla anterior
+            if (mensaje.equals(ControladorSesion.SESION_GUARDADA)
+                    || mensaje.equals(ControladorSesion.SESION_ACTUALIZADA)) {
+                finish(); // vuelve al calendario
             }
         }
     }

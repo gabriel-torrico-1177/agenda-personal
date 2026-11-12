@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -92,6 +93,17 @@ public class CalendarioActivity extends AppCompatActivity {
         adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>());
         lvSesiones.setAdapter(adaptador);
         lvSesiones.setEmptyView(tvVacio);
+
+        // Tocar una sesión: abre el formulario en modo edición con su id
+        lvSesiones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
+                // id = getItemId(posicion) del adaptador = id de la sesión en la base de datos
+                Intent intent = new Intent(CalendarioActivity.this, SesionFormActivity.class);
+                intent.putExtra(SesionFormActivity.EXTRA_ID, (int) id);
+                startActivity(intent);
+            }
+        });
 
         // ◀ y ▶: retroceden o avanzan 7 días (se queda elegido el mismo día de la semana)
         btnAnterior.setOnClickListener(new View.OnClickListener() {
