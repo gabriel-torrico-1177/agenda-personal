@@ -1,12 +1,15 @@
 package com.gabriel.agenda.vista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -46,8 +49,15 @@ public class MateriasActivity extends AppCompatActivity {
 
         controlador = new ControladorMateria(this);
 
-        // El adaptador empieza con una lista vacía; se llena en onResume
-        adaptador = new MateriaAdapter(this, new ArrayList<Materia>());
+        // El adaptador empieza con una lista vacía; se llena en onResume.
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        adaptador = new MateriaAdapter(this, new ArrayList<Materia>(),
+                new MateriaAdapter.OnEliminarListener() {
+                    @Override
+                    public void onEliminar(Materia materia) {
+                        confirmarEliminar(materia);
+                    }
+                });
         lvMaterias.setAdapter(adaptador);
         // Si el adaptador no tiene filas, el ListView muestra "Aún no tienes materias"
         lvMaterias.setEmptyView(tvVacio);
@@ -79,6 +89,33 @@ public class MateriasActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         cargarLista();
+    }
+
+    // Muestra el diálogo "¿Eliminar {materia}? También se borrarán sus sesiones" con Sí y No
+    private void confirmarEliminar(final Materia materia) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.titulo_eliminar_materia)
+                .setMessage(getString(R.string.pregunta_eliminar_materia, materia.getNombre()))
+                // Sí: borra la materia (y sus sesiones, por el ON DELETE CASCADE) y recarga la lista
+                .setPositiveButton(R.string.btn_si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogo, int boton) {
+                        if (controlador.eliminar(materia.getId())) {
+                            Toast.makeText(MateriasActivity.this,
+                                    ControladorMateria.MATERIA_ELIMINADA,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        cargarLista();
+                    }
+                })
+                // No: solo cierra el diálogo
+                .setNegativeButton(R.string.btn_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogo, int boton) {
+                        dialogo.dismiss();
+                    }
+                })
+                .show();
     }
 
     // Pide las materias al controlador y se las pasa al adaptador

@@ -68,9 +68,10 @@ Criterios de calidad: Usabilidad: el formulario aparece con los datos actuales y
 ### HU-08 Eliminar materia · prioridad 360 · 2 puntos · depende de: HU-06
 Como estudiante, quiero eliminar una materia que ya no curso, para que no aparezca en mi planificación.
 Pruebas de aceptación:
-- [ ] Presionar "Eliminar" en "Cálculo II" y comprobar que la app pregunta "¿Eliminar Cálculo II? También se borrarán sus sesiones" con "Sí" y "No".
+- [x] Presionar "Eliminar" en "Cálculo II" y comprobar que la app pregunta "¿Eliminar Cálculo II? También se borrarán sus sesiones" con "Sí" y "No".
 - [ ] Confirmar con "Sí" y comprobar que la materia desaparece, que sus sesiones ya no están en el calendario y que aparece "Materia eliminada".
-- [ ] Responder "No" y comprobar que la materia sigue en la lista.
+  - Nota: ya pasa que la materia desaparece y aparece "Materia eliminada". Falta comprobar que sus sesiones ya no están en el calendario: se probará después de HU-10.
+- [x] Responder "No" y comprobar que la materia sigue en la lista.
 Criterios de calidad: Seguridad: se avisa que también se borrarán las sesiones antes de eliminar.
 
 ### HU-09 Planificar sesión de estudio · prioridad 340 · 5 puntos · depende de: HU-05

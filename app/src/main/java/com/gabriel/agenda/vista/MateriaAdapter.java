@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gabriel.agenda.R;
@@ -17,13 +18,22 @@ import java.util.List;
 // Adaptador: convierte cada Materia de la lista en una fila (item_materia.xml) del ListView
 public class MateriaAdapter extends BaseAdapter {
 
+    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón ✕ de una fila
+    // (funciona igual que View.OnClickListener, pero entrega la Materia de esa fila)
+    public interface OnEliminarListener {
+        void onEliminar(Materia materia);
+    }
+
     private final Context context;
     private List<Materia> materias;
+    private final OnEliminarListener eliminarListener;
 
-    // Constructor: recibe la pantalla y la lista a mostrar
-    public MateriaAdapter(Context context, List<Materia> materias) {
+    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
+    public MateriaAdapter(Context context, List<Materia> materias,
+                          OnEliminarListener eliminarListener) {
         this.context = context;
         this.materias = materias;
+        this.eliminarListener = eliminarListener;
     }
 
     // Cambia la lista y avisa al ListView que se redibuje
@@ -59,10 +69,11 @@ public class MateriaAdapter extends BaseAdapter {
                     .inflate(R.layout.item_materia, parent, false);
         }
 
-        Materia materia = getItem(posicion);
+        final Materia materia = getItem(posicion);
         View vColor = convertView.findViewById(R.id.vColor);
         TextView tvNombre = convertView.findViewById(R.id.tvNombre);
         TextView tvDocente = convertView.findViewById(R.id.tvDocente);
+        ImageButton btnEliminar = convertView.findViewById(R.id.btnEliminar);
 
         // Círculo: una forma ovalada rellena con el color guardado ("#3F51B5" → color real)
         GradientDrawable circulo = new GradientDrawable();
@@ -79,6 +90,15 @@ public class MateriaAdapter extends BaseAdapter {
         } else {
             tvDocente.setText(docente);
         }
+
+        // Botón ✕: avisa a la pantalla qué materia se quiere eliminar.
+        // Se vuelve a asignar en cada getView porque la fila puede reutilizarse con otra materia
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminarListener.onEliminar(materia);
+            }
+        });
 
         return convertView;
     }
