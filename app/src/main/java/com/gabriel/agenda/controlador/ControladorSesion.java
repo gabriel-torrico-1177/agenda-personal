@@ -15,6 +15,7 @@ public class ControladorSesion {
     // Mensajes que la pantalla muestra (públicos para poder compararlos desde la vista)
     public static final String ERROR_MATERIA = "Elija una materia";
     public static final String ERROR_HORAS = "La hora de fin debe ser posterior a la de inicio";
+    public static final String ERROR_CRUCE = "Ya tienes una sesión en ese horario";
     public static final String ERROR_FECHA_HORA = "Elija la fecha y las horas";
     public static final String SIN_MATERIAS = "Primero registre una materia";
     public static final String SESION_GUARDADA = "Sesión guardada";
@@ -122,7 +123,29 @@ public class ControladorSesion {
         if (sesion.getDuracionMinutos() <= 0) {
             return ERROR_HORAS;
         }
+
+        // 6. No puede cruzarse con otra sesión del mismo día (de cualquier materia)
+        if (seCruzaConOtra(sesion)) {
+            return ERROR_CRUCE;
+        }
         return null;
+    }
+
+    // Dice si la sesión se cruza con otra del mismo día.
+    // Dos sesiones se cruzan si: inicioNueva < finOtra  Y  finNueva > inicioOtra.
+    // Si una empieza justo cuando termina la otra (08:00-09:00 y 09:00-10:00) NO se cruzan
+    private boolean seCruzaConOtra(SesionEstudio nueva) {
+        for (SesionEstudio otra : sesionDAO.buscarPorFecha(nueva.getFecha())) {
+            // Al editar, la sesión no se compara consigo misma (una nueva tiene id 0: nunca coincide)
+            if (otra.getId() == nueva.getId()) {
+                continue; // salta a la siguiente sesión
+            }
+            if (nueva.getInicioEnMinutos() < otra.getFinEnMinutos()
+                    && nueva.getFinEnMinutos() > otra.getInicioEnMinutos()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Dice si el estado es uno de los 3 que acepta la tabla (Pendiente, Completada, Reprogramada)
