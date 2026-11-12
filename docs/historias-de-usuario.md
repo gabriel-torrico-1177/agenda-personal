@@ -34,9 +34,9 @@ Criterios de calidad: Usabilidad: el formulario aparece con los datos actuales y
 ### HU-04 Eliminar contacto · prioridad 440 · 1 punto · depende de: HU-02
 Como estudiante, quiero eliminar un contacto que ya no necesito, para mantener mi lista ordenada.
 Pruebas de aceptación:
-- [ ] Presionar "Eliminar" en "Ana Pérez" y comprobar que la app pregunta "¿Eliminar a Ana Pérez?" con "Sí" y "No".
-- [ ] Confirmar con "Sí" y comprobar que el contacto desaparece y aparece "Contacto eliminado".
-- [ ] Responder "No" y comprobar que el contacto sigue en la lista.
+- [x] Presionar "Eliminar" en "Ana Pérez" y comprobar que la app pregunta "¿Eliminar a Ana Pérez?" con "Sí" y "No".
+- [x] Confirmar con "Sí" y comprobar que el contacto desaparece y aparece "Contacto eliminado".
+- [x] Responder "No" y comprobar que el contacto sigue en la lista.
 Criterios de calidad: Seguridad: nada se elimina sin confirmación.
 
 ## Sprint 1 (16/11 al 20/11): materias y sesiones de estudio
