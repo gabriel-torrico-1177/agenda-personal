@@ -33,6 +33,9 @@ import java.util.Locale;
 // Pantalla P3: formulario para registrar una sesión de estudio (capa vista)
 public class SesionFormActivity extends AppCompatActivity {
 
+    // Nombre del dato "fecha" que puede llegar en el Intent (lo manda CalendarioActivity)
+    public static final String EXTRA_FECHA = "fecha_sesion";
+
     // Elementos del formulario
     private Spinner spMateria;
     private EditText etFecha;
@@ -142,12 +145,22 @@ public class SesionFormActivity extends AppCompatActivity {
         spMateria.setAdapter(adaptador);
     }
 
-    // Fecha de hoy; inicio a la próxima hora en punto y fin una hora después
+    // Fecha: la que mandó el calendario, o la de hoy si no llegó ninguna.
+    // Inicio a la próxima hora en punto y fin una hora después
     private void ponerValoresIniciales() {
         Calendar hoy = Calendar.getInstance();
         anio = hoy.get(Calendar.YEAR);
         mes = hoy.get(Calendar.MONTH);
         dia = hoy.get(Calendar.DAY_OF_MONTH);
+
+        // getStringExtra devuelve null si la pantalla anterior no mandó la fecha
+        String fechaRecibida = getIntent().getStringExtra(EXTRA_FECHA);
+        if (fechaRecibida != null && fechaRecibida.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            String[] partes = fechaRecibida.split("-");  // "2026-11-13" → ["2026", "11", "13"]
+            anio = Integer.parseInt(partes[0]);
+            mes = Integer.parseInt(partes[1]) - 1;        // - 1: para Calendar noviembre es 10
+            dia = Integer.parseInt(partes[2]);
+        }
 
         // Math.min(..., 22): así el fin nunca pasa de las 23:00
         horaInicio = Math.min(hoy.get(Calendar.HOUR_OF_DAY) + 1, 22);

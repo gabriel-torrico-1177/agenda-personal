@@ -109,11 +109,14 @@ public class CalendarioActivity extends AppCompatActivity {
             }
         });
 
-        // Botón +: abre el formulario para planificar una sesión
+        // Botón +: abre el formulario para planificar una sesión en el día elegido
         fabAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CalendarioActivity.this, SesionFormActivity.class);
+                // Manda la fecha elegida ("2026-11-13") para que el formulario empiece con ella
+                intent.putExtra(SesionFormActivity.EXTRA_FECHA,
+                        fechaParaBuscar(diaDeLaSemana(indiceElegido)));
                 startActivity(intent);
             }
         });
