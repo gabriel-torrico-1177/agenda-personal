@@ -106,9 +106,9 @@ Criterios de calidad: Usabilidad: el estado se elige con un toque.
 ### HU-12 Eliminar sesión · prioridad 280 · 1 punto · depende de: HU-10
 Como estudiante, quiero eliminar una sesión que ya no voy a realizar, para que mi planificación sea real.
 Pruebas de aceptación:
-- [ ] Presionar "Eliminar" en la sesión de "Cálculo II" y comprobar que la app pregunta "¿Eliminar la sesión de Cálculo II?" con "Sí" y "No".
-- [ ] Confirmar con "Sí" y comprobar que la sesión desaparece y aparece "Sesión eliminada".
-- [ ] Responder "No" y comprobar que la sesión sigue en el calendario.
+- [x] Presionar "Eliminar" en la sesión de "Cálculo II" y comprobar que la app pregunta "¿Eliminar la sesión de Cálculo II?" con "Sí" y "No".
+- [x] Confirmar con "Sí" y comprobar que la sesión desaparece y aparece "Sesión eliminada".
+- [x] Responder "No" y comprobar que la sesión sigue en el calendario.
 Criterios de calidad: Seguridad: nada se elimina sin confirmación.
 
 ## Sprint 2 (21/11 al 24/11): meta semanal, reporte y estadísticas
