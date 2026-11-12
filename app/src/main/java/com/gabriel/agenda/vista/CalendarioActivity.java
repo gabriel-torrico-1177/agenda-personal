@@ -1,5 +1,6 @@
 package com.gabriel.agenda.vista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -11,7 +12,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -89,8 +92,15 @@ public class CalendarioActivity extends AppCompatActivity {
 
         crearTiraDeDias();
 
-        // Lista de sesiones del día elegido; si está vacía muestra "No tienes sesiones para este día"
-        adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>());
+        // Lista de sesiones del día elegido; si está vacía muestra "No tienes sesiones para este día".
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>(),
+                new SesionAdapter.OnEliminarListener() {
+                    @Override
+                    public void onEliminar(SesionEstudio sesion) {
+                        confirmarEliminar(sesion);
+                    }
+                });
         lvSesiones.setAdapter(adaptador);
         lvSesiones.setEmptyView(tvVacio);
 
@@ -169,6 +179,33 @@ public class CalendarioActivity extends AppCompatActivity {
             llDias.addView(celda); // agrega la celda a la tira
         }
         colorTextoNormal = tvNumeros[0].getTextColors();
+    }
+
+    // Muestra el diálogo "¿Eliminar la sesión de {materia}?" con los botones Sí y No
+    private void confirmarEliminar(final SesionEstudio sesion) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.titulo_eliminar_sesion)
+                .setMessage(getString(R.string.pregunta_eliminar_sesion, sesion.getNombreMateria()))
+                // Sí: borra la sesión y vuelve a pintar la semana (lista y puntos de la tira)
+                .setPositiveButton(R.string.btn_si, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogo, int boton) {
+                        if (controlador.eliminar(sesion.getId())) {
+                            Toast.makeText(CalendarioActivity.this,
+                                    ControladorSesion.SESION_ELIMINADA,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        mostrarSemana();
+                    }
+                })
+                // No: solo cierra el diálogo
+                .setNegativeButton(R.string.btn_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogo, int boton) {
+                        dialogo.dismiss();
+                    }
+                })
+                .show();
     }
 
     // Pinta la semana: números, puntos, día resaltado, mes, título del día y sus sesiones

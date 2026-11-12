@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.gabriel.agenda.R;
@@ -17,13 +18,22 @@ import java.util.List;
 // Adaptador: convierte cada SesionEstudio de la lista en una fila (item_sesion.xml) del ListView
 public class SesionAdapter extends BaseAdapter {
 
+    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón ✕ de una fila
+    // (funciona igual que View.OnClickListener, pero entrega la SesionEstudio de esa fila)
+    public interface OnEliminarListener {
+        void onEliminar(SesionEstudio sesion);
+    }
+
     private final Context context;
     private List<SesionEstudio> sesiones;
+    private final OnEliminarListener eliminarListener;
 
-    // Constructor: recibe la pantalla y la lista a mostrar
-    public SesionAdapter(Context context, List<SesionEstudio> sesiones) {
+    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
+    public SesionAdapter(Context context, List<SesionEstudio> sesiones,
+                         OnEliminarListener eliminarListener) {
         this.context = context;
         this.sesiones = sesiones;
+        this.eliminarListener = eliminarListener;
     }
 
     // Cambia la lista (por ejemplo, al elegir otro día) y avisa al ListView que se redibuje
@@ -59,11 +69,12 @@ public class SesionAdapter extends BaseAdapter {
                     .inflate(R.layout.item_sesion, parent, false);
         }
 
-        SesionEstudio sesion = getItem(posicion);
+        final SesionEstudio sesion = getItem(posicion);
         View vColor = convertView.findViewById(R.id.vColor);
         TextView tvMateria = convertView.findViewById(R.id.tvMateria);
         TextView tvHorario = convertView.findViewById(R.id.tvHorario);
         TextView tvEstado = convertView.findViewById(R.id.tvEstado);
+        ImageButton btnEliminar = convertView.findViewById(R.id.btnEliminar);
 
         // Círculo con el color de la materia (viene del JOIN del SesionDAO)
         GradientDrawable circulo = new GradientDrawable();
@@ -76,6 +87,15 @@ public class SesionAdapter extends BaseAdapter {
         tvHorario.setText(context.getString(R.string.formato_horario,
                 sesion.getHoraInicio(), sesion.getHoraFin()));
         tvEstado.setText(sesion.getEstado());
+
+        // Botón ✕: avisa a la pantalla qué sesión se quiere eliminar.
+        // Se vuelve a asignar en cada getView porque la fila puede reutilizarse con otra sesión
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminarListener.onEliminar(sesion);
+            }
+        });
 
         return convertView;
     }
