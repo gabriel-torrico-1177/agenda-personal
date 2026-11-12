@@ -69,16 +69,14 @@ Criterios de calidad: Usabilidad: el formulario aparece con los datos actuales y
 Como estudiante, quiero eliminar una materia que ya no curso, para que no aparezca en mi planificación.
 Pruebas de aceptación:
 - [x] Presionar "Eliminar" en "Cálculo II" y comprobar que la app pregunta "¿Eliminar Cálculo II? También se borrarán sus sesiones" con "Sí" y "No".
-- [ ] Confirmar con "Sí" y comprobar que la materia desaparece, que sus sesiones ya no están en el calendario y que aparece "Materia eliminada".
-  - Nota: ya pasa que la materia desaparece y aparece "Materia eliminada". Falta comprobar que sus sesiones ya no están en el calendario: se probará después de HU-10.
+- [x] Confirmar con "Sí" y comprobar que la materia desaparece, que sus sesiones ya no están en el calendario y que aparece "Materia eliminada".
 - [x] Responder "No" y comprobar que la materia sigue en la lista.
 Criterios de calidad: Seguridad: se avisa que también se borrarán las sesiones antes de eliminar.
 
 ### HU-09 Planificar sesión de estudio · prioridad 340 · 5 puntos · depende de: HU-05
 Como estudiante, quiero planificar una sesión de estudio eligiendo la materia, la fecha y la hora de inicio y de fin, para organizar mi tiempo de estudio.
 Pruebas de aceptación:
-- [ ] Elegir la materia "Cálculo II", la fecha 13/11/2026 y el horario de 19:00 a 20:30, presionar "Guardar" y comprobar que aparece "Sesión guardada" y la sesión está en el calendario de ese día como "Pendiente".
-  - Nota: ya pasa que aparece "Sesión guardada". Falta comprobar que la sesión está en el calendario de ese día como "Pendiente": se probará con HU-10.
+- [x] Elegir la materia "Cálculo II", la fecha 13/11/2026 y el horario de 19:00 a 20:30, presionar "Guardar" y comprobar que aparece "Sesión guardada" y la sesión está en el calendario de ese día como "Pendiente".
 - [x] Presionar "Guardar" sin elegir materia y comprobar que se indica "Elija una materia".
 - [x] Elegir una hora de fin igual o anterior a la de inicio y comprobar que se indica "La hora de fin debe ser posterior a la de inicio".
 - [x] Tocar el campo de fecha o de hora y comprobar que se abre un selector de calendario o de reloj.
@@ -88,10 +86,10 @@ Criterios de calidad: Usabilidad: la fecha y las horas se eligen con selectores,
 ### HU-10 Ver sesiones de la semana · prioridad 320 · 3 puntos · depende de: HU-09
 Como estudiante, quiero ver mi semana y las sesiones de cada día ordenadas por hora, para saber qué tengo que estudiar.
 Pruebas de aceptación:
-- [ ] Abrir "Calendario" y comprobar que se ven los 7 días de la semana, marcados los que tienen sesiones, y las sesiones de hoy ordenadas por hora, con materia, horario y estado.
-- [ ] Tocar el viernes 13/11/2026 y comprobar que solo se ven las sesiones de ese día.
-- [ ] Tocar un día sin sesiones y comprobar que se indica "No tienes sesiones para este día".
-- [ ] Pasar a la semana siguiente con ▶ y comprobar que cambian los días.
+- [x] Abrir "Calendario" y comprobar que se ven los 7 días de la semana, marcados los que tienen sesiones, y las sesiones de hoy ordenadas por hora, con materia, horario y estado.
+- [x] Tocar el viernes 13/11/2026 y comprobar que solo se ven las sesiones de ese día.
+- [x] Tocar un día sin sesiones y comprobar que se indica "No tienes sesiones para este día".
+- [x] Pasar a la semana siguiente con ▶ y comprobar que cambian los días.
 Criterios de calidad: Usabilidad: el día elegido se ve resaltado. Eficiencia: la lista carga en menos de 1 segundo.
 
 ### HU-11 Editar sesión y cambiar su estado · prioridad 300 · 3 puntos · depende de: HU-09, HU-10
