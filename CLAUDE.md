@@ -88,7 +88,7 @@ CREATE TABLE meta_semanal (
 ## Validaciones y mensajes (deben coincidir con las pruebas de aceptación)
 - Contacto: "El nombre es obligatorio", "Ingrese un teléfono válido" (7 u 8 dígitos), "Ingrese un correo válido" (si se escribe y no tiene "@").
 - Materia: "El nombre es obligatorio", "Ya existe una materia con ese nombre" (lo decide `nombreRepetido` en el controlador: "CÁLCULO II", "Calculo II" y "Cálculo  II" cuentan como "Cálculo II"). El nombre se guarda con los espacios repetidos unidos en uno. Si no se elige color, usar `#3F51B5`. Docente opcional. Los contactos sí pueden repetirse.
-- Sesión: "Elija una materia", "La hora de fin debe ser posterior a la de inicio". Estado por defecto: "Pendiente". Si no hay materias al abrir el formulario: "Primero registre una materia".
+- Sesión: "Elija una materia", "La hora de fin debe ser posterior a la de inicio", "Ya tienes una sesión en ese horario" (no se puede cruzar con otra sesión del mismo día, de cualquier materia: se cruzan si inicioNueva < finOtra y finNueva > inicioOtra; si una empieza justo cuando termina la otra, sí se permite; al editar, la sesión no se compara consigo misma por su id). Estado por defecto: "Pendiente". Si no hay materias al abrir el formulario: "Primero registre una materia".
 - Meta: "Ingrese una meta entre 1 y 80 horas". Al alcanzarla: "¡Meta cumplida! Sigue así".
 - Éxito: "Contacto guardado/actualizado/eliminado", "Materia guardada/actualizada/eliminada", "Sesión guardada/actualizada/eliminada", "Meta guardada".
 - Listas vacías: "Aún no tienes contactos", "No se encontraron contactos", "Aún no tienes materias", "No tienes sesiones para este día", "No hay sesiones en esta semana", "Aún no hay horas registradas esta semana".

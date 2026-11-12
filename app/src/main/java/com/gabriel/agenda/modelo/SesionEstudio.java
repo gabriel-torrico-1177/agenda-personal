@@ -50,7 +50,17 @@ public class SesionEstudio {
     // Ejemplo: de "19:00" a "20:30" → 1230 - 1140 = 90 minutos.
     // Las horas no se guardan en la base de datos: siempre se calculan con este método
     public int getDuracionMinutos() {
-        return aMinutos(horaFin) - aMinutos(horaInicio);
+        return getFinEnMinutos() - getInicioEnMinutos();
+    }
+
+    // Hora de inicio en minutos desde las 00:00: "19:00" → 1140
+    public int getInicioEnMinutos() {
+        return aMinutos(horaInicio);
+    }
+
+    // Hora de fin en minutos desde las 00:00: "20:30" → 1230
+    public int getFinEnMinutos() {
+        return aMinutos(horaFin);
     }
 
     // Convierte "HH:MM" en minutos desde las 00:00. Ejemplo: "19:30" → 19 * 60 + 30 = 1170

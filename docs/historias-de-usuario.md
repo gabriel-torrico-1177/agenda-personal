@@ -81,6 +81,7 @@ Pruebas de aceptación:
 - [x] Elegir una hora de fin igual o anterior a la de inicio y comprobar que se indica "La hora de fin debe ser posterior a la de inicio".
 - [x] Tocar el campo de fecha o de hora y comprobar que se abre un selector de calendario o de reloj.
 - [x] Abrir "Nueva sesión" sin materias registradas y comprobar que se indica "Primero registre una materia".
+- [x] Con una sesión el 12/11/2026 de 08:00 a 09:00, guardar otra ese día de 08:30 a 09:30 (de cualquier materia) y comprobar que se indica "Ya tienes una sesión en ese horario"; guardar otra de 09:00 a 10:00 y comprobar que sí se guarda.
 Criterios de calidad: Usabilidad: la fecha y las horas se eligen con selectores, sin escribir a mano. Eficiencia: la sesión se guarda en menos de 1 segundo.
 
 ### HU-10 Ver sesiones de la semana · prioridad 320 · 3 puntos · depende de: HU-09
@@ -95,10 +96,11 @@ Criterios de calidad: Usabilidad: el día elegido se ve resaltado. Eficiencia: l
 ### HU-11 Editar sesión y cambiar su estado · prioridad 300 · 3 puntos · depende de: HU-09, HU-10
 Como estudiante, quiero modificar una sesión y marcarla como completada, pendiente o reprogramada, para llevar el control de lo que realmente estudié.
 Pruebas de aceptación:
-- [ ] Seleccionar la sesión de "Cálculo II", marcarla como "Completada", presionar "Guardar" y comprobar que aparece "Sesión actualizada" y el calendario muestra el estado nuevo.
-- [ ] Cambiar la fecha de la sesión a otro día y comprobar que ya no aparece en el día anterior y sí en el nuevo.
-- [ ] Poner una hora de fin anterior a la de inicio y comprobar que se indica "La hora de fin debe ser posterior a la de inicio".
-- [ ] Presionar "Cancelar" y comprobar que la sesión queda igual.
+- [x] Seleccionar la sesión de "Cálculo II", marcarla como "Completada", presionar "Guardar" y comprobar que aparece "Sesión actualizada" y el calendario muestra el estado nuevo.
+- [x] Cambiar la fecha de la sesión a otro día y comprobar que ya no aparece en el día anterior y sí en el nuevo.
+- [x] Poner una hora de fin anterior a la de inicio y comprobar que se indica "La hora de fin debe ser posterior a la de inicio".
+- [x] Presionar "Cancelar" y comprobar que la sesión queda igual.
+- [x] Cambiar el horario de una sesión para que se cruce con otra del mismo día y comprobar que se indica "Ya tienes una sesión en ese horario"; guardar la sesión sin cambiar su horario y comprobar que no aparece ese mensaje.
 Criterios de calidad: Usabilidad: el estado se elige con un toque.
 
 ### HU-12 Eliminar sesión · prioridad 280 · 1 punto · depende de: HU-10
