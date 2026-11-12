@@ -31,14 +31,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnNuevoContacto" />
 
-    <!-- Provisional: abre el formulario de materia (P5) hasta tener la lista de materias -->
+    <!-- Provisional: abre la lista de materias (P4) hasta tener el menú "Más" -->
     <Button
-        android:id="@+id/btnNuevaMateria"
+        android:id="@+id/btnMaterias"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:minHeight="48dp"
-        android:text="@string/btn_nueva_materia"
+        android:text="@string/btn_materias"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnContactos" />

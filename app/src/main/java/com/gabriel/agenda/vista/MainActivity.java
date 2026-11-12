@@ -50,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Botón provisional "+ Nueva materia": abre el formulario de materia
-        Button btnNuevaMateria = findViewById(R.id.btnNuevaMateria);
-        btnNuevaMateria.setOnClickListener(new View.OnClickListener() {
+        // Botón provisional "Materias": abre la lista de materias
+        Button btnMaterias = findViewById(R.id.btnMaterias);
+        btnMaterias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MateriaFormActivity.class);
+                Intent intent = new Intent(MainActivity.this, MateriasActivity.class);
                 startActivity(intent);
             }
         });
