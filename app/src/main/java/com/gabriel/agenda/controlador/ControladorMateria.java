@@ -6,6 +6,7 @@ import com.gabriel.agenda.datos.MateriaDAO;
 import com.gabriel.agenda.modelo.Materia;
 
 import java.text.Collator;
+import java.text.Normalizer;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -83,8 +84,9 @@ public class ControladorMateria {
     // Limpia los datos, pone el color por defecto y revisa las reglas.
     // Devuelve el mensaje de error, o null si todo está bien
     private String validar(Materia materia) {
-        // 1. Quitar espacios de los extremos (así "  Física " se guarda como "Física")
-        materia.setNombre(limpiar(materia.getNombre()));
+        // 1. Quitar espacios de los extremos (así "  Física " se guarda como "Física").
+        //    En el nombre, además, los espacios repetidos quedan en uno: "Cálculo  II" → "Cálculo II"
+        materia.setNombre(unirEspacios(limpiar(materia.getNombre())));
         materia.setDocente(limpiar(materia.getDocente()));
         materia.setColor(limpiar(materia.getColor()));
 
@@ -98,12 +100,41 @@ public class ControladorMateria {
             return ERROR_NOMBRE;
         }
 
-        // 4. El nombre no se puede repetir. Se excluye el id de la propia materia
-        //    (0 si es nueva) para que al editarla no choque consigo misma
-        if (materiaDAO.existeNombre(materia.getNombre(), materia.getId())) {
+        // 4. El nombre no se puede repetir, sin importar tildes, mayúsculas ni espacios
+        //    ("CÁLCULO II", "Calculo II" y "Cálculo  II" son la misma materia)
+        if (nombreRepetido(materia)) {
             return ERROR_NOMBRE_REPETIDO;
         }
         return null;
+    }
+
+    // Dice si OTRA materia ya tiene el mismo nombre simplificado.
+    // Se salta la propia materia (por su id; 0 si es nueva) para que al editarla no choque consigo misma
+    private boolean nombreRepetido(Materia materia) {
+        String nombreSimple = simplificar(materia.getNombre());
+        for (Materia otra : materiaDAO.obtenerTodas()) {
+            if (otra.getId() != materia.getId()
+                    && simplificar(otra.getNombre()).equals(nombreSimple)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Quita las tildes, pasa a minúsculas y deja un solo espacio entre palabras:
+    // "CÁLCULO  II" → "calculo ii" (la misma simplificación que el buscador de contactos)
+    private String simplificar(String texto) {
+        // NFD separa cada letra de su tilde: "Á" pasa a ser "A" + "´"
+        String separado = Normalizer.normalize(texto, Normalizer.Form.NFD);
+        // \\p{M} = las marcas (tildes, diéresis): se borran y queda solo la letra
+        String sinTildes = separado.replaceAll("\\p{M}", "");
+        return unirEspacios(sinTildes.trim()).toLowerCase(Locale.ROOT);
+    }
+
+    // Cambia cada grupo de espacios seguidos por uno solo: "Cálculo   II" → "Cálculo II"
+    private String unirEspacios(String texto) {
+        // \\s+ = uno o más espacios (o tabulaciones) seguidos
+        return texto.replaceAll("\\s+", " ");
     }
 
     // Ordena la lista por nombre con las reglas del español: "Álgebra" va junto a "Algoritmos"

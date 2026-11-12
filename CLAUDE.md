@@ -76,8 +76,8 @@ CREATE TABLE meta_semanal (
 ## Métodos acordados (diagramas de clases del informe)
 - ControladorContacto: `registrar(nombre, telefono, correo)`, `listar()`, `buscar(texto)`, `obtener(id)`, `actualizar(contacto)`, `eliminar(id)`, `validar(...)` (privado). **Ya existe: no cambiarlo.**
 - ContactoDAO: `insertar(c)`, `obtenerTodos()`, `buscarPorNombre(texto)`, `buscarPorId(id)`, `actualizar(c)`, `eliminar(id)`. **Ya existe.**
-- ControladorMateria: `registrar(nombre, docente, color)`, `listar()`, `obtener(id)`, `actualizar(materia)`, `eliminar(id)`, `validar(materia)` (privado).
-- MateriaDAO: `insertar(m)`, `obtenerTodas()`, `buscarPorId(id)`, `existeNombre(nombre, idExcluir)`, `actualizar(m)`, `eliminar(id)`.
+- ControladorMateria: `registrar(nombre, docente, color)`, `listar()`, `obtener(id)`, `actualizar(materia)`, `eliminar(id)`, `validar(materia)` (privado), `nombreRepetido(materia)` (privado: recorre `obtenerTodas()`, se salta la propia materia por su id y compara los nombres simplificados con `simplificar`: sin tildes con `Normalizer`, en minúsculas y con los espacios repetidos unidos en uno).
+- MateriaDAO: `insertar(m)`, `obtenerTodas()`, `buscarPorId(id)`, `existeNombre(nombre, idExcluir)`, `actualizar(m)`, `eliminar(id)`. `existeNombre` se conserva porque está en el diagrama de clases, pero ya no se usa: los repetidos los revisa el controlador.
 - ControladorSesion: `registrar(sesion)`, `listarPorFecha(fecha)`, `obtener(id)`, `actualizar(sesion)`, `eliminar(id)`, `validar(sesion)` (privado).
 - SesionDAO: `insertar(s)`, `buscarPorFecha(fecha)`, `buscarPorSemana(lunes)`, `buscarPorId(id)`, `actualizar(s)`, `eliminar(id)`. Al leer, traer también el nombre y el color de la materia con un `JOIN`.
 - ControladorMeta: `definirMeta(lunes, horas)`, `obtenerProgreso(lunes)` (horas completadas y meta).
@@ -87,7 +87,7 @@ CREATE TABLE meta_semanal (
 
 ## Validaciones y mensajes (deben coincidir con las pruebas de aceptación)
 - Contacto: "El nombre es obligatorio", "Ingrese un teléfono válido" (7 u 8 dígitos), "Ingrese un correo válido" (si se escribe y no tiene "@").
-- Materia: "El nombre es obligatorio", "Ya existe una materia con ese nombre". Si no se elige color, usar `#3F51B5`. Docente opcional.
+- Materia: "El nombre es obligatorio", "Ya existe una materia con ese nombre" (lo decide `nombreRepetido` en el controlador: "CÁLCULO II", "Calculo II" y "Cálculo  II" cuentan como "Cálculo II"). El nombre se guarda con los espacios repetidos unidos en uno. Si no se elige color, usar `#3F51B5`. Docente opcional. Los contactos sí pueden repetirse.
 - Sesión: "Elija una materia", "La hora de fin debe ser posterior a la de inicio". Estado por defecto: "Pendiente". Si no hay materias al abrir el formulario: "Primero registre una materia".
 - Meta: "Ingrese una meta entre 1 y 80 horas". Al alcanzarla: "¡Meta cumplida! Sigue así".
 - Éxito: "Contacto guardado/actualizado/eliminado", "Materia guardada/actualizada/eliminada", "Sesión guardada/actualizada/eliminada", "Meta guardada".
