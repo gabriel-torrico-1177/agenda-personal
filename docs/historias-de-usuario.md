@@ -53,8 +53,8 @@ Criterios de calidad: Usabilidad: los colores se distinguen bien entre sí. Efic
 ### HU-06 Ver materias · prioridad 400 · 2 puntos · depende de: HU-05
 Como estudiante, quiero ver la lista de mis materias con su color y su docente, para tener presente lo que estoy cursando.
 Pruebas de aceptación:
-- [ ] Abrir "Materias" con materias guardadas y comprobar que se ven ordenadas por nombre, cada una con su color y su docente.
-- [ ] Abrir "Materias" sin ninguna materia guardada y comprobar que se indica "Aún no tienes materias".
+- [x] Abrir "Materias" con materias guardadas y comprobar que se ven ordenadas por nombre, cada una con su color y su docente.
+- [x] Abrir "Materias" sin ninguna materia guardada y comprobar que se indica "Aún no tienes materias".
 Criterios de calidad: Usabilidad: el color de cada materia se ve junto a su nombre.
 
 ### HU-07 Editar materia · prioridad 380 · 2 puntos · depende de: HU-05, HU-06
