@@ -59,5 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Botón provisional "Calendario": abre el calendario de la semana
+        Button btnCalendario = findViewById(R.id.btnCalendario);
+        btnCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarioActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -55,6 +55,64 @@
     <string name="color_morado">Morado</string>
     <string name="color_cafe">Café</string>
 
+    <!-- Calendario de la semana (P2) -->
+    <string name="btn_calendario">Calendario</string>
+    <string name="titulo_calendario">Calendario</string>
+    <string name="flecha_anterior">◀</string>
+    <string name="flecha_siguiente">▶</string>
+    <string name="semana_anterior">Semana anterior</string>
+    <string name="semana_siguiente">Semana siguiente</string>
+    <string name="lista_sesiones_vacia">No tienes sesiones para este día</string>
+    <string name="btn_agregar_sesion">Agregar sesión</string>
+    <!-- Horario de una sesión: %1$s = inicio, %2$s = fin -->
+    <string name="formato_horario">%1$s – %2$s</string>
+    <string-array name="dias_cortos">
+        <item>L</item>
+        <item>M</item>
+        <item>M</item>
+        <item>J</item>
+        <item>V</item>
+        <item>S</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="dias_largos">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+    <string-array name="meses_cortos">
+        <item>Ene</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Abr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Ago</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dic</item>
+    </string-array>
+
+    <!-- Formulario de sesión (P3) -->
+    <string name="titulo_nueva_sesion">Registrar sesión</string>
+    <string name="etiqueta_materia">Materia *</string>
+    <string name="opcion_elija_materia">— Elija una materia —</string>
+    <string name="etiqueta_fecha">Fecha *</string>
+    <string name="etiqueta_inicio">Inicio *</string>
+    <string name="etiqueta_fin">Fin *</string>
+    <string name="etiqueta_estado">Estado</string>
+    <string name="estado_pendiente">Pendiente</string>
+    <string name="estado_completada">Completada</string>
+    <string name="estado_reprogramada">Reprogramada</string>
+    <string name="etiqueta_notas">Notas (opcional)</string>
+    <string name="pista_notas">Ej.: Repasar integrales</string>
+
     <!-- Botones comunes -->
     <string name="btn_cancelar">Cancelar</string>
     <string name="btn_guardar">Guardar</string>
