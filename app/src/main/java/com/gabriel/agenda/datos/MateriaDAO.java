@@ -69,7 +69,7 @@ public class MateriaDAO {
 
     // Dice si OTRA materia ya usa ese nombre (sin importar mayúsculas/minúsculas).
     // idExcluir: id de la materia que se está editando, para no compararla consigo misma.
-    // Para una materia nueva se pasa -1 (ningún id real es -1).
+    // Para una materia nueva se pasa 0 (SQLite empieza los id en 1, así que ninguno es 0).
     public boolean existeNombre(String nombre, int idExcluir) {
         SQLiteDatabase db = baseDatos.getReadableDatabase();
         String[] parametros = {nombre, String.valueOf(idExcluir)};
