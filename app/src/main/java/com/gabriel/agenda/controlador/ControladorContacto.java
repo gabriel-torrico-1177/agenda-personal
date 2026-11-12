@@ -6,6 +6,8 @@ import com.gabriel.agenda.datos.ContactoDAO;
 import com.gabriel.agenda.modelo.Contacto;
 
 import java.text.Collator;
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -56,17 +58,26 @@ public class ControladorContacto {
         return contactos;
     }
 
-    // Busca por nombre; si el texto está vacío devuelve todos. Siempre ordenados A-Z
+    // Busca por nombre sin importar tildes ni mayúsculas ("perez" encuentra "Ana Pérez").
+    // Si el texto está vacío devuelve todos. Siempre ordenados A-Z
     public List<Contacto> buscar(String texto) {
         texto = limpiar(texto);
-        List<Contacto> contactos;
+        List<Contacto> todos = contactoDAO.obtenerTodos();
         if (texto.isEmpty()) {
-            contactos = contactoDAO.obtenerTodos();
-        } else {
-            contactos = contactoDAO.buscarPorNombre(texto);
+            ordenarPorNombre(todos);
+            return todos;
         }
-        ordenarPorNombre(contactos);
-        return contactos;
+
+        // Se compara la versión "simple" (sin tildes y en minúsculas) del texto y del nombre
+        String buscado = simplificar(texto);
+        List<Contacto> encontrados = new ArrayList<>();
+        for (Contacto contacto : todos) {
+            if (simplificar(contacto.getNombre()).contains(buscado)) {
+                encontrados.add(contacto);
+            }
+        }
+        ordenarPorNombre(encontrados);
+        return encontrados;
     }
 
     // Devuelve el contacto con ese id, o null si no existe
@@ -123,6 +134,15 @@ public class ControladorContacto {
                 return collator.compare(a.getNombre(), b.getNombre());
             }
         });
+    }
+
+    // Quita las tildes y pasa a minúsculas: "Álvaro Pérez" → "alvaro perez"
+    private String simplificar(String texto) {
+        // NFD separa cada letra de su tilde: "á" pasa a ser "a" + "´"
+        String separado = Normalizer.normalize(texto, Normalizer.Form.NFD);
+        // \\p{M} = las marcas (tildes, diéresis): se borran y queda solo la letra
+        String sinTildes = separado.replaceAll("\\p{M}", "");
+        return sinTildes.toLowerCase(Locale.ROOT);
     }
 
     // Quita los espacios de los extremos y convierte null en texto vacío
