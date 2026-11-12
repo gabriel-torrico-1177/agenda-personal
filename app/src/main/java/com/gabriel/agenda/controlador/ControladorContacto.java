@@ -5,7 +5,11 @@ import android.content.Context;
 import com.gabriel.agenda.datos.ContactoDAO;
 import com.gabriel.agenda.modelo.Contacto;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 // Controlador: valida los datos de un contacto y le pide al DAO que los guarde o los lea
 public class ControladorContacto {
@@ -45,18 +49,24 @@ public class ControladorContacto {
         return CONTACTO_GUARDADO;
     }
 
-    // Devuelve todos los contactos ordenados A-Z
+    // Devuelve todos los contactos ordenados A-Z (en español: sin importar tildes ni mayúsculas)
     public List<Contacto> listar() {
-        return contactoDAO.obtenerTodos();
+        List<Contacto> contactos = contactoDAO.obtenerTodos();
+        ordenarPorNombre(contactos);
+        return contactos;
     }
 
-    // Busca por nombre; si el texto está vacío devuelve todos
+    // Busca por nombre; si el texto está vacío devuelve todos. Siempre ordenados A-Z
     public List<Contacto> buscar(String texto) {
         texto = limpiar(texto);
+        List<Contacto> contactos;
         if (texto.isEmpty()) {
-            return contactoDAO.obtenerTodos();
+            contactos = contactoDAO.obtenerTodos();
+        } else {
+            contactos = contactoDAO.buscarPorNombre(texto);
         }
-        return contactoDAO.buscarPorNombre(texto);
+        ordenarPorNombre(contactos);
+        return contactos;
     }
 
     // Devuelve el contacto con ese id, o null si no existe
@@ -101,6 +111,18 @@ public class ControladorContacto {
             return ERROR_CORREO;
         }
         return null;
+    }
+
+    // Ordena la lista por nombre con las reglas del español: "Álvaro" va junto a "Alberto"
+    private void ordenarPorNombre(List<Contacto> contactos) {
+        final Collator collator = Collator.getInstance(Locale.forLanguageTag("es"));
+        collator.setStrength(Collator.PRIMARY); // PRIMARY: ignora tildes y mayúsculas
+        Collections.sort(contactos, new Comparator<Contacto>() {
+            @Override
+            public int compare(Contacto a, Contacto b) {
+                return collator.compare(a.getNombre(), b.getNombre());
+            }
+        });
     }
 
     // Quita los espacios de los extremos y convierte null en texto vacío

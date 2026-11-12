@@ -5,7 +5,11 @@ import android.content.Context;
 import com.gabriel.agenda.datos.MateriaDAO;
 import com.gabriel.agenda.modelo.Materia;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 // Controlador: valida los datos de una materia y le pide al DAO que los guarde o los lea
 public class ControladorMateria {
@@ -45,9 +49,11 @@ public class ControladorMateria {
         return MATERIA_GUARDADA;
     }
 
-    // Devuelve todas las materias ordenadas A-Z
+    // Devuelve todas las materias ordenadas A-Z (en español: sin importar tildes ni mayúsculas)
     public List<Materia> listar() {
-        return materiaDAO.obtenerTodas();
+        List<Materia> materias = materiaDAO.obtenerTodas();
+        ordenarPorNombre(materias);
+        return materias;
     }
 
     // Devuelve la materia con ese id, o null si no existe
@@ -98,6 +104,18 @@ public class ControladorMateria {
             return ERROR_NOMBRE_REPETIDO;
         }
         return null;
+    }
+
+    // Ordena la lista por nombre con las reglas del español: "Álgebra" va junto a "Algoritmos"
+    private void ordenarPorNombre(List<Materia> materias) {
+        final Collator collator = Collator.getInstance(Locale.forLanguageTag("es"));
+        collator.setStrength(Collator.PRIMARY); // PRIMARY: ignora tildes y mayúsculas
+        Collections.sort(materias, new Comparator<Materia>() {
+            @Override
+            public int compare(Materia a, Materia b) {
+                return collator.compare(a.getNombre(), b.getNombre());
+            }
+        });
     }
 
     // Quita los espacios de los extremos y convierte null en texto vacío
