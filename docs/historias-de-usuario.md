@@ -60,9 +60,9 @@ Criterios de calidad: Usabilidad: el color de cada materia se ve junto a su nomb
 ### HU-07 Editar materia · prioridad 380 · 2 puntos · depende de: HU-05, HU-06
 Como estudiante, quiero modificar el nombre, el docente o el color de una materia, para corregir sus datos.
 Pruebas de aceptación:
-- [ ] Seleccionar "Cálculo II", cambiar el docente a "Lic. Vargas", presionar "Guardar" y comprobar que aparece "Materia actualizada" y la lista muestra el docente nuevo.
-- [ ] Cambiar el nombre por el de otra materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
-- [ ] Presionar "Cancelar" y comprobar que la materia no cambia.
+- [x] Seleccionar "Cálculo II", cambiar el docente a "Lic. Vargas", presionar "Guardar" y comprobar que aparece "Materia actualizada" y la lista muestra el docente nuevo.
+- [x] Cambiar el nombre por el de otra materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
+- [x] Presionar "Cancelar" y comprobar que la materia no cambia.
 Criterios de calidad: Usabilidad: el formulario aparece con los datos actuales ya cargados.
 
 ### HU-08 Eliminar materia · prioridad 360 · 2 puntos · depende de: HU-06
