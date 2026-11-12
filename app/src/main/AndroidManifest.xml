@@ -31,6 +31,11 @@
             android:name=".vista.ContactoFormActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <!-- Formulario de materia (P5) -->
+        <activity
+            android:name=".vista.MateriaFormActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

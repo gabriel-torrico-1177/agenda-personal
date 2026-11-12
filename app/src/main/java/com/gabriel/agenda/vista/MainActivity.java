@@ -49,5 +49,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Botón provisional "+ Nueva materia": abre el formulario de materia
+        Button btnNuevaMateria = findViewById(R.id.btnNuevaMateria);
+        btnNuevaMateria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MateriaFormActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
