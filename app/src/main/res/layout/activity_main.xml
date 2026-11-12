@@ -43,4 +43,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnContactos" />
 
+    <!-- Provisional: abre el formulario de sesión (P3) hasta tener el panel de Inicio -->
+    <Button
+        android:id="@+id/btnNuevaSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:minHeight="48dp"
+        android:text="@string/btn_nueva_sesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnMaterias" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

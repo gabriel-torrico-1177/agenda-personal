@@ -59,5 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Botón provisional "+ Nueva sesión": abre el formulario de sesión
+        Button btnNuevaSesion = findViewById(R.id.btnNuevaSesion);
+        btnNuevaSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SesionFormActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
