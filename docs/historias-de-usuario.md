@@ -45,9 +45,9 @@ Criterios de calidad: Seguridad: nada se elimina sin confirmación.
 Como estudiante, quiero registrar mis materias con su nombre, su docente y un color, para organizar mis sesiones de estudio por materia.
 Pruebas de aceptación:
 - [ ] Introducir "Cálculo II", el docente "Lic. Méndez", elegir un color, presionar "Guardar" y comprobar que aparece "Materia guardada" y la materia está en la lista.
-- [ ] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio".
-- [ ] Introducir el nombre de una materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
-- [ ] Guardar una materia sin docente ni color elegido y comprobar que se guarda con un color por defecto.
+- [x] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio".
+- [x] Introducir el nombre de una materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
+- [x] Guardar una materia sin docente ni color elegido y comprobar que se guarda con un color por defecto.
 Criterios de calidad: Usabilidad: los colores se distinguen bien entre sí. Eficiencia: la materia se guarda en menos de 1 segundo.
 
 ### HU-06 Ver materias · prioridad 400 · 2 puntos · depende de: HU-05
