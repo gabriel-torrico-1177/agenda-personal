@@ -49,5 +49,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Botón provisional "Materias": abre la lista de materias
+        Button btnMaterias = findViewById(R.id.btnMaterias);
+        btnMaterias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MateriasActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

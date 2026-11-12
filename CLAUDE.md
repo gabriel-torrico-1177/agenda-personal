@@ -69,7 +69,7 @@ CREATE TABLE meta_semanal (
 - `onConfigure(db)`: llamar `db.setForeignKeyConstraintsEnabled(true)` para que funcione el `ON DELETE CASCADE`.
 - `onUpgrade` de 1 a 2: `DROP TABLE IF EXISTS evento` y crear las tablas nuevas **sin borrar la tabla contacto** (los contactos ya guardados se conservan).
 - Usar `SQLiteOpenHelper` con `ContentValues`, `insert`, `query`/`rawQuery` con parámetros `?`, `update` y `delete`. **No** usar Room.
-- Orden: contactos y materias por nombre (A-Z, sin importar mayúsculas: `COLLATE NOCASE`); sesiones por `hora_inicio`.
+- Orden: contactos y materias por nombre (A-Z). El DAO trae los datos con `COLLATE NOCASE`, pero el **orden final lo hace el controlador** (`ordenarPorNombre`, privado) con `java.text.Collator` en español (`Locale.forLanguageTag("es")`, fuerza `PRIMARY`), que ignora tildes y mayúsculas ("Álgebra" va antes que "Matemáticas"). Sesiones por `hora_inicio`.
 - Las horas **no se guardan**: se calculan con `hora_fin - hora_inicio` (método `getDuracionMinutos()` de SesionEstudio). **Solo cuentan las sesiones "Completada"** para la meta, el reporte (horas hechas) y las estadísticas. El reporte muestra como "planificadas" las horas de todas las sesiones de la semana.
 - La semana va de lunes a domingo. Para buscar sesiones de una semana: `fecha BETWEEN lunes AND domingo`.
 

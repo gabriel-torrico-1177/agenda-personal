@@ -29,6 +29,26 @@
     <string name="pista_telefono">71234567</string>
     <string name="pista_correo">ana@correo.com</string>
 
+    <!-- Lista de materias (P4) -->
+    <string name="btn_materias">Materias</string>
+    <string name="titulo_materias">Materias</string>
+    <string name="lista_materias_vacia">Aún no tienes materias</string>
+    <string name="btn_agregar_materia">Agregar materia</string>
+    <string name="sin_docente">—</string>
+
+    <!-- Formulario de materia (P5) -->
+    <string name="titulo_nueva_materia">Nueva materia</string>
+    <string name="etiqueta_docente">Docente (opcional)</string>
+    <string name="etiqueta_color">Color</string>
+    <string name="pista_nombre_materia">Ej.: Cálculo II</string>
+    <string name="pista_docente">Ej.: Lic. Méndez</string>
+    <string name="color_azul">Azul</string>
+    <string name="color_rojo">Rojo</string>
+    <string name="color_verde">Verde</string>
+    <string name="color_naranja">Naranja</string>
+    <string name="color_morado">Morado</string>
+    <string name="color_cafe">Café</string>
+
     <!-- Botones comunes -->
     <string name="btn_cancelar">Cancelar</string>
     <string name="btn_guardar">Guardar</string>

@@ -44,17 +44,17 @@ Criterios de calidad: Seguridad: nada se elimina sin confirmación.
 ### HU-05 Registrar materia · prioridad 420 · 2 puntos · depende de: ninguna
 Como estudiante, quiero registrar mis materias con su nombre, su docente y un color, para organizar mis sesiones de estudio por materia.
 Pruebas de aceptación:
-- [ ] Introducir "Cálculo II", el docente "Lic. Méndez", elegir un color, presionar "Guardar" y comprobar que aparece "Materia guardada" y la materia está en la lista.
-- [ ] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio".
-- [ ] Introducir el nombre de una materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
-- [ ] Guardar una materia sin docente ni color elegido y comprobar que se guarda con un color por defecto.
+- [x] Introducir "Cálculo II", el docente "Lic. Méndez", elegir un color, presionar "Guardar" y comprobar que aparece "Materia guardada" y la materia está en la lista.
+- [x] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio".
+- [x] Introducir el nombre de una materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
+- [x] Guardar una materia sin docente ni color elegido y comprobar que se guarda con un color por defecto.
 Criterios de calidad: Usabilidad: los colores se distinguen bien entre sí. Eficiencia: la materia se guarda en menos de 1 segundo.
 
 ### HU-06 Ver materias · prioridad 400 · 2 puntos · depende de: HU-05
 Como estudiante, quiero ver la lista de mis materias con su color y su docente, para tener presente lo que estoy cursando.
 Pruebas de aceptación:
-- [ ] Abrir "Materias" con materias guardadas y comprobar que se ven ordenadas por nombre, cada una con su color y su docente.
-- [ ] Abrir "Materias" sin ninguna materia guardada y comprobar que se indica "Aún no tienes materias".
+- [x] Abrir "Materias" con materias guardadas y comprobar que se ven ordenadas por nombre, cada una con su color y su docente.
+- [x] Abrir "Materias" sin ninguna materia guardada y comprobar que se indica "Aún no tienes materias".
 Criterios de calidad: Usabilidad: el color de cada materia se ve junto a su nombre.
 
 ### HU-07 Editar materia · prioridad 380 · 2 puntos · depende de: HU-05, HU-06
