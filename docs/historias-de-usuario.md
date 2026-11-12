@@ -44,7 +44,7 @@ Criterios de calidad: Seguridad: nada se elimina sin confirmación.
 ### HU-05 Registrar materia · prioridad 420 · 2 puntos · depende de: ninguna
 Como estudiante, quiero registrar mis materias con su nombre, su docente y un color, para organizar mis sesiones de estudio por materia.
 Pruebas de aceptación:
-- [ ] Introducir "Cálculo II", el docente "Lic. Méndez", elegir un color, presionar "Guardar" y comprobar que aparece "Materia guardada" y la materia está en la lista.
+- [x] Introducir "Cálculo II", el docente "Lic. Méndez", elegir un color, presionar "Guardar" y comprobar que aparece "Materia guardada" y la materia está en la lista.
 - [x] Dejar el nombre vacío, presionar "Guardar" y comprobar que se indica "El nombre es obligatorio".
 - [x] Introducir el nombre de una materia que ya existe y comprobar que se indica "Ya existe una materia con ese nombre".
 - [x] Guardar una materia sin docente ni color elegido y comprobar que se guarda con un color por defecto.
