@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Botón provisional "+ Nueva sesión": abre el formulario de sesión
-        Button btnNuevaSesion = findViewById(R.id.btnNuevaSesion);
-        btnNuevaSesion.setOnClickListener(new View.OnClickListener() {
+        // Botón provisional "Calendario": abre el calendario de la semana
+        Button btnCalendario = findViewById(R.id.btnCalendario);
+        btnCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SesionFormActivity.class);
+                Intent intent = new Intent(MainActivity.this, CalendarioActivity.class);
                 startActivity(intent);
             }
         });

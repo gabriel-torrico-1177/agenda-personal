@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- screenOrientation="portrait" en cada pantalla: la app se usa siempre en vertical,
+         así no se pierden los datos elegidos en un formulario al girar el teléfono -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AgendaPersonal">
+        <!-- Inicio (P1) -->
         <activity
             android:name=".vista.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,29 +25,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Lista de contactos (P2) -->
+        <!-- Calendario de la semana (P2) -->
         <activity
-            android:name=".vista.ContactosActivity"
+            android:name=".vista.CalendarioActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <!-- Formulario de contacto (P3): solo se abre desde la propia app -->
-        <activity
-            android:name=".vista.ContactoFormActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <!-- Lista de materias (P4) -->
-        <activity
-            android:name=".vista.MateriasActivity"
-            android:exported="false" />
+            android:screenOrientation="portrait" />
         <!-- Formulario de sesión (P3) -->
         <activity
             android:name=".vista.SesionFormActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+        <!-- Lista de materias (P4) -->
+        <activity
+            android:name=".vista.MateriasActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <!-- Formulario de materia (P5) -->
         <activity
             android:name=".vista.MateriaFormActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Lista de contactos (P9) -->
+        <activity
+            android:name=".vista.ContactosActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Formulario de contacto (P10): solo se abre desde la propia app -->
+        <activity
+            android:name=".vista.ContactoFormActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

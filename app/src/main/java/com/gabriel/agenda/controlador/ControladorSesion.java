@@ -5,7 +5,9 @@ import android.content.Context;
 import com.gabriel.agenda.datos.SesionDAO;
 import com.gabriel.agenda.modelo.SesionEstudio;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // Controlador: valida los datos de una sesión de estudio y le pide al DAO que los guarde o los lea
 public class ControladorSesion {
@@ -50,6 +52,17 @@ public class ControladorSesion {
     // Devuelve las sesiones de un día ("2026-11-13"), ordenadas por hora de inicio
     public List<SesionEstudio> listarPorFecha(String fecha) {
         return sesionDAO.buscarPorFecha(fecha);
+    }
+
+    // Devuelve las fechas ("2026-11-13") de la semana que tienen al menos una sesión.
+    // El calendario lo usa para poner un punto debajo de esos días
+    public Set<String> diasConSesiones(String lunes) {
+        // Set (conjunto): guarda cada fecha una sola vez, aunque ese día tenga varias sesiones
+        Set<String> fechas = new HashSet<>();
+        for (SesionEstudio sesion : sesionDAO.buscarPorSemana(lunes)) {
+            fechas.add(sesion.getFecha());
+        }
+        return fechas;
     }
 
     // Devuelve la sesión con ese id, o null si no existe
