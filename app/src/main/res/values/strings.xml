@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Agenda Personal</string>
+    <string name="app_name">Agenda de Estudio</string>
 
     <!-- Panel principal -->
     <string name="btn_nuevo_contacto">+ Nuevo contacto</string>
