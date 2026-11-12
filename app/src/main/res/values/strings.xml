@@ -38,6 +38,7 @@
 
     <!-- Formulario de materia (P5) -->
     <string name="titulo_nueva_materia">Nueva materia</string>
+    <string name="titulo_editar_materia">Editar materia</string>
     <string name="etiqueta_docente">Docente (opcional)</string>
     <string name="etiqueta_color">Color</string>
     <string name="pista_nombre_materia">Ej.: Cálculo II</string>

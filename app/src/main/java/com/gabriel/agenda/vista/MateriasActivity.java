@@ -3,6 +3,7 @@ package com.gabriel.agenda.vista;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,7 +52,18 @@ public class MateriasActivity extends AppCompatActivity {
         // Si el adaptador no tiene filas, el ListView muestra "Aún no tienes materias"
         lvMaterias.setEmptyView(tvVacio);
 
-        // Botón +: abre el formulario para una materia nueva.
+        // Tocar una materia: abre el formulario en modo edición con su id
+        lvMaterias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
+                // id = getItemId(posicion) del adaptador = id de la materia en la base de datos
+                Intent intent = new Intent(MateriasActivity.this, MateriaFormActivity.class);
+                intent.putExtra(MateriaFormActivity.EXTRA_ID, (int) id);
+                startActivity(intent);
+            }
+        });
+
+        // Botón +: abre el formulario para una materia nueva (sin id).
         // Al guardar, el formulario hace finish() y se vuelve a esta lista
         fabAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
