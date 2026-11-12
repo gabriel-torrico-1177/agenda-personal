@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +17,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.gabriel.agenda.R;
 import com.gabriel.agenda.controlador.ControladorMateria;
+import com.gabriel.agenda.modelo.Materia;
 
-// Pantalla P5: formulario para registrar una materia (capa vista)
+// Pantalla P5: formulario para registrar o editar una materia (capa vista)
 public class MateriaFormActivity extends AppCompatActivity {
+
+    // Nombre del dato "id" que viaja en el Intent (lo usa también MateriasActivity)
+    public static final String EXTRA_ID = "id_materia";
+    // Valor que significa "no llegó ningún id" → materia nueva
+    private static final int SIN_ID = -1;
+
+    // Id de la materia que se edita, o SIN_ID si es una nueva
+    private int idMateria;
 
     // Campos de texto del formulario
     private EditText etNombre;
@@ -48,6 +58,7 @@ public class MateriaFormActivity extends AppCompatActivity {
         });
 
         // Conecta las variables con los elementos del layout por su id
+        TextView tvTitulo = findViewById(R.id.tvTitulo);
         etNombre = findViewById(R.id.etNombre);
         etDocente = findViewById(R.id.etDocente);
         Button btnCancelar = findViewById(R.id.btnCancelar);
@@ -60,6 +71,15 @@ public class MateriaFormActivity extends AppCompatActivity {
 
         controlador = new ControladorMateria(this);
 
+        // Lee el id que mandó la pantalla anterior; si no mandó nada, queda SIN_ID
+        idMateria = getIntent().getIntExtra(EXTRA_ID, SIN_ID);
+
+        // Modo edición: cambia el título y carga los datos guardados (también su color)
+        if (idMateria != SIN_ID) {
+            tvTitulo.setText(R.string.titulo_editar_materia);
+            cargarMateria();
+        }
+
         // Un solo listener para los 6 círculos: lee el color del círculo tocado (su tag)
         View.OnClickListener alTocarColor = new View.OnClickListener() {
             @Override
@@ -71,7 +91,7 @@ public class MateriaFormActivity extends AppCompatActivity {
         for (View circulo : circulosColor) {
             circulo.setOnClickListener(alTocarColor);
         }
-        pintarColores(); // dibujo inicial: el azul aparece marcado
+        pintarColores(); // dibujo inicial: azul si es nueva, o el color guardado si se edita
 
         // Qué hacer al tocar cada botón
         btnGuardar.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +108,18 @@ public class MateriaFormActivity extends AppCompatActivity {
         });
     }
 
+    // Pide la materia al controlador y pone sus datos en los campos y en colorElegido
+    private void cargarMateria() {
+        Materia materia = controlador.obtener(idMateria);
+        if (materia == null) {
+            finish(); // la materia ya no existe: no hay nada que editar
+            return;
+        }
+        etNombre.setText(materia.getNombre());
+        etDocente.setText(materia.getDocente());
+        colorElegido = materia.getColor(); // pintarColores() marcará este círculo
+    }
+
     // Dibuja cada círculo con su color; el elegido lleva un borde oscuro grueso
     private void pintarColores() {
         float densidad = getResources().getDisplayMetrics().density; // para pasar dp a píxeles
@@ -97,22 +129,32 @@ public class MateriaFormActivity extends AppCompatActivity {
             GradientDrawable forma = new GradientDrawable();
             forma.setShape(GradientDrawable.OVAL);         // círculo
             forma.setColor(Color.parseColor(color));        // relleno con el color del tag
-            if (color.equals(colorElegido)) {
+            // equalsIgnoreCase: "#3f51b5" y "#3F51B5" cuentan como el mismo color
+            boolean elegido = color.equalsIgnoreCase(colorElegido);
+            if (elegido) {
                 forma.setStroke((int) (4 * densidad), Color.BLACK); // borde de 4dp = elegido
             }
             circulo.setBackground(forma);
-            circulo.setSelected(color.equals(colorElegido)); // para TalkBack (accesibilidad)
+            circulo.setSelected(elegido); // para TalkBack (accesibilidad)
         }
     }
 
-    // Lee los campos, pide al controlador que registre la materia y muestra el resultado
+    // Lee los campos, pide al controlador que registre o actualice y muestra el resultado
     private void guardar() {
         etNombre.setError(null); // quita el error anterior
 
         String nombre = etNombre.getText().toString();
         String docente = etDocente.getText().toString();
 
-        String mensaje = controlador.registrar(nombre, docente, colorElegido);
+        String mensaje;
+        if (idMateria == SIN_ID) {
+            // Materia nueva
+            mensaje = controlador.registrar(nombre, docente, colorElegido);
+        } else {
+            // Materia existente: se usa el constructor CON id
+            Materia materia = new Materia(idMateria, nombre, docente, colorElegido);
+            mensaje = controlador.actualizar(materia);
+        }
 
         // Los dos errores son del nombre: se marcan en ese campo
         if (mensaje.equals(ControladorMateria.ERROR_NOMBRE)
@@ -121,8 +163,9 @@ public class MateriaFormActivity extends AppCompatActivity {
             etNombre.requestFocus();
         } else {
             Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-            if (mensaje.equals(ControladorMateria.MATERIA_GUARDADA)) {
-                finish(); // vuelve a la pantalla anterior
+            if (mensaje.equals(ControladorMateria.MATERIA_GUARDADA)
+                    || mensaje.equals(ControladorMateria.MATERIA_ACTUALIZADA)) {
+                finish(); // vuelve a la lista de materias
             }
         }
     }
