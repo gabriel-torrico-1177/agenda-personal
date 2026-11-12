@@ -64,6 +64,11 @@
     <string name="semana_siguiente">Semana siguiente</string>
     <string name="lista_sesiones_vacia">No tienes sesiones para este día</string>
     <string name="btn_agregar_sesion">Agregar sesión</string>
+    <string name="btn_eliminar_sesion">Eliminar sesión</string>
+
+    <!-- Diálogo para eliminar una sesión. %1$s se reemplaza por el nombre de la materia -->
+    <string name="titulo_eliminar_sesion">Eliminar sesión</string>
+    <string name="pregunta_eliminar_sesion">¿Eliminar la sesión de %1$s?</string>
     <!-- Horario de una sesión: %1$s = inicio, %2$s = fin -->
     <string name="formato_horario">%1$s – %2$s</string>
     <string-array name="dias_cortos">
