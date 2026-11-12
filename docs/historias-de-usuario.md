@@ -78,10 +78,11 @@ Criterios de calidad: Seguridad: se avisa que también se borrarán las sesiones
 Como estudiante, quiero planificar una sesión de estudio eligiendo la materia, la fecha y la hora de inicio y de fin, para organizar mi tiempo de estudio.
 Pruebas de aceptación:
 - [ ] Elegir la materia "Cálculo II", la fecha 13/11/2026 y el horario de 19:00 a 20:30, presionar "Guardar" y comprobar que aparece "Sesión guardada" y la sesión está en el calendario de ese día como "Pendiente".
-- [ ] Presionar "Guardar" sin elegir materia y comprobar que se indica "Elija una materia".
-- [ ] Elegir una hora de fin igual o anterior a la de inicio y comprobar que se indica "La hora de fin debe ser posterior a la de inicio".
-- [ ] Tocar el campo de fecha o de hora y comprobar que se abre un selector de calendario o de reloj.
-- [ ] Abrir "Nueva sesión" sin materias registradas y comprobar que se indica "Primero registre una materia".
+  - Nota: ya pasa que aparece "Sesión guardada". Falta comprobar que la sesión está en el calendario de ese día como "Pendiente": se probará con HU-10.
+- [x] Presionar "Guardar" sin elegir materia y comprobar que se indica "Elija una materia".
+- [x] Elegir una hora de fin igual o anterior a la de inicio y comprobar que se indica "La hora de fin debe ser posterior a la de inicio".
+- [x] Tocar el campo de fecha o de hora y comprobar que se abre un selector de calendario o de reloj.
+- [x] Abrir "Nueva sesión" sin materias registradas y comprobar que se indica "Primero registre una materia".
 Criterios de calidad: Usabilidad: la fecha y las horas se eligen con selectores, sin escribir a mano. Eficiencia: la sesión se guarda en menos de 1 segundo.
 
 ### HU-10 Ver sesiones de la semana · prioridad 320 · 3 puntos · depende de: HU-09
