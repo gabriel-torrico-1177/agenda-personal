@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Menú inferior reutilizable: cada pantalla lo pega al final con <include layout="@layout/menu_inferior" />.
+     Los clics y el botón resaltado los maneja la clase MenuInferior -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Línea gris que separa el menú del contenido de la pantalla -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/menu_linea" />
+
+    <!-- Los 4 botones en fila; width 0dp + weight 1: se reparten el ancho por igual -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/menuInicio"
+            style="@style/BotonMenu"
+            android:text="@string/menu_inicio" />
+
+        <TextView
+            android:id="@+id/menuCalendario"
+            style="@style/BotonMenu"
+            android:text="@string/menu_calendario" />
+
+        <TextView
+            android:id="@+id/menuEstadisticas"
+            style="@style/BotonMenu"
+            android:text="@string/menu_estadisticas" />
+
+        <!-- "Más" abre un PopupMenu con Materias, Reporte semanal, Meta semanal y Contactos -->
+        <TextView
+            android:id="@+id/menuMas"
+            style="@style/BotonMenu"
+            android:text="@string/menu_mas" />
+    </LinearLayout>
+</LinearLayout>

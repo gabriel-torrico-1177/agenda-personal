@@ -49,6 +49,9 @@ public class MateriasActivity extends AppCompatActivity {
 
         controlador = new ControladorMateria(this);
 
+        // Menú inferior con "Más" resaltado (Materias está dentro de "Más")
+        MenuInferior.configurar(this, R.id.menuMas);
+
         // El adaptador empieza con una lista vacía; se llena en onResume.
         // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
         adaptador = new MateriaAdapter(this, new ArrayList<Materia>(),

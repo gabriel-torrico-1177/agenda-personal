@@ -1,58 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!-- Pantalla P1: Inicio. Por ahora solo el título; el panel completo (meta, próxima sesión
+     y sesiones de hoy) se arma en HU-13. Abajo va el menú inferior -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".vista.MainActivity">
 
-    <!-- Provisional: el panel completo (P1) se hace en el Paso 10 -->
-    <Button
-        android:id="@+id/btnNuevoContacto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:text="@string/btn_nuevo_contacto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Contenido de la pantalla: weight 1 ocupa todo el alto que deja libre el menú -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- Provisional: abre la lista de contactos (P2) -->
-    <Button
-        android:id="@+id/btnContactos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:minHeight="48dp"
-        android:text="@string/btn_contactos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnNuevoContacto" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_inicio"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <!-- Provisional: abre la lista de materias (P4) hasta tener el menú "Más" -->
-    <Button
-        android:id="@+id/btnMaterias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:minHeight="48dp"
-        android:text="@string/btn_materias"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnContactos" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/inicio_provisional"
+            android:textSize="16sp" />
+    </LinearLayout>
 
-    <!-- Provisional: abre el calendario (P2) hasta tener el menú inferior -->
-    <Button
-        android:id="@+id/btnCalendario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:minHeight="48dp"
-        android:text="@string/btn_calendario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnMaterias" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Menú inferior: pega aquí el contenido de menu_inferior.xml -->
+    <include layout="@layout/menu_inferior" />
+</LinearLayout>

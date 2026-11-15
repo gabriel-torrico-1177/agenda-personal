@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">Agenda de Estudio</string>
 
-    <!-- Panel principal -->
-    <string name="btn_nuevo_contacto">+ Nuevo contacto</string>
-    <string name="btn_contactos">Contactos</string>
+    <!-- Panel principal (P1): por ahora solo el título; el panel completo se arma en HU-13 -->
+    <string name="titulo_inicio">Inicio</string>
+    <string name="inicio_provisional">Aquí verás tu meta semanal, la próxima sesión y las sesiones de hoy.</string>
+
+    <!-- Menú inferior y opciones del botón "Más" -->
+    <string name="menu_inicio">Inicio</string>
+    <string name="menu_calendario">Calendario</string>
+    <string name="menu_estadisticas">Estadísticas</string>
+    <string name="menu_mas">Más</string>
+    <string name="menu_materias">Materias</string>
+    <string name="menu_reporte">Reporte semanal</string>
+    <string name="menu_meta">Meta semanal</string>
+    <string name="menu_contactos">Contactos</string>
+    <string name="proximamente">Próximamente</string>
 
     <!-- Lista de contactos (P2) -->
     <string name="titulo_contactos">Contactos</string>
@@ -30,7 +41,6 @@
     <string name="pista_correo">ana@correo.com</string>
 
     <!-- Lista de materias (P4) -->
-    <string name="btn_materias">Materias</string>
     <string name="titulo_materias">Materias</string>
     <string name="lista_materias_vacia">Aún no tienes materias</string>
     <string name="btn_agregar_materia">Agregar materia</string>
@@ -56,7 +66,6 @@
     <string name="color_cafe">Café</string>
 
     <!-- Calendario de la semana (P2) -->
-    <string name="btn_calendario">Calendario</string>
     <string name="titulo_calendario">Calendario</string>
     <string name="flecha_anterior">◀</string>
     <string name="flecha_siguiente">▶</string>
