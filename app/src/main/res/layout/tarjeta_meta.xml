@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta del progreso de la meta semanal: "1,5 / 20 h", barra y mensaje.
+     Se reutiliza con <include> en Inicio (P1) y en Meta semanal (P8) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tarjetaMeta"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fondo_tarjeta"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Título de la tarjeta (en Meta semanal se cambia a "PROGRESO") -->
+    <TextView
+        android:id="@+id/tvTituloMeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titulo_meta_semana"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- Horas completadas / meta, por ejemplo "12 / 20 h" -->
+    <TextView
+        android:id="@+id/tvProgreso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <!-- Barra horizontal de 0 a 100 (%) -->
+    <ProgressBar
+        android:id="@+id/pbMeta"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:max="100" />
+
+    <!-- "Te faltan 8 h", "¡Meta cumplida! Sigue así" o la invitación a definir la meta -->
+    <TextView
+        android:id="@+id/tvMensajeMeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+</LinearLayout>

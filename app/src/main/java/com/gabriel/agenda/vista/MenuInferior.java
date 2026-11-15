@@ -76,10 +76,12 @@ public class MenuInferior {
                 int id = opcion.getItemId();
                 if (id == R.id.opcionMaterias) {
                     abrir(activity, MateriasActivity.class);
+                } else if (id == R.id.opcionMeta) {
+                    abrir(activity, MetaActivity.class);
                 } else if (id == R.id.opcionContactos) {
                     abrir(activity, ContactosActivity.class);
                 } else {
-                    // Reporte semanal (HU-14) y Meta semanal (HU-13) todavía no existen
+                    // Reporte semanal (HU-14) todavía no existe
                     proximamente(activity);
                 }
                 return true; // true = "ya atendí el clic"

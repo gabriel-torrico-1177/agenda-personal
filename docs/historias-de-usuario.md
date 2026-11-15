@@ -116,10 +116,10 @@ Criterios de calidad: Seguridad: nada se elimina sin confirmación.
 ### HU-13 Definir meta semanal y ver el progreso · prioridad 260 · 3 puntos · depende de: HU-11
 Como estudiante, quiero definir cuántas horas quiero estudiar en la semana y ver mi progreso, para mantenerme constante.
 Pruebas de aceptación:
-- [ ] Introducir 20 horas como meta, presionar "Guardar" y comprobar que la pantalla de inicio muestra el progreso como "horas completadas / 20 h" con una barra.
-- [ ] Marcar como completada una sesión de 1 h 30 min y comprobar que el progreso aumenta en 1,5 horas.
-- [ ] Introducir 0 o 100 horas y comprobar que se indica "Ingrese una meta entre 1 y 80 horas".
-- [ ] Completar las horas de la meta y comprobar que aparece "¡Meta cumplida! Sigue así".
+- [x] Introducir 20 horas como meta, presionar "Guardar" y comprobar que la pantalla de inicio muestra el progreso como "horas completadas / 20 h" con una barra.
+- [x] Marcar como completada una sesión de 1 h 30 min y comprobar que el progreso aumenta en 1,5 horas.
+- [x] Introducir 0 o 100 horas y comprobar que se indica "Ingrese una meta entre 1 y 80 horas".
+- [x] Completar las horas de la meta y comprobar que aparece "¡Meta cumplida! Sigue así".
 Criterios de calidad: Usabilidad: el progreso se ve en la pantalla de inicio sin entrar a otra pantalla.
 
 ### HU-14 Ver reporte semanal · prioridad 240 · 3 puntos · depende de: HU-11

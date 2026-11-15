@@ -29,6 +29,7 @@ public class SesionAdapter extends BaseAdapter {
     private final OnEliminarListener eliminarListener;
 
     // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
+    // (null = la lista se muestra sin el botón ✕, como en la pantalla de Inicio)
     public SesionAdapter(Context context, List<SesionEstudio> sesiones,
                          OnEliminarListener eliminarListener) {
         this.context = context;
@@ -87,6 +88,13 @@ public class SesionAdapter extends BaseAdapter {
         tvHorario.setText(context.getString(R.string.formato_horario,
                 sesion.getHoraInicio(), sesion.getHoraFin()));
         tvEstado.setText(sesion.getEstado());
+
+        // Sin listener (pantalla de Inicio): se oculta el ✕ porque ahí no se elimina
+        if (eliminarListener == null) {
+            btnEliminar.setVisibility(View.GONE);
+            return convertView;
+        }
+        btnEliminar.setVisibility(View.VISIBLE);
 
         // Botón ✕: avisa a la pantalla qué sesión se quiere eliminar.
         // Se vuelve a asignar en cada getView porque la fila puede reutilizarse con otra sesión
