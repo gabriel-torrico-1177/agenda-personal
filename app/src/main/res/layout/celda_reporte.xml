@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Diseño de UNA celda de la tabla del reporte. ReporteActivity lo infla 4 veces por fila -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CeldaReporte" />

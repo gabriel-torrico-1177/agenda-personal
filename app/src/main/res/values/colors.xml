@@ -7,4 +7,7 @@
     <color name="menu_linea">#22888888</color>
     <color name="menu_activo_texto">#3F51B5</color>
     <color name="menu_activo_fondo">#E8EAF6</color>
+
+    <!-- Fondo gris claro de la fila de títulos y de la fila de total del reporte -->
+    <color name="fila_destacada">#22888888</color>
 </resources>

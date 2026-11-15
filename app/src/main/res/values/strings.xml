@@ -141,6 +141,19 @@
     <string name="etiqueta_notas">Notas (opcional)</string>
     <string name="pista_notas">Ej.: Repasar integrales</string>
 
+    <!-- Reporte semanal (P7) -->
+    <string name="titulo_reporte">Reporte</string>
+    <string name="col_materia">Materia</string>
+    <string name="col_plan">Plan.</string>
+    <string name="col_hechas">Hechas</string>
+    <!-- formatted="false": el % es un texto normal, no un formato como %1$s -->
+    <string name="col_porcentaje" formatted="false">%</string>
+    <!-- %1$d se reemplaza por el número: "75%" -->
+    <string name="formato_porcentaje">%1$d%%</string>
+    <!-- Semana: %1$s = lunes, %2$s = domingo → "09/11 – 15/11" -->
+    <string name="formato_semana">%1$s – %2$s</string>
+    <string name="reporte_vacio">No hay sesiones en esta semana</string>
+
     <!-- Botones comunes -->
     <string name="btn_cancelar">Cancelar</string>
     <string name="btn_guardar">Guardar</string>
