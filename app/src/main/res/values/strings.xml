@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">Agenda de Estudio</string>
 
-    <!-- Panel principal (P1): por ahora solo el título; el panel completo se arma en HU-13 -->
-    <string name="titulo_inicio">Inicio</string>
-    <string name="inicio_provisional">Aquí verás tu meta semanal, la próxima sesión y las sesiones de hoy.</string>
+    <!-- Panel principal (P1) -->
+    <string name="saludo">¡Hola, Gabriel!</string>
+    <string name="titulo_proxima">Próxima sesión</string>
+    <string name="sin_proxima">No tienes sesiones pendientes</string>
+    <string name="hoy">Hoy</string>
+    <!-- Próxima sesión: %1$s = "Hoy" o la fecha, %2$s = horario -->
+    <string name="formato_proxima">%1$s · %2$s</string>
+    <string name="btn_nueva_sesion">+ Nueva sesión</string>
+    <string name="titulo_sesiones_hoy">Sesiones de hoy</string>
+
+    <!-- Tarjeta de la meta y pantalla Meta semanal (P8) -->
+    <string name="titulo_meta_semana">TU META DE ESTA SEMANA</string>
+    <string name="titulo_progreso">PROGRESO</string>
+    <string name="titulo_meta">Meta semanal</string>
+    <string name="etiqueta_horas">¿Cuántas horas quieres estudiar? *</string>
+    <string name="pista_horas">Ej.: 20</string>
 
     <!-- Menú inferior y opciones del botón "Más" -->
     <string name="menu_inicio">Inicio</string>

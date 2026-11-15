@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla P1: Inicio. Por ahora solo el título; el panel completo (meta, próxima sesión
-     y sesiones de hoy) se arma en HU-13. Abajo va el menú inferior -->
+<!-- Pantalla P1: Inicio. Saludo, fecha, progreso de la meta, próxima sesión,
+     botón "+ Nueva sesión" y sesiones de hoy. Abajo va el menú inferior -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -15,21 +15,90 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp">
 
+        <!-- Saludo y fecha de hoy ("Domingo 15/11/2026") -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/titulo_inicio"
+            android:text="@string/saludo"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textSize="14sp" />
+
+        <!-- Tarjeta del progreso de la meta (se toca para abrir Meta semanal) -->
+        <include layout="@layout/tarjeta_meta" />
+
+        <!-- Próxima sesión: materia y "Hoy · 19:00 – 20:30" (se toca para editarla) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/titulo_proxima"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/llProxima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="48dp"
+            android:orientation="vertical"
+            android:paddingVertical="6dp">
+
+            <TextView
+                android:id="@+id/tvProximaMateria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvProximaHorario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Botón para planificar una sesión (abre el formulario con la fecha de hoy) -->
+        <Button
+            android:id="@+id/btnNuevaSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/btn_nueva_sesion" />
+
+        <!-- Sesiones de hoy (las llena SesionAdapter, sin el botón ✕) -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/inicio_provisional"
-            android:textSize="16sp" />
+            android:text="@string/titulo_sesiones_hoy"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/lvHoy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Mensaje cuando hoy no hay sesiones (el ListView lo muestra solo) -->
+        <TextView
+            android:id="@+id/tvVacioHoy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/lista_sesiones_vacia"
+            android:textSize="16sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <!-- Menú inferior: pega aquí el contenido de menu_inferior.xml -->

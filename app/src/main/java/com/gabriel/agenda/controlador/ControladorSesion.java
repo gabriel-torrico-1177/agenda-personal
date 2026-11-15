@@ -5,8 +5,10 @@ import android.content.Context;
 import com.gabriel.agenda.datos.SesionDAO;
 import com.gabriel.agenda.modelo.SesionEstudio;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 // Controlador: valida los datos de una sesión de estudio y le pide al DAO que los guarde o los lea
@@ -64,6 +66,18 @@ public class ControladorSesion {
             fechas.add(sesion.getFecha());
         }
         return fechas;
+    }
+
+    // Devuelve la próxima sesión sin completar (desde este momento), o null si no hay.
+    // La pantalla de Inicio la muestra en "Próxima sesión"
+    public SesionEstudio proximaSesion() {
+        Calendar ahora = Calendar.getInstance();
+        // Fecha y hora de ahora en el mismo formato que la tabla: "2026-11-15" y "19:30"
+        String fecha = String.format(Locale.ROOT, "%04d-%02d-%02d", ahora.get(Calendar.YEAR),
+                ahora.get(Calendar.MONTH) + 1, ahora.get(Calendar.DAY_OF_MONTH));
+        String hora = String.format(Locale.ROOT, "%02d:%02d",
+                ahora.get(Calendar.HOUR_OF_DAY), ahora.get(Calendar.MINUTE));
+        return sesionDAO.buscarProxima(fecha, hora);
     }
 
     // Devuelve la sesión con ese id, o null si no existe

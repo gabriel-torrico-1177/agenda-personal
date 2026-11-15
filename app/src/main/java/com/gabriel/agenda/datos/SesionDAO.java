@@ -55,6 +55,22 @@ public class SesionDAO {
         return leerLista(sql, new String[]{lunes, lunes});
     }
 
+    // Devuelve la próxima sesión sin completar desde ese momento ("2026-11-15", "19:30"), o null.
+    // Cuenta las de días siguientes y las de hoy que todavía no terminaron (hora_fin > ahora).
+    // LIMIT 1: de todas las que cumplen, solo trae la primera según el orden
+    public SesionEstudio buscarProxima(String fecha, String hora) {
+        String sql = SELECT_CON_MATERIA
+                + "WHERE s.estado <> 'Completada' "
+                + "AND (s.fecha > ? OR (s.fecha = ? AND s.hora_fin > ?)) "
+                + "ORDER BY s.fecha, s.hora_inicio "
+                + "LIMIT 1";
+        List<SesionEstudio> lista = leerLista(sql, new String[]{fecha, fecha, hora});
+        if (lista.isEmpty()) {
+            return null;
+        }
+        return lista.get(0);
+    }
+
     // Devuelve la sesión con ese id (con su materia), o null si no existe
     public SesionEstudio buscarPorId(int id) {
         String sql = SELECT_CON_MATERIA + "WHERE s.id = ?";

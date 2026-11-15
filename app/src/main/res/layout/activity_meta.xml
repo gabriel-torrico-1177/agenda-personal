@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pantalla P8: meta semanal. Arriba el formulario (con scroll) y abajo el menú inferior -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".vista.MetaActivity">
+
+    <!-- ScrollView: permite desplazar el formulario cuando aparece el teclado -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Título -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo_meta"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- "Semana del 09/11 al 15/11" -->
+            <TextView
+                android:id="@+id/tvSemana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textSize="14sp" />
+
+            <!-- Horas objetivo (obligatorio, de 1 a 80). inputType number: teclado numérico -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/etiqueta_horas"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etHoras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/pista_horas"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="3"
+                android:minHeight="48dp" />
+
+            <!-- Tarjeta del progreso (la misma de Inicio) -->
+            <include layout="@layout/tarjeta_meta" />
+
+            <!-- Botones Cancelar y Guardar, uno al lado del otro y del mismo ancho -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="@string/btn_cancelar" />
+
+                <Button
+                    android:id="@+id/btnGuardar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="@string/btn_guardar" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Menú inferior -->
+    <include layout="@layout/menu_inferior" />
+</LinearLayout>
