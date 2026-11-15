@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Pista" gris de cada barra de las estadísticas (la parte de color se dibuja encima) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="8dp" />
+    <solid android:color="@color/fila_destacada" />
+</shape>

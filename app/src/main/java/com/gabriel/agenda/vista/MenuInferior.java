@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
@@ -41,11 +40,11 @@ public class MenuInferior {
             }
         });
 
-        // Estadísticas: todavía no existe la pantalla (HU-15)
+        // Estadísticas: abre las estadísticas de la semana
         menuEstadisticas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                proximamente(activity);
+                abrir(activity, EstadisticasActivity.class);
             }
         });
 
@@ -110,10 +109,5 @@ public class MenuInferior {
                 activity.finish();
             }
         }
-    }
-
-    // Mensaje para las pantallas que se programan en los próximos pasos
-    private static void proximamente(Activity activity) {
-        Toast.makeText(activity, R.string.proximamente, Toast.LENGTH_SHORT).show();
     }
 }

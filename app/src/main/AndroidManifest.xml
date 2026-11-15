@@ -47,6 +47,11 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+        <!-- Estadísticas (P6) -->
+        <activity
+            android:name=".vista.EstadisticasActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <!-- Reporte semanal (P7) -->
         <activity
             android:name=".vista.ReporteActivity"
