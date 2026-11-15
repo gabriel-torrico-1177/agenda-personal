@@ -1,9 +1,6 @@
 package com.gabriel.agenda.vista;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -14,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 // R está en el paquete base (com.gabriel.agenda), por eso hay que importarlo
 import com.gabriel.agenda.R;
 
-// Pantalla P1: panel principal de la agenda (capa vista)
+// Pantalla P1: Inicio (capa vista). El panel completo se arma en HU-13
 public class MainActivity extends AppCompatActivity {
 
     // Se ejecuta al abrir la pantalla: carga el diseño activity_main.xml
@@ -30,44 +27,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Botón "+ Nuevo contacto": abre el formulario con un Intent
-        Button btnNuevoContacto = findViewById(R.id.btnNuevoContacto);
-        btnNuevoContacto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ContactoFormActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Botón "Contactos": abre la lista de contactos
-        Button btnContactos = findViewById(R.id.btnContactos);
-        btnContactos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ContactosActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Botón provisional "Materias": abre la lista de materias
-        Button btnMaterias = findViewById(R.id.btnMaterias);
-        btnMaterias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MateriasActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Botón provisional "Calendario": abre el calendario de la semana
-        Button btnCalendario = findViewById(R.id.btnCalendario);
-        btnCalendario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CalendarioActivity.class);
-                startActivity(intent);
-            }
-        });
+        // Menú inferior con "Inicio" resaltado
+        MenuInferior.configurar(this, R.id.menuInicio);
     }
 }

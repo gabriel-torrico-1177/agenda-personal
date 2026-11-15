@@ -56,6 +56,9 @@ public class ContactosActivity extends AppCompatActivity {
 
         controlador = new ControladorContacto(this);
 
+        // Menú inferior con "Más" resaltado (Contactos está dentro de "Más")
+        MenuInferior.configurar(this, R.id.menuMas);
+
         // El adaptador empieza con una lista vacía; se llena en onResume.
         // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
         adaptador = new ContactoAdapter(this, new ArrayList<Contacto>(),

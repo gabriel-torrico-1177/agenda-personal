@@ -92,6 +92,9 @@ public class CalendarioActivity extends AppCompatActivity {
 
         crearTiraDeDias();
 
+        // Menú inferior con "Calendario" resaltado
+        MenuInferior.configurar(this, R.id.menuCalendario);
+
         // Lista de sesiones del día elegido; si está vacía muestra "No tienes sesiones para este día".
         // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
         adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>(),

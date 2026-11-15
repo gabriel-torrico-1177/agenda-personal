@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Menú inferior -->
+    <color name="menu_linea">#22888888</color>
+    <color name="menu_activo_texto">#3F51B5</color>
+    <color name="menu_activo_fondo">#E8EAF6</color>
 </resources>
