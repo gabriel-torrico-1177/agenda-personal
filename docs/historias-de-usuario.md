@@ -125,9 +125,9 @@ Criterios de calidad: Usabilidad: el progreso se ve en la pantalla de inicio sin
 ### HU-14 Ver reporte semanal · prioridad 240 · 3 puntos · depende de: HU-11
 Como estudiante, quiero ver un reporte de la semana con las horas planificadas y completadas por materia, para saber en qué materias cumplí lo que planifiqué.
 Pruebas de aceptación:
-- [ ] Abrir "Reporte semanal" y comprobar que por cada materia se ven las horas planificadas, las completadas y el porcentaje, y una fila de total.
-- [ ] Pasar a la semana anterior con ◀ y comprobar que el reporte cambia a esa semana.
-- [ ] Abrir una semana sin sesiones y comprobar que se indica "No hay sesiones en esta semana".
+- [x] Abrir "Reporte semanal" y comprobar que por cada materia se ven las horas planificadas, las completadas y el porcentaje, y una fila de total.
+- [x] Pasar a la semana anterior con ◀ y comprobar que el reporte cambia a esa semana.
+- [x] Abrir una semana sin sesiones y comprobar que se indica "No hay sesiones en esta semana".
 Criterios de calidad: Eficiencia: el reporte se calcula en menos de 1 segundo.
 
 ### HU-15 Ver estadísticas · prioridad 220 · 5 puntos · depende de: HU-11, HU-13

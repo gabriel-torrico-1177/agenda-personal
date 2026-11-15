@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pantalla P7: reporte semanal. Arriba la semana con ◀ ▶, en medio la tabla y abajo el menú -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".vista.ReporteActivity">
+
+    <!-- Encabezado: título, ◀ semana ▶ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/titulo_reporte"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAnterior"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/semana_anterior"
+            android:minWidth="48dp"
+            android:padding="0dp"
+            android:text="@string/flecha_anterior" />
+
+        <!-- "09/11 – 15/11" -->
+        <TextView
+            android:id="@+id/tvSemana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnSiguiente"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/semana_siguiente"
+            android:minWidth="48dp"
+            android:padding="0dp"
+            android:text="@string/flecha_siguiente" />
+    </LinearLayout>
+
+    <!-- ScrollView: si hay muchas materias, la tabla se desplaza -->
+    <ScrollView
+        android:id="@+id/svTabla"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Tabla: stretchColumns="0" hace que la columna Materia ocupe el ancho que sobra
+             y shrinkColumns="0" que se achique (en dos líneas) si el nombre es muy largo -->
+        <TableLayout
+            android:id="@+id/tlReporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:shrinkColumns="0"
+            android:stretchColumns="0">
+
+            <!-- Fila de títulos (siempre está; las demás filas las agrega ReporteActivity) -->
+            <TableRow android:background="@color/fila_destacada">
+
+                <TextView
+                    style="@style/CeldaReporte"
+                    android:gravity="start"
+                    android:text="@string/col_materia"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/CeldaReporte"
+                    android:text="@string/col_plan"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/CeldaReporte"
+                    android:text="@string/col_hechas"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/CeldaReporte"
+                    android:text="@string/col_porcentaje"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <!-- Mensaje cuando la semana no tiene sesiones (se muestra en lugar de la tabla) -->
+    <TextView
+        android:id="@+id/tvVacio"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/reporte_vacio"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- Menú inferior -->
+    <include layout="@layout/menu_inferior" />
+</LinearLayout>

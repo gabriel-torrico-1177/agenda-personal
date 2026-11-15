@@ -107,8 +107,9 @@ public class ControladorMeta {
         return "Te faltan " + horasComoTexto(minutosFaltan) + " h";
     }
 
-    // Convierte minutos en horas con coma decimal: 90 → "1,5", 120 → "2", 75 → "1,25"
-    public String horasComoTexto(int minutos) {
+    // Convierte minutos en horas con coma decimal: 90 → "1,5", 120 → "2", 75 → "1,25".
+    // static: no usa la base de datos, así el ControladorReporte también lo puede usar
+    public static String horasComoTexto(int minutos) {
         double horas = minutos / 60.0; // 60.0 (con decimal) para que 90 / 60.0 dé 1.5 y no 1
         // "0.##": hasta 2 decimales y sin ceros de más. Símbolos en español: coma decimal
         DecimalFormat formato = new DecimalFormat("0.##",

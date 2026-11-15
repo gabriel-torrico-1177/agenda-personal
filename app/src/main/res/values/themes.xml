@@ -7,6 +7,16 @@
 
     <style name="Theme.AgendaPersonal" parent="Base.Theme.AgendaPersonal" />
 
+    <!-- Estilo de cada celda de la tabla del reporte (los números van alineados a la derecha) -->
+    <style name="CeldaReporte">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">end</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <!-- Estilo de cada botón del menú inferior: así los 4 se ven iguales sin repetir atributos -->
     <style name="BotonMenu">
         <item name="android:layout_width">0dp</item>
