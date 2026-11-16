@@ -1,8 +1,46 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.AgendaPersonal" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema de toda la app: verde y negro.
+         Padre "Material3.Dark" (y no "DayNight"): siempre oscuro, aunque el teléfono esté en modo claro.
+         Cada item cambia un color que Material usa en sus componentes (reemplaza el morado por defecto) -->
+    <style name="Base.Theme.AgendaPersonal" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Color principal: botones, barras de progreso, RadioButton marcado, cursor y línea del campo activo -->
+        <item name="colorPrimary">@color/verde</item>
+        <item name="colorOnPrimary">@color/texto_sobre_verde</item>
+        <!-- Versión "contenedor" del principal: botón flotante + (con el ícono blanco encima) -->
+        <item name="colorPrimaryContainer">@color/verde_oscuro</item>
+        <item name="colorOnPrimaryContainer">@color/texto</item>
+        <!-- Secundario y terciario también en verde: así no aparece ningún otro color de Material -->
+        <item name="colorSecondary">@color/verde</item>
+        <item name="colorOnSecondary">@color/texto_sobre_verde</item>
+        <item name="colorSecondaryContainer">@color/verde_oscuro</item>
+        <item name="colorOnSecondaryContainer">@color/texto</item>
+        <item name="colorTertiary">@color/verde</item>
+        <item name="colorOnTertiary">@color/texto_sobre_verde</item>
+        <!-- colorAccent: lo usan los selectores de fecha y de hora (DatePicker y TimePicker) -->
+        <item name="colorAccent">@color/verde</item>
+
+        <!-- Fondo de las pantallas -->
+        <item name="android:colorBackground">@color/fondo</item>
+        <item name="android:windowBackground">@color/fondo</item>
+        <item name="colorOnBackground">@color/texto</item>
+        <!-- Superficies: fondo base, tarjetas y diálogos (Material elige el "Container" según el componente) -->
+        <item name="colorSurface">@color/fondo</item>
+        <item name="colorOnSurface">@color/texto</item>
+        <item name="colorSurfaceVariant">@color/tarjeta</item>
+        <item name="colorOnSurfaceVariant">@color/texto_secundario</item>
+        <item name="colorSurfaceContainerLowest">@color/fondo</item>
+        <item name="colorSurfaceContainerLow">@color/tarjeta</item>
+        <item name="colorSurfaceContainer">@color/tarjeta</item>
+        <item name="colorSurfaceContainerHigh">@color/tarjeta_alta</item>
+        <item name="colorSurfaceContainerHighest">@color/tarjeta_alta</item>
+        <!-- Bordes de los componentes de Material -->
+        <item name="colorOutline">@color/borde</item>
+        <item name="colorOutlineVariant">@color/borde</item>
+
+        <!-- Textos de los TextView y EditText que no tienen un color propio -->
+        <item name="android:textColorPrimary">@color/texto</item>
+        <item name="android:textColorSecondary">@color/texto_secundario</item>
+        <item name="android:textColorHint">@color/texto_pista</item>
     </style>
 
     <style name="Theme.AgendaPersonal" parent="Base.Theme.AgendaPersonal" />

@@ -56,7 +56,7 @@ public class MenuInferior {
             }
         });
 
-        // Resalta el botón de la pantalla actual: fondo celeste, texto azul y en negrita
+        // Resalta el botón de la pantalla actual: fondo verde transparente, texto verde y en negrita
         TextView actual = activity.findViewById(idActual);
         actual.setBackgroundResource(R.drawable.fondo_menu_activo);
         actual.setTextColor(ContextCompat.getColor(activity, R.color.menu_activo_texto));

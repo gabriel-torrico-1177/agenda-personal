@@ -251,7 +251,7 @@ public class CalendarioActivity extends AppCompatActivity {
                 puntos[i].setVisibility(View.INVISIBLE);
             }
 
-            // Día elegido: fondo azul y texto blanco. Los demás: borde gris y texto normal
+            // Día elegido: fondo verde oscuro y texto blanco. Los demás: borde gris oscuro y texto normal
             if (i == indiceElegido) {
                 celdas[i].setBackgroundResource(R.drawable.fondo_dia_elegido);
                 tvLetras[i].setTextColor(Color.WHITE);

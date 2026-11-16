@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fondo de un día de la tira (no elegido): rectángulo con esquinas redondeadas y borde gris -->
+<!-- Fondo de un día de la tira (no elegido): rectángulo con esquinas redondeadas y borde gris oscuro -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="8dp" />
     <stroke
         android:width="1dp"
-        android:color="#9E9E9E" />
+        android:color="@color/borde" />
 </shape>

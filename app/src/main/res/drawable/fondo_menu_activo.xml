@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fondo del botón de la pantalla actual en el menú inferior: rectángulo redondeado celeste -->
+<!-- Fondo del botón de la pantalla actual en el menú inferior: rectángulo redondeado verde transparente -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="8dp" />

@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Paleta de la app: verde y negro. Es una sola (no hay values-night): no cambia con el modo del teléfono.
+     Los demás colores de este archivo y del tema (themes.xml) se arman con estos -->
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Fondos -->
+    <color name="fondo">#FF0E0E0E</color>             <!-- fondo de todas las pantallas (casi negro) -->
+    <color name="tarjeta">#FF1C1C1C</color>           <!-- tarjetas y superficies (gris muy oscuro) -->
+    <color name="tarjeta_alta">#FF262626</color>      <!-- diálogos, panel "Más", listas desplegables -->
+    <color name="borde">#FF3D3D3D</color>             <!-- bordes y líneas divisorias -->
+
+    <!-- Verdes -->
+    <color name="verde">#FF4CAF50</color>             <!-- color principal: botones, barras, activos -->
+    <color name="verde_oscuro">#FF2E7D32</color>      <!-- rellenos con texto blanco encima (día elegido, botón +) -->
+    <color name="verde_transparente">#334CAF50</color> <!-- verde al 20 %: fondos suaves (botón activo del menú) -->
+
+    <!-- Textos -->
+    <color name="texto">#FFF2F2F2</color>             <!-- texto principal (casi blanco) -->
+    <color name="texto_secundario">#FFB3B3B3</color>  <!-- texto secundario (gris claro) -->
+    <color name="texto_pista">#FF808080</color>       <!-- pistas de los campos vacíos ("Ej.: ...") -->
+    <color name="texto_sobre_verde">#FF0E0E0E</color> <!-- texto sobre el verde principal (botones) -->
 
     <!-- Menú inferior -->
-    <color name="menu_linea">#22888888</color>
-    <color name="menu_activo_texto">#3F51B5</color>
-    <color name="menu_activo_fondo">#E8EAF6</color>
+    <color name="menu_linea">@color/borde</color>
+    <color name="menu_activo_texto">@color/verde</color>
+    <color name="menu_activo_fondo">@color/verde_transparente</color>
 
-    <!-- Fondo gris claro de la fila de títulos y de la fila de total del reporte -->
-    <color name="fila_destacada">#22888888</color>
+    <!-- Fila de títulos y fila de total del reporte, y "pista" de las barras de las estadísticas -->
+    <color name="fila_destacada">@color/tarjeta_alta</color>
 
     <!-- Sesión "En curso": verde para el borde y la barra, y el mismo verde transparente de fondo -->
-    <color name="en_curso">#43A047</color>
-    <color name="en_curso_fondo">#3343A047</color>
+    <color name="en_curso">@color/verde</color>
+    <color name="en_curso_fondo">@color/verde_transparente</color>
 </resources>

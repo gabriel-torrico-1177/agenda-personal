@@ -120,7 +120,7 @@ public class MateriaFormActivity extends AppCompatActivity {
         colorElegido = materia.getColor(); // pintarColores() marcará este círculo
     }
 
-    // Dibuja cada círculo con su color; el elegido lleva un borde oscuro grueso
+    // Dibuja cada círculo con su color; el elegido lleva un borde blanco grueso (se ve sobre el fondo negro)
     private void pintarColores() {
         float densidad = getResources().getDisplayMetrics().density; // para pasar dp a píxeles
         for (View circulo : circulosColor) {
@@ -132,7 +132,7 @@ public class MateriaFormActivity extends AppCompatActivity {
             // equalsIgnoreCase: "#3f51b5" y "#3F51B5" cuentan como el mismo color
             boolean elegido = color.equalsIgnoreCase(colorElegido);
             if (elegido) {
-                forma.setStroke((int) (4 * densidad), Color.BLACK); // borde de 4dp = elegido
+                forma.setStroke((int) (4 * densidad), Color.WHITE); // borde de 4dp = elegido
             }
             circulo.setBackground(forma);
             circulo.setSelected(elegido); // para TalkBack (accesibilidad)
