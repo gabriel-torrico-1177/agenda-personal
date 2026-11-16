@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Color del texto de un chip de estado (va en res/color porque es un color que cambia según el estado):
+     oscuro sobre el verde si está elegido, claro si no -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/texto_sobre_verde" android:state_checked="true" />
+    <item android:color="@color/texto" />
+</selector>

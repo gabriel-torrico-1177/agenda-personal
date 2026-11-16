@@ -30,6 +30,7 @@
             android:id="@+id/tvMateria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/texto"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -37,6 +38,7 @@
             android:id="@+id/tvHorario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/texto_secundario"
             android:textSize="14sp" />
 
         <!-- Barra de avance: solo se ve cuando la sesión está "En curso" (0 a 100 %) -->

@@ -41,6 +41,11 @@
         <item name="android:textColorPrimary">@color/texto</item>
         <item name="android:textColorSecondary">@color/texto_secundario</item>
         <item name="android:textColorHint">@color/texto_pista</item>
+        <!-- Material3 pone en estos dos sus tonos lila (#CAC4D0 y #E6E1E5). Algunos teléfonos
+             (como el Infinix) usan textColorTertiary para los TextView sin color propio:
+             por eso se pone nuestro texto claro -->
+        <item name="android:textColorTertiary">@color/texto</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/texto</item>
     </style>
 
     <style name="Theme.AgendaPersonal" parent="Base.Theme.AgendaPersonal" />
@@ -91,6 +96,62 @@
         <item name="android:textColor">@color/texto</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Etiqueta de un campo de formulario ("Materia *", "Fecha *"...): gris claro y en negrita -->
+    <style name="EtiquetaCampo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:textColor">@color/texto_secundario</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Campo dentro de una caja redondeada (caja_campo.xml), con espacio para el ícono de la izquierda -->
+    <style name="CajaCampo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/caja_campo</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:paddingHorizontal">14dp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:textColor">@color/texto</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Chip de estado: un RadioButton sin el circulito (button @null), con fondo y color de texto
+         que cambian si está elegido (chip_estado.xml y color/chip_estado_texto.xml).
+         Width 0dp + weight 1: los 3 chips se reparten el ancho por igual -->
+    <style name="ChipEstado">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/chip_estado</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingHorizontal">4dp</item>
+        <item name="android:textColor">@color/chip_estado_texto</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Botón principal (Guardar): verde relleno con texto oscuro -->
+    <style name="BotonPrincipal" parent="Widget.Material3.Button">
+        <item name="android:minHeight">48dp</item>
+        <item name="backgroundTint">@color/verde</item>
+        <item name="android:textColor">@color/texto_sobre_verde</item>
+    </style>
+
+    <!-- Botón secundario (Cancelar): solo con borde verde, fondo transparente y texto verde -->
+    <style name="BotonSecundario" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">48dp</item>
+        <item name="strokeColor">@color/verde</item>
+        <item name="android:textColor">@color/verde</item>
     </style>
 
     <!-- Tarjeta del panel "Más": la mitad del ancho (weight 1), borde redondeado,
