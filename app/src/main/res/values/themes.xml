@@ -69,14 +69,17 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
-    <!-- Tarjeta de Inicio (meta, próxima sesión y sesiones de hoy): gris muy oscuro con esquinas redondeadas -->
+    <!-- Tarjeta de Inicio (meta, próxima sesión y sesiones de hoy): gris muy oscuro con esquinas redondeadas.
+         paddingHorizontal y paddingVertical (y no padding): android:padding gana sobre todos los demás,
+         y así una tarjeta no podría cambiar solo los lados (como la de sesiones de hoy) -->
     <style name="TarjetaInicio">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:background">@drawable/fondo_tarjeta</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:padding">16dp</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">16dp</item>
     </style>
 
     <!-- Título de una tarjeta con su ícono a la izquierda (drawableStart) -->
