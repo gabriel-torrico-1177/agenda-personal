@@ -26,6 +26,11 @@ public class ControladorSesion {
     public static final String SESION_ELIMINADA = "Sesión eliminada";
     public static final String ERROR_GUARDAR = "No se pudo guardar";
 
+    // Lo que devuelve porcentajeEnCurso cuando la sesión NO está en curso
+    public static final int NO_EN_CURSO = -1;
+    // Un minuto en milisegundos (60 segundos * 1000)
+    private static final long MILIS_POR_MINUTO = 60 * 1000;
+
     // Formatos que se guardan en la base de datos (expresiones regulares)
     // \\d{4}-\\d{2}-\\d{2} = AAAA-MM-DD, por ejemplo "2026-11-13"
     private static final String FORMATO_FECHA = "\\d{4}-\\d{2}-\\d{2}";
@@ -79,6 +84,46 @@ public class ControladorSesion {
         String hora = String.format(Locale.ROOT, "%02d:%02d",
                 ahora.get(Calendar.HOUR_OF_DAY), ahora.get(Calendar.MINUTE));
         return sesionDAO.buscarProxima(fecha, hora);
+    }
+
+    // Dice cuánto avanzó una sesión que está "En curso", de 0 a 99 (%).
+    // Está en curso si: es "Pendiente", es de hoy y la hora actual está entre su inicio y su fin.
+    // Si no está en curso devuelve NO_EN_CURSO (-1). No se guarda nada: se calcula cada vez,
+    // así la meta, el reporte y las estadísticas siguen contando solo las "Completada"
+    public int porcentajeEnCurso(SesionEstudio sesion) {
+        // 1. Solo las pendientes (una completada o reprogramada nunca está en curso)
+        if (!sesion.getEstado().equals(SesionEstudio.ESTADO_PENDIENTE)) {
+            return NO_EN_CURSO;
+        }
+
+        // 2. Solo las de hoy: se compara la fecha de la sesión con la de hoy ("2026-11-16")
+        Calendar ahora = Calendar.getInstance();
+        String hoy = String.format(Locale.ROOT, "%04d-%02d-%02d", ahora.get(Calendar.YEAR),
+                ahora.get(Calendar.MONTH) + 1, ahora.get(Calendar.DAY_OF_MONTH));
+        if (!sesion.getFecha().equals(hoy)) {
+            return NO_EN_CURSO;
+        }
+
+        // 3. La hora actual en minutos desde las 00:00 (11:30 → 690), igual que el inicio y el fin
+        int minutosAhora = ahora.get(Calendar.HOUR_OF_DAY) * 60 + ahora.get(Calendar.MINUTE);
+        // Todavía no empezó (antes del inicio) o ya terminó (desde el fin en adelante)
+        if (minutosAhora < sesion.getInicioEnMinutos() || minutosAhora >= sesion.getFinEnMinutos()) {
+            return NO_EN_CURSO;
+        }
+
+        // 4. Porcentaje = minutos que pasaron * 100 / duración (división entera).
+        //    Ejemplo: de 11:00 a 12:00, a las 11:30 → 30 * 100 / 60 = 50 %.
+        //    La duración nunca es 0 aquí: si inicio <= ahora < fin, el fin es mayor que el inicio
+        int minutosPasados = minutosAhora - sesion.getInicioEnMinutos();
+        return minutosPasados * 100 / sesion.getDuracionMinutos();
+    }
+
+    // Milisegundos que faltan para que empiece el siguiente minuto del reloj
+    // (a las 11:30:45 faltan 15 segundos = 15000). Las pantallas lo usan para refrescar
+    // la lista justo cuando cambia el minuto, y no hasta 59 segundos tarde
+    public long milisHastaElSiguienteMinuto() {
+        // % (resto): cuántos milisegundos ya pasaron dentro del minuto actual
+        return MILIS_POR_MINUTO - System.currentTimeMillis() % MILIS_POR_MINUTO;
     }
 
     // Devuelve la sesión con ese id, o null si no existe

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,6 +59,18 @@ public class CalendarioActivity extends AppCompatActivity {
     private TextView tvDiaElegido;
     private SesionAdapter adaptador;
     private ControladorSesion controlador;
+
+    // Handler: permite programar una tarea para "dentro de un rato" en el hilo de la pantalla
+    private final Handler reloj = new Handler(Looper.getMainLooper());
+    // Tarea que se repite cada minuto: vuelve a pintar la semana (así "En curso" y su barra
+    // avanzan solos) y se vuelve a programar para el siguiente cambio de minuto
+    private final Runnable actualizarCadaMinuto = new Runnable() {
+        @Override
+        public void run() {
+            mostrarSemana();
+            reloj.postDelayed(this, controlador.milisHastaElSiguienteMinuto());
+        }
+    };
 
     // Se ejecuta al abrir la pantalla
     @Override
@@ -152,6 +166,16 @@ public class CalendarioActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mostrarSemana();
+        // Empieza a refrescar la lista cada minuto mientras la pantalla está abierta
+        reloj.postDelayed(actualizarCadaMinuto, controlador.milisHastaElSiguienteMinuto());
+    }
+
+    // Se ejecuta cuando la pantalla deja de verse (se abre otra, o se sale de la app)
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Cancela el refresco: no hace falta repintar una pantalla que no se ve
+        reloj.removeCallbacks(actualizarCadaMinuto);
     }
 
     // Crea las 7 celdas de la tira UNA sola vez: infla item_dia.xml 7 veces y las agrega al LinearLayout

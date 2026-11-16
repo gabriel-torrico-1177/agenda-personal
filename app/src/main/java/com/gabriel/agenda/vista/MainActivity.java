@@ -2,6 +2,8 @@ package com.gabriel.agenda.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -43,6 +45,18 @@ public class MainActivity extends AppCompatActivity {
     private ControladorSesion controladorSesion;
     // Próxima sesión que se está mostrando (null si no hay); se usa al tocarla
     private SesionEstudio proxima;
+
+    // Handler: permite programar una tarea para "dentro de un rato" en el hilo de la pantalla
+    private final Handler reloj = new Handler(Looper.getMainLooper());
+    // Tarea que se repite cada minuto: vuelve a pintar la pantalla (así "En curso" y su barra
+    // avanzan solos) y se vuelve a programar para el siguiente cambio de minuto
+    private final Runnable actualizarCadaMinuto = new Runnable() {
+        @Override
+        public void run() {
+            mostrarTodo();
+            reloj.postDelayed(this, controladorSesion.milisHastaElSiguienteMinuto());
+        }
+    };
 
     // Se ejecuta al abrir la pantalla: carga el diseño y conecta los botones
     @Override
@@ -122,6 +136,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mostrarTodo();
+        // Empieza a refrescar la pantalla cada minuto mientras está abierta
+        reloj.postDelayed(actualizarCadaMinuto, controladorSesion.milisHastaElSiguienteMinuto());
+    }
+
+    // Se ejecuta cuando la pantalla deja de verse (se abre otra, o se sale de la app)
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Cancela el refresco: no hace falta repintar una pantalla que no se ve
+        reloj.removeCallbacks(actualizarCadaMinuto);
+    }
+
+    // Pinta la fecha, la meta, la próxima sesión y las sesiones de hoy
+    private void mostrarTodo() {
         Calendar hoy = Calendar.getInstance();
         mostrarFecha(hoy);
         mostrarMeta();

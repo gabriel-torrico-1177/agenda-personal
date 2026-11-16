@@ -10,4 +10,8 @@
 
     <!-- Fondo gris claro de la fila de títulos y de la fila de total del reporte -->
     <color name="fila_destacada">#22888888</color>
+
+    <!-- Sesión "En curso": verde para el borde y la barra, y el mismo verde transparente de fondo -->
+    <color name="en_curso">#43A047</color>
+    <color name="en_curso_fondo">#3343A047</color>
 </resources>

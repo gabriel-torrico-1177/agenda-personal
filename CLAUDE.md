@@ -72,6 +72,7 @@ CREATE TABLE meta_semanal (
 - Orden: contactos y materias por nombre (A-Z). El DAO trae los datos con `COLLATE NOCASE`, pero el **orden final lo hace el controlador** (`ordenarPorNombre`, privado) con `java.text.Collator` en español (`Locale.forLanguageTag("es")`, fuerza `PRIMARY`), que ignora tildes y mayúsculas ("Álgebra" va antes que "Matemáticas"). Sesiones por `hora_inicio`.
 - Las horas **no se guardan**: se calculan con `hora_fin - hora_inicio` (método `getDuracionMinutos()` de SesionEstudio). **Solo cuentan las sesiones "Completada"** para la meta, el reporte (horas hechas) y las estadísticas. El reporte muestra como "planificadas" las horas de todas las sesiones de la semana.
 - La semana va de lunes a domingo. Para buscar sesiones de una semana: `fecha BETWEEN lunes AND domingo`.
+- "En curso" no es un estado guardado: una sesión "Pendiente" de hoy cuya hora actual está entre su inicio y su fin se muestra como "En curso" (etiqueta verde y barra de avance) en el calendario y en Inicio. Lo calcula `ControladorSesion.porcentajeEnCurso(sesion)` (minutos pasados * 100 / duración, o -1 si no está en curso) y las dos pantallas se refrescan cada minuto con un `Handler`. No cuenta para la meta, el reporte ni las estadísticas.
 
 ## Métodos acordados (diagramas de clases del informe)
 - ControladorContacto: `registrar(nombre, telefono, correo)`, `listar()`, `buscar(texto)`, `obtener(id)`, `actualizar(contacto)`, `eliminar(id)`, `validar(...)` (privado). **Ya existe: no cambiarlo.**
