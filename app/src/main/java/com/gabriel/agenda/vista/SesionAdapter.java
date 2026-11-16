@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gabriel.agenda.R;
+import com.gabriel.agenda.controlador.ControladorSesion;
 import com.gabriel.agenda.modelo.SesionEstudio;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class SesionAdapter extends BaseAdapter {
     private final Context context;
     private List<SesionEstudio> sesiones;
     private final OnEliminarListener eliminarListener;
+    // Le pregunta si una sesión está "En curso" (la vista no hace ese cálculo)
+    private final ControladorSesion controlador;
 
     // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
     // (null = la lista se muestra sin el botón ✕, como en la pantalla de Inicio)
@@ -35,6 +39,7 @@ public class SesionAdapter extends BaseAdapter {
         this.context = context;
         this.sesiones = sesiones;
         this.eliminarListener = eliminarListener;
+        this.controlador = new ControladorSesion(context);
     }
 
     // Cambia la lista (por ejemplo, al elegir otro día) y avisa al ListView que se redibuje
@@ -76,6 +81,7 @@ public class SesionAdapter extends BaseAdapter {
         TextView tvHorario = convertView.findViewById(R.id.tvHorario);
         TextView tvEstado = convertView.findViewById(R.id.tvEstado);
         ImageButton btnEliminar = convertView.findViewById(R.id.btnEliminar);
+        ProgressBar pbEnCurso = convertView.findViewById(R.id.pbEnCurso);
 
         // Círculo con el color de la materia (viene del JOIN del SesionDAO)
         GradientDrawable circulo = new GradientDrawable();
@@ -87,7 +93,22 @@ public class SesionAdapter extends BaseAdapter {
         // "19:00 – 20:30"
         tvHorario.setText(context.getString(R.string.formato_horario,
                 sesion.getHoraInicio(), sesion.getHoraFin()));
-        tvEstado.setText(sesion.getEstado());
+
+        // Estado: el controlador dice si la sesión está en curso y cuánto avanzó (o -1 si no).
+        // Se pintan las dos ramas siempre, porque la fila puede venir reutilizada de otra sesión
+        int porcentaje = controlador.porcentajeEnCurso(sesion);
+        if (porcentaje == ControladorSesion.NO_EN_CURSO) {
+            // Normal: el estado guardado, borde gris y sin barra
+            tvEstado.setText(sesion.getEstado());
+            tvEstado.setBackgroundResource(R.drawable.fondo_estado);
+            pbEnCurso.setVisibility(View.GONE);
+        } else {
+            // En curso: etiqueta verde y barra con el avance
+            tvEstado.setText(R.string.estado_en_curso);
+            tvEstado.setBackgroundResource(R.drawable.fondo_estado_en_curso);
+            pbEnCurso.setProgress(porcentaje);
+            pbEnCurso.setVisibility(View.VISIBLE);
+        }
 
         // Sin listener (pantalla de Inicio): se oculta el ✕ porque ahí no se elimina
         if (eliminarListener == null) {
