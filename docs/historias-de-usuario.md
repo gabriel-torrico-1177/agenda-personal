@@ -91,6 +91,8 @@ Pruebas de aceptación:
 - [x] Tocar el viernes 13/11/2026 y comprobar que solo se ven las sesiones de ese día.
 - [x] Tocar un día sin sesiones y comprobar que se indica "No tienes sesiones para este día".
 - [x] Pasar a la semana siguiente con ▶ y comprobar que cambian los días.
+- [x] Con una sesión "Pendiente" de hoy cuyo horario incluye la hora actual, comprobar que se muestra "En curso" con una barra de progreso.
+- [x] Dejar la pantalla abierta y comprobar que la barra avanza y que la sesión vuelve a "Pendiente" al llegar la hora de fin.
 Criterios de calidad: Usabilidad: el día elegido se ve resaltado. Eficiencia: la lista carga en menos de 1 segundo.
 
 ### HU-11 Editar sesión y cambiar su estado · prioridad 300 · 3 puntos · depende de: HU-09, HU-10
