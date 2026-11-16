@@ -139,6 +139,7 @@
     <string name="estado_reprogramada">Reprogramada</string>
     <!-- No es un estado guardado: se muestra mientras una sesión Pendiente de hoy está en su horario -->
     <string name="estado_en_curso">En curso</string>
+    <string name="btn_terminar_ahora">Terminar ahora</string>
     <string name="etiqueta_notas">Notas (opcional)</string>
     <string name="pista_notas">Ej.: Repasar integrales</string>
 

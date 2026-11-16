@@ -104,6 +104,7 @@ Pruebas de aceptación:
 - [x] Presionar "Cancelar" y comprobar que la sesión queda igual.
 - [x] Cambiar el horario de una sesión para que se cruce con otra del mismo día y comprobar que se indica "Ya tienes una sesión en ese horario"; guardar la sesión sin cambiar su horario y comprobar que no aparece ese mensaje.
 - [x] Marcar como "Completada" una sesión cuya hora de fin todavía no llegó y comprobar que se indica "No puedes completar una sesión que todavía no terminó".
+- [ ] Abrir una sesión "En curso", presionar "Terminar ahora" y comprobar que aparece "Sesión terminada", que la hora de fin pasa a ser la hora actual y que queda "Completada"; comprobar que el botón no aparece en una sesión que no está en curso y que, si no pasó ni 1 minuto desde el inicio, se indica "Espera al menos 1 minuto para terminar la sesión".
 Criterios de calidad: Usabilidad: el estado se elige con un toque.
 
 ### HU-12 Eliminar sesión · prioridad 280 · 1 punto · depende de: HU-10

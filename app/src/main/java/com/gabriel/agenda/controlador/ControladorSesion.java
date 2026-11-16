@@ -25,6 +25,9 @@ public class ControladorSesion {
     public static final String SESION_ACTUALIZADA = "Sesión actualizada";
     public static final String SESION_ELIMINADA = "Sesión eliminada";
     public static final String ERROR_GUARDAR = "No se pudo guardar";
+    public static final String SESION_TERMINADA = "Sesión terminada";
+    public static final String ERROR_NO_EN_CURSO = "Esta sesión ya no está en curso";
+    public static final String ERROR_MUY_PRONTO = "Espera al menos 1 minuto para terminar la sesión";
 
     // Lo que devuelve porcentajeEnCurso cuando la sesión NO está en curso
     public static final int NO_EN_CURSO = -1;
@@ -116,6 +119,43 @@ public class ControladorSesion {
         //    La duración nunca es 0 aquí: si inicio <= ahora < fin, el fin es mayor que el inicio
         int minutosPasados = minutosAhora - sesion.getInicioEnMinutos();
         return minutosPasados * 100 / sesion.getDuracionMinutos();
+    }
+
+    // Botón "Terminar ahora": la sesión en curso termina en este momento.
+    // Pone como hora de fin la hora actual (HH:MM), la marca "Completada" y la guarda
+    // con actualizar (que vuelve a pasar por validar). Devuelve el mensaje para la pantalla
+    public String terminarAhora(int id) {
+        // 1. Se usa la sesión tal como está guardada (los cambios sin guardar del formulario no cuentan)
+        SesionEstudio sesion = sesionDAO.buscarPorId(id);
+        if (sesion == null) {
+            return ERROR_GUARDAR;
+        }
+
+        // 2. Se vuelve a revisar que siga en curso: el formulario pudo quedar abierto
+        //    hasta después de la hora de fin
+        if (porcentajeEnCurso(sesion) == NO_EN_CURSO) {
+            return ERROR_NO_EN_CURSO;
+        }
+
+        // 3. Hora actual en minutos desde las 00:00. Tiene que haber pasado al menos 1 minuto
+        //    desde el inicio; si no, el fin quedaría igual al inicio (una sesión de 0 minutos)
+        Calendar ahora = Calendar.getInstance();
+        int hora = ahora.get(Calendar.HOUR_OF_DAY);
+        int minuto = ahora.get(Calendar.MINUTE);
+        if (hora * 60 + minuto - sesion.getInicioEnMinutos() < 1) {
+            return ERROR_MUY_PRONTO;
+        }
+
+        // 4. Nuevo fin = ahora ("11:45") y estado Completada
+        sesion.setHoraFin(String.format(Locale.ROOT, "%02d:%02d", hora, minuto));
+        sesion.setEstado(SesionEstudio.ESTADO_COMPLETADA);
+
+        // 5. Se guarda con el mismo método que el botón Guardar (valida todo de nuevo)
+        String mensaje = actualizar(sesion);
+        if (mensaje.equals(SESION_ACTUALIZADA)) {
+            return SESION_TERMINADA;
+        }
+        return mensaje; // si algo falló, el error de validar
     }
 
     // Milisegundos que faltan para que empiece el siguiente minuto del reloj
