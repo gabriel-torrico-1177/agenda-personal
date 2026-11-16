@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -19,7 +18,7 @@ import com.gabriel.agenda.controlador.ControladorMeta;
 import com.gabriel.agenda.modelo.MetaSemanal;
 
 // Pantalla P8: definir las horas de estudio de la semana actual y ver el progreso (capa vista)
-public class MetaActivity extends AppCompatActivity {
+public class MetaActivity extends PantallaBase {
 
     private EditText etHoras;
     private ControladorMeta controlador;

@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -30,7 +29,7 @@ import java.util.Locale;
 
 // Pantalla P1: Inicio (capa vista). Muestra el progreso de la meta, la próxima sesión
 // y las sesiones de hoy. Los cálculos los hacen ControladorMeta y ControladorSesion
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends PantallaBase {
 
     private TextView tvFecha;
     private TextView tvProgreso;
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         tarjetaMeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MetaActivity.class));
+                abrirFormulario(new Intent(MainActivity.this, MetaActivity.class));
             }
         });
 
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         btnNuevaSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SesionFormActivity.class));
+                abrirFormulario(new Intent(MainActivity.this, SesionFormActivity.class));
             }
         });
     }
@@ -204,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
     private void abrirSesion(int idSesion) {
         Intent intent = new Intent(MainActivity.this, SesionFormActivity.class);
         intent.putExtra(SesionFormActivity.EXTRA_ID, idSesion);
-        startActivity(intent);
+        abrirFormulario(intent);
     }
 
     // Fecha como AAAA-MM-DD para buscar en la base de datos (mes + 1 porque Calendar empieza en 0)

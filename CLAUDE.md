@@ -27,7 +27,7 @@ Cada capa solo habla con la de abajo: Vista → Controlador → DAO → SQLite.
 
 | Paquete | Clases | Regla |
 |---|---|---|
-| `com.gabriel.agenda.vista` | MainActivity, CalendarioActivity, SesionFormActivity, MateriasActivity, MateriaFormActivity, EstadisticasActivity, ReporteActivity, MetaActivity, ContactosActivity, ContactoFormActivity y los adaptadores (ContactoAdapter, MateriaAdapter, SesionAdapter) | Solo muestran datos y leen lo que escribe el usuario. **No** validan, **no** calculan horas y **no** usan SQL. |
+| `com.gabriel.agenda.vista` | MainActivity, CalendarioActivity, SesionFormActivity, MateriasActivity, MateriaFormActivity, EstadisticasActivity, ReporteActivity, MetaActivity, ContactosActivity, ContactoFormActivity y los adaptadores (ContactoAdapter, MateriaAdapter, SesionAdapter). Todas las pantallas heredan de PantallaBase, que solo pone las animaciones (pestañas: fundido de 150 ms; formularios: suben al abrir y bajan al cerrar; `res/anim`) | Solo muestran datos y leen lo que escribe el usuario. **No** validan, **no** calculan horas y **no** usan SQL. |
 | `com.gabriel.agenda.controlador` | ControladorContacto, ControladorMateria, ControladorSesion, ControladorMeta, ControladorReporte, ControladorEstadisticas | Validan los datos, calculan horas y porcentajes y deciden qué hacer. Devuelven un mensaje (String) o los datos que la vista muestra. |
 | `com.gabriel.agenda.modelo` | Contacto, Materia, SesionEstudio, MetaSemanal, FilaReporte | Clases simples con atributos privados, constructores, getters y setters. |
 | `com.gabriel.agenda.datos` | BaseDatos (extiende SQLiteOpenHelper), ContactoDAO, MateriaDAO, SesionDAO, MetaDAO | Único lugar donde hay SQL. |

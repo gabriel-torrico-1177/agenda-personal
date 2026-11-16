@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pantalla de abajo mientras la otra se anima encima: no cambia (alpha 1 a 1), pero dura 250 ms
+     para que siga visible durante toda la animación (con duración 0 desaparecería de golpe y
+     se vería el fondo de la ventana) -->
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="250"
+    android:fromAlpha="1"
+    android:toAlpha="1" />

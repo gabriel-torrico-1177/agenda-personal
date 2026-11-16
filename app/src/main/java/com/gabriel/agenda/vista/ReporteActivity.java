@@ -10,7 +10,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -26,7 +25,7 @@ import java.util.Locale;
 
 // Pantalla P7: reporte de la semana con una tabla Materia / Plan. / Hechas / % (capa vista).
 // Los cálculos los hace ControladorReporte; aquí solo se arma la tabla
-public class ReporteActivity extends AppCompatActivity {
+public class ReporteActivity extends PantallaBase {
 
     private static final int DIAS_SEMANA = 7;
 

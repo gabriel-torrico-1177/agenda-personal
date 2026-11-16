@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -20,7 +19,7 @@ import com.gabriel.agenda.controlador.ControladorMateria;
 import com.gabriel.agenda.modelo.Materia;
 
 // Pantalla P5: formulario para registrar o editar una materia (capa vista)
-public class MateriaFormActivity extends AppCompatActivity {
+public class MateriaFormActivity extends PantallaBase {
 
     // Nombre del dato "id" que viaja en el Intent (lo usa también MateriasActivity)
     public static final String EXTRA_ID = "id_materia";

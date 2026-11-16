@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Pantalla P2: lista de contactos ordenada A-Z con buscador (capa vista)
-public class ContactosActivity extends AppCompatActivity {
+public class ContactosActivity extends PantallaBase {
 
     private EditText etBuscar;
     private TextView tvVacio;
@@ -97,7 +96,7 @@ public class ContactosActivity extends AppCompatActivity {
                 // id = getItemId(posicion) del adaptador = id del contacto en la base de datos
                 Intent intent = new Intent(ContactosActivity.this, ContactoFormActivity.class);
                 intent.putExtra(ContactoFormActivity.EXTRA_ID, (int) id);
-                startActivity(intent);
+                abrirFormulario(intent);
             }
         });
 
@@ -106,7 +105,7 @@ public class ContactosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ContactosActivity.this, ContactoFormActivity.class);
-                startActivity(intent);
+                abrirFormulario(intent);
             }
         });
     }

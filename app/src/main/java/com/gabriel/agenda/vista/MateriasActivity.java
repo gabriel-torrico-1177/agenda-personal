@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -24,7 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 // Pantalla P4: lista de materias ordenada A-Z con su color y su docente (capa vista)
-public class MateriasActivity extends AppCompatActivity {
+public class MateriasActivity extends PantallaBase {
 
     private MateriaAdapter adaptador;
     private ControladorMateria controlador;
@@ -72,7 +71,7 @@ public class MateriasActivity extends AppCompatActivity {
                 // id = getItemId(posicion) del adaptador = id de la materia en la base de datos
                 Intent intent = new Intent(MateriasActivity.this, MateriaFormActivity.class);
                 intent.putExtra(MateriaFormActivity.EXTRA_ID, (int) id);
-                startActivity(intent);
+                abrirFormulario(intent);
             }
         });
 
@@ -82,7 +81,7 @@ public class MateriasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MateriasActivity.this, MateriaFormActivity.class);
-                startActivity(intent);
+                abrirFormulario(intent);
             }
         });
     }
