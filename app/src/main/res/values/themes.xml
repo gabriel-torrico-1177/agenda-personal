@@ -47,6 +47,9 @@
              por eso se pone nuestro texto claro -->
         <item name="android:textColorTertiary">@color/texto</item>
         <item name="android:textColorPrimaryDisableOnly">@color/texto</item>
+
+        <!-- Tema de todos los AlertDialog de la app (nombre, eliminar...): estilo DialogoAgenda -->
+        <item name="alertDialogTheme">@style/DialogoAgenda</item>
     </style>
 
     <style name="Theme.AgendaPersonal" parent="Base.Theme.AgendaPersonal" />
@@ -160,6 +163,23 @@
         <item name="strokeColor">@color/verde</item>
         <item name="android:textColor">@color/verde</item>
     </style>
+
+    <!-- Diálogos (AlertDialog): parte del de Material3 y cambia el fondo de la ventana
+         (fondo_dialogo.xml: tarjeta_alta con esquinas redondeadas) y los botones:
+         positivo (Guardar, Sí) verde relleno y negativo (Cancelar, No) con borde verde -->
+    <style name="DialogoAgenda" parent="ThemeOverlay.Material3.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/fondo_dialogo</item>
+        <item name="buttonBarPositiveButtonStyle">@style/BotonDialogoPrincipal</item>
+        <item name="buttonBarNegativeButtonStyle">@style/BotonDialogoSecundario</item>
+    </style>
+
+    <!-- Botón positivo del diálogo: como BotonPrincipal, con 8dp de separación del de al lado -->
+    <style name="BotonDialogoPrincipal" parent="BotonPrincipal">
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+
+    <!-- Botón negativo del diálogo: como BotonSecundario (borde verde, fondo transparente) -->
+    <style name="BotonDialogoSecundario" parent="BotonSecundario" />
 
     <!-- Tarjeta del panel "Más": la mitad del ancho (weight 1), borde redondeado,
          efecto al tocarla (foreground) y mucho más alta que el mínimo de 48dp -->
