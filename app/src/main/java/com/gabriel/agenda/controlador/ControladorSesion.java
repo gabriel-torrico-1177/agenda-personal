@@ -18,6 +18,7 @@ public class ControladorSesion {
     public static final String ERROR_MATERIA = "Elija una materia";
     public static final String ERROR_HORAS = "La hora de fin debe ser posterior a la de inicio";
     public static final String ERROR_CRUCE = "Ya tienes una sesión en ese horario";
+    public static final String ERROR_COMPLETAR_FUTURA = "No puedes completar una sesión que todavía no terminó";
     public static final String ERROR_FECHA_HORA = "Elija la fecha y las horas";
     public static final String SIN_MATERIAS = "Primero registre una materia";
     public static final String SESION_GUARDADA = "Sesión guardada";
@@ -138,7 +139,12 @@ public class ControladorSesion {
             return ERROR_HORAS;
         }
 
-        // 6. No puede cruzarse con otra sesión del mismo día (de cualquier materia)
+        // 6. Solo se puede marcar "Completada" una sesión que ya terminó
+        if (sesion.getEstado().equals(SesionEstudio.ESTADO_COMPLETADA) && todaviaNoTermino(sesion)) {
+            return ERROR_COMPLETAR_FUTURA;
+        }
+
+        // 7. No puede cruzarse con otra sesión del mismo día (de cualquier materia)
         if (seCruzaConOtra(sesion)) {
             return ERROR_CRUCE;
         }
@@ -160,6 +166,22 @@ public class ControladorSesion {
             }
         }
         return false;
+    }
+
+    // Dice si la fecha y la hora de fin de la sesión son posteriores a este momento.
+    // Arma dos textos con el mismo formato "AAAA-MM-DD HH:MM" y los compara con compareTo:
+    // como todas las partes tienen ceros a la izquierda, el orden alfabético es el orden del tiempo
+    // ("2026-11-16 20:30" va después de "2026-11-16 19:05")
+    private boolean todaviaNoTermino(SesionEstudio sesion) {
+        Calendar ahora = Calendar.getInstance(); // fecha y hora del teléfono
+        String textoAhora = String.format(Locale.ROOT, "%04d-%02d-%02d %02d:%02d",
+                ahora.get(Calendar.YEAR), ahora.get(Calendar.MONTH) + 1, // los meses empiezan en 0
+                ahora.get(Calendar.DAY_OF_MONTH),
+                ahora.get(Calendar.HOUR_OF_DAY), ahora.get(Calendar.MINUTE));
+        String finSesion = sesion.getFecha() + " " + sesion.getHoraFin();
+        // compareTo > 0: el fin de la sesión va después de ahora (todavía no llega).
+        // Si termina justo en este minuto (son iguales), ya cuenta como terminada
+        return finSesion.compareTo(textoAhora) > 0;
     }
 
     // Dice si el estado es uno de los 3 que acepta la tabla (Pendiente, Completada, Reprogramada)
