@@ -42,34 +42,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/etiqueta_nombre"
+            style="@style/EtiquetaCampo"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etNombre"
+            style="@style/CajaCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="@string/pista_nombre_materia"
             android:importantForAutofill="no"
-            android:inputType="textCapSentences"
-            android:minHeight="48dp" />
+            android:inputType="textCapSentences" />
 
         <!-- Docente (opcional) -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/etiqueta_docente"
+            style="@style/EtiquetaCampo"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etDocente"
+            style="@style/CajaCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:hint="@string/pista_docente"
             android:importantForAutofill="no"
-            android:inputType="textPersonName|textCapWords"
-            android:minHeight="48dp" />
+            android:inputType="textPersonName|textCapWords" />
 
         <!-- Color: 6 círculos de 48dp. El color de cada uno va en android:tag -->
         <TextView
@@ -77,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/etiqueta_color"
+            style="@style/EtiquetaCampo"
             android:textStyle="bold" />
 
         <LinearLayout

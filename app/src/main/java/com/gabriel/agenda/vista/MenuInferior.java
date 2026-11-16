@@ -96,7 +96,8 @@ public class MenuInferior {
 
     // Abre otra pantalla del menú. La pila queda siempre "Inicio → pantalla actual",
     // así el botón Atrás del teléfono vuelve a Inicio y no se acumulan pantallas
-    private static void abrir(PantallaBase activity, Class<?> destino) {
+    // Sin "private": PantallaBase también la usa al deslizar entre pestañas
+    static void abrir(PantallaBase activity, Class<?> destino) {
         // Si ya estoy en esa pantalla, no hago nada
         if (activity.getClass() == destino) {
             return;
