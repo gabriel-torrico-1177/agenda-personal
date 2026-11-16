@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -20,7 +19,7 @@ import com.gabriel.agenda.controlador.ControladorMateria;
 import com.gabriel.agenda.modelo.Materia;
 
 // Pantalla P5: formulario para registrar o editar una materia (capa vista)
-public class MateriaFormActivity extends AppCompatActivity {
+public class MateriaFormActivity extends PantallaBase {
 
     // Nombre del dato "id" que viaja en el Intent (lo usa también MateriasActivity)
     public static final String EXTRA_ID = "id_materia";
@@ -120,7 +119,7 @@ public class MateriaFormActivity extends AppCompatActivity {
         colorElegido = materia.getColor(); // pintarColores() marcará este círculo
     }
 
-    // Dibuja cada círculo con su color; el elegido lleva un borde oscuro grueso
+    // Dibuja cada círculo con su color; el elegido lleva un borde blanco grueso (se ve sobre el fondo negro)
     private void pintarColores() {
         float densidad = getResources().getDisplayMetrics().density; // para pasar dp a píxeles
         for (View circulo : circulosColor) {
@@ -132,7 +131,7 @@ public class MateriaFormActivity extends AppCompatActivity {
             // equalsIgnoreCase: "#3f51b5" y "#3F51B5" cuentan como el mismo color
             boolean elegido = color.equalsIgnoreCase(colorElegido);
             if (elegido) {
-                forma.setStroke((int) (4 * densidad), Color.BLACK); // borde de 4dp = elegido
+                forma.setStroke((int) (4 * densidad), Color.WHITE); // borde de 4dp = elegido
             }
             circulo.setBackground(forma);
             circulo.setSelected(elegido); // para TalkBack (accesibilidad)

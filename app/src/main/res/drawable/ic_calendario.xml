@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de calendario (campo Fecha): una hoja con esquinas redondeadas, la línea de arriba
+     y las dos argollas. Lienzo de 24 x 24 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Hoja: rectángulo de (3.5, 5) a (20.5, 20.5) con esquinas de radio 2 (cada "a" es una esquina) -->
+    <path
+        android:pathData="M5.5,5 L18.5,5 a2,2 0 0,1 2,2 L20.5,18.5 a2,2 0 0,1 -2,2 L5.5,20.5 a2,2 0 0,1 -2,-2 L3.5,7 a2,2 0 0,1 2,-2 Z"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+    <!-- Línea que separa el encabezado del calendario -->
+    <path
+        android:pathData="M3.5,10 L20.5,10"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+    <!-- Argollas: dos líneas cortas que salen por arriba de la hoja -->
+    <path
+        android:pathData="M8,3 L8,7 M16,3 L16,7"
+        android:strokeLineCap="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+</vector>

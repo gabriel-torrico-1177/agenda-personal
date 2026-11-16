@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -18,7 +17,7 @@ import com.gabriel.agenda.controlador.ControladorContacto;
 import com.gabriel.agenda.modelo.Contacto;
 
 // Pantalla P3: formulario para registrar o editar un contacto (capa vista)
-public class ContactoFormActivity extends AppCompatActivity {
+public class ContactoFormActivity extends PantallaBase {
 
     // Nombre del dato "id" que viaja en el Intent (lo usa también ContactosActivity)
     public static final String EXTRA_ID = "id_contacto";

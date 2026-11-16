@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Adaptive icon (Android 8 o más): el sistema junta el fondo y el frente y los recorta con su forma.
+     monochrome: versión de un solo color para los íconos con tema (Android 13 o más) -->
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@drawable/ic_launcher_background" />
     <foreground android:drawable="@drawable/ic_launcher_foreground" />

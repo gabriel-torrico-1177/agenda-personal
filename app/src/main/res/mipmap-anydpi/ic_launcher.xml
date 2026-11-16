@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono para Android 7 (API 24 y 25), que no conoce el adaptive icon: se apilan las mismas
+     dos capas vectoriales (primero el fondo y encima el frente). En Android 8 o más se usa
+     mipmap-anydpi-v26/ic_launcher.xml, que tiene prioridad por ser más específico (v26) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_launcher_background" />
+    <item android:drawable="@drawable/ic_launcher_foreground" />
+</layer-list>

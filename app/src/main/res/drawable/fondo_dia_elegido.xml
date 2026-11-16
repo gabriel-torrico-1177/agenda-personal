@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Fondo del día elegido: rectángulo redondeado relleno de azul (el texto se pone en blanco) -->
+<!-- Fondo del día elegido: rectángulo redondeado relleno de verde oscuro (el texto se pone en blanco) -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="8dp" />
-    <solid android:color="#3F51B5" />
+    <solid android:color="@color/verde_oscuro" />
 </shape>

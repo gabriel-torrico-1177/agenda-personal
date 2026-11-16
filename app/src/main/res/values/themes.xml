@@ -1,8 +1,52 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.AgendaPersonal" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Tema de toda la app: verde y negro.
+         Padre "Material3.Dark" (y no "DayNight"): siempre oscuro, aunque el teléfono esté en modo claro.
+         Cada item cambia un color que Material usa en sus componentes (reemplaza el morado por defecto) -->
+    <style name="Base.Theme.AgendaPersonal" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Color principal: botones, barras de progreso, RadioButton marcado, cursor y línea del campo activo -->
+        <item name="colorPrimary">@color/verde</item>
+        <item name="colorOnPrimary">@color/texto_sobre_verde</item>
+        <!-- Versión "contenedor" del principal: botón flotante +, verde con el + oscuro
+             (igual que los demás botones verdes) -->
+        <item name="colorPrimaryContainer">@color/verde</item>
+        <item name="colorOnPrimaryContainer">@color/texto_sobre_verde</item>
+        <!-- Secundario y terciario también en verde: así no aparece ningún otro color de Material -->
+        <item name="colorSecondary">@color/verde</item>
+        <item name="colorOnSecondary">@color/texto_sobre_verde</item>
+        <item name="colorSecondaryContainer">@color/verde_oscuro</item>
+        <item name="colorOnSecondaryContainer">@color/texto</item>
+        <item name="colorTertiary">@color/verde</item>
+        <item name="colorOnTertiary">@color/texto_sobre_verde</item>
+        <!-- colorAccent: lo usan los selectores de fecha y de hora (DatePicker y TimePicker) -->
+        <item name="colorAccent">@color/verde</item>
+
+        <!-- Fondo de las pantallas -->
+        <item name="android:colorBackground">@color/fondo</item>
+        <item name="android:windowBackground">@color/fondo</item>
+        <item name="colorOnBackground">@color/texto</item>
+        <!-- Superficies: fondo base, tarjetas y diálogos (Material elige el "Container" según el componente) -->
+        <item name="colorSurface">@color/fondo</item>
+        <item name="colorOnSurface">@color/texto</item>
+        <item name="colorSurfaceVariant">@color/tarjeta</item>
+        <item name="colorOnSurfaceVariant">@color/texto_secundario</item>
+        <item name="colorSurfaceContainerLowest">@color/fondo</item>
+        <item name="colorSurfaceContainerLow">@color/tarjeta</item>
+        <item name="colorSurfaceContainer">@color/tarjeta</item>
+        <item name="colorSurfaceContainerHigh">@color/tarjeta_alta</item>
+        <item name="colorSurfaceContainerHighest">@color/tarjeta_alta</item>
+        <!-- Bordes de los componentes de Material -->
+        <item name="colorOutline">@color/borde</item>
+        <item name="colorOutlineVariant">@color/borde</item>
+
+        <!-- Textos de los TextView y EditText que no tienen un color propio -->
+        <item name="android:textColorPrimary">@color/texto</item>
+        <item name="android:textColorSecondary">@color/texto_secundario</item>
+        <item name="android:textColorHint">@color/texto_pista</item>
+        <!-- Material3 pone en estos dos sus tonos lila (#CAC4D0 y #E6E1E5). Algunos teléfonos
+             (como el Infinix) usan textColorTertiary para los TextView sin color propio:
+             por eso se pone nuestro texto claro -->
+        <item name="android:textColorTertiary">@color/texto</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/texto</item>
     </style>
 
     <style name="Theme.AgendaPersonal" parent="Base.Theme.AgendaPersonal" />
@@ -17,18 +61,104 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-    <!-- Estilo de cada botón del menú inferior: así los 4 se ven iguales sin repetir atributos -->
+    <!-- Estilo de cada botón del menú inferior: así los 4 se ven iguales sin repetir atributos.
+         Ícono arriba (drawableTop, en cada botón) y texto abajo; 56dp de alto (más de 48dp).
+         textColor y drawableTint usan color/menu_item.xml: verde si el botón está "selected", gris si no -->
     <style name="BotonMenu">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">56dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginHorizontal">2dp</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@color/menu_item</item>
+        <item name="android:drawableTint">@color/menu_item</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- Tarjeta de Inicio (meta, próxima sesión y sesiones de hoy): gris muy oscuro con esquinas redondeadas.
+         paddingHorizontal y paddingVertical (y no padding): android:padding gana sobre todos los demás,
+         y así una tarjeta no podría cambiar solo los lados (como la de sesiones de hoy) -->
+    <style name="TarjetaInicio">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:background">@drawable/fondo_tarjeta</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">16dp</item>
+    </style>
+
+    <!-- Título de una tarjeta con su ícono a la izquierda (drawableStart) -->
+    <style name="TituloTarjeta">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/texto</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Etiqueta de un campo de formulario ("Materia *", "Fecha *"...): gris claro y en negrita -->
+    <style name="EtiquetaCampo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:textColor">@color/texto_secundario</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Campo dentro de una caja redondeada (caja_campo.xml), con espacio para el ícono de la izquierda -->
+    <style name="CajaCampo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/caja_campo</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:paddingHorizontal">14dp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:textColor">@color/texto</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Chip de estado: un RadioButton sin el circulito (button @null), con fondo y color de texto
+         que cambian si está elegido (chip_estado.xml y color/chip_estado_texto.xml).
+         Width 0dp + weight 1: los 3 chips se reparten el ancho por igual -->
+    <style name="ChipEstado">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/chip_estado</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingHorizontal">4dp</item>
+        <item name="android:textColor">@color/chip_estado_texto</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Botón principal (Guardar): verde relleno con texto oscuro -->
+    <style name="BotonPrincipal" parent="Widget.Material3.Button">
+        <item name="android:minHeight">48dp</item>
+        <item name="backgroundTint">@color/verde</item>
+        <item name="android:textColor">@color/texto_sobre_verde</item>
+    </style>
+
+    <!-- Botón secundario (Cancelar): solo con borde verde, fondo transparente y texto verde -->
+    <style name="BotonSecundario" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">48dp</item>
+        <item name="strokeColor">@color/verde</item>
+        <item name="android:textColor">@color/verde</item>
     </style>
 
     <!-- Tarjeta del panel "Más": la mitad del ancho (weight 1), borde redondeado,
@@ -47,12 +177,12 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <!-- Emoji de la tarjeta (el lector de pantalla lo salta: el nombre ya dice qué es) -->
+    <!-- Ícono vectorial de la tarjeta (ImageView de 32dp; el vector se agranda sin perder calidad).
+         El lector de pantalla lo salta: el nombre ya dice qué es -->
     <style name="TarjetaMasIcono">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">6dp</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
         <item name="android:importantForAccessibility">no</item>
     </style>
 

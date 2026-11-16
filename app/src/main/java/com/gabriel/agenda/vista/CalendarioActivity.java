@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -34,7 +33,7 @@ import java.util.Locale;
 import java.util.Set;
 
 // Pantalla P2: tira con los 7 días de la semana y las sesiones del día elegido (capa vista)
-public class CalendarioActivity extends AppCompatActivity {
+public class CalendarioActivity extends PantallaBase {
 
     private static final int DIAS_SEMANA = 7;
 
@@ -128,7 +127,7 @@ public class CalendarioActivity extends AppCompatActivity {
                 // id = getItemId(posicion) del adaptador = id de la sesión en la base de datos
                 Intent intent = new Intent(CalendarioActivity.this, SesionFormActivity.class);
                 intent.putExtra(SesionFormActivity.EXTRA_ID, (int) id);
-                startActivity(intent);
+                abrirFormulario(intent);
             }
         });
 
@@ -156,7 +155,7 @@ public class CalendarioActivity extends AppCompatActivity {
                 // Manda la fecha elegida ("2026-11-13") para que el formulario empiece con ella
                 intent.putExtra(SesionFormActivity.EXTRA_FECHA,
                         fechaParaBuscar(diaDeLaSemana(indiceElegido)));
-                startActivity(intent);
+                abrirFormulario(intent);
             }
         });
     }
@@ -251,7 +250,7 @@ public class CalendarioActivity extends AppCompatActivity {
                 puntos[i].setVisibility(View.INVISIBLE);
             }
 
-            // Día elegido: fondo azul y texto blanco. Los demás: borde gris y texto normal
+            // Día elegido: fondo verde oscuro y texto blanco. Los demás: borde gris oscuro y texto normal
             if (i == indiceElegido) {
                 celdas[i].setBackgroundResource(R.drawable.fondo_dia_elegido);
                 tvLetras[i].setTextColor(Color.WHITE);

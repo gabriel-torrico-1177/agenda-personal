@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de cuadrícula (menú: Más): cuatro cuadrados de 2 x 2, como las tarjetas del panel Más.
+     Lienzo de 24 x 24. Cada cuadrado: M = esquina de arriba a la izquierda, h/v = lados, z = cerrar -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <path
+        android:pathData="M4,4 h6.5 v6.5 h-6.5 z M13.5,4 h6.5 v6.5 h-6.5 z M4,13.5 h6.5 v6.5 h-6.5 z M13.5,13.5 h6.5 v6.5 h-6.5 z"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+</vector>

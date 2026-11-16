@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Color del texto y del ícono de cada botón del menú inferior (ColorStateList: cambia según el estado).
+     state_selected = el botón de la pantalla actual (MenuInferior le hace setSelected(true)): verde.
+     Los demás: gris claro -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/menu_activo_texto" android:state_selected="true" />
+    <item android:color="@color/texto_secundario" />
+</selector>

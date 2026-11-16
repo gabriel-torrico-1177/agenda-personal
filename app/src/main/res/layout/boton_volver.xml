@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Flecha ← para volver, reutilizable: cada pantalla secundaria la pone a la izquierda de su título
+     con <include layout="@layout/boton_volver" />. No hace falta código en cada pantalla:
+     PantallaBase busca el id btnVolver y al tocarlo llama a finish() (con su animación de cierre).
+     48 x 48 dp: el tamaño mínimo para tocar con el dedo -->
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btnVolver"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_marginEnd="4dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:contentDescription="@string/volver"
+    android:src="@drawable/ic_flecha_atras" />

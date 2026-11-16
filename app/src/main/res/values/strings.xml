@@ -3,6 +3,9 @@
 
     <!-- Panel principal (P1) -->
     <string name="saludo">¡Hola, Gabriel!</string>
+    <!-- Inicial del avatar de Inicio (cambiará junto con el nombre en el issue #22) -->
+    <string name="avatar_inicial">G</string>
+    <string name="frase_motivadora">Cada hora de estudio cuenta. ¡Tú puedes!</string>
     <string name="titulo_proxima">Próxima sesión</string>
     <string name="sin_proxima">No tienes sesiones pendientes</string>
     <string name="hoy">Hoy</string>
@@ -23,15 +26,13 @@
     <string name="menu_calendario">Calendario</string>
     <string name="menu_estadisticas">Estadísticas</string>
     <string name="menu_mas">Más</string>
+    <!-- Flecha ← de las pantallas secundarias (lo lee TalkBack) -->
+    <string name="volver">Volver</string>
     <string name="menu_materias">Materias</string>
     <string name="menu_reporte">Reporte semanal</string>
     <string name="menu_meta">Meta semanal</string>
     <string name="menu_contactos">Contactos</string>
-    <!-- Panel "Más": emoji y descripción corta de cada tarjeta -->
-    <string name="icono_materias">📚</string>
-    <string name="icono_reporte">📊</string>
-    <string name="icono_meta">🎯</string>
-    <string name="icono_contactos">👥</string>
+    <!-- Panel "Más": descripción corta de cada tarjeta -->
     <string name="descripcion_materias">Tus materias, docentes y colores</string>
     <string name="descripcion_reporte">Horas planificadas y hechas</string>
     <string name="descripcion_meta">Horas objetivo y progreso</string>

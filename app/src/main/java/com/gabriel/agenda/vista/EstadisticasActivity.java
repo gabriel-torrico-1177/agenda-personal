@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -26,7 +25,7 @@ import java.util.List;
 
 // Pantalla P6: estadísticas de esta semana (capa vista): horas estudiadas, comparación con la
 // semana anterior, la meta y una barra por materia. Los cálculos los hacen los controladores
-public class EstadisticasActivity extends AppCompatActivity {
+public class EstadisticasActivity extends PantallaBase {
 
     private TextView tvSemana;
     private TextView tvTotal;
@@ -71,7 +70,7 @@ public class EstadisticasActivity extends AppCompatActivity {
         tarjetaMeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EstadisticasActivity.this, MetaActivity.class));
+                abrirFormulario(new Intent(EstadisticasActivity.this, MetaActivity.class));
             }
         });
     }

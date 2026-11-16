@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -32,7 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 // Pantalla P3: formulario para registrar una sesión de estudio (capa vista)
-public class SesionFormActivity extends AppCompatActivity {
+public class SesionFormActivity extends PantallaBase {
 
     // Nombre del dato "fecha" que puede llegar en el Intent (lo manda CalendarioActivity)
     public static final String EXTRA_FECHA = "fecha_sesion";

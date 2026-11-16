@@ -15,67 +15,82 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Título de la pantalla -->
-        <TextView
-            android:id="@+id/tvTitulo"
+        <!-- Título de la pantalla con la flecha ← a la izquierda (boton_volver.xml).
+             marginStart -12dp: la flecha queda a la misma distancia del borde que en las demás pantallas -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="-12dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/titulo_nuevo_contacto"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <include layout="@layout/boton_volver" />
+
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/titulo_nuevo_contacto"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <!-- Nombre -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/etiqueta_nombre"
+            style="@style/EtiquetaCampo"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etNombre"
+            style="@style/CajaCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:autofillHints="name"
             android:hint="@string/pista_nombre"
-            android:inputType="textPersonName|textCapWords"
-            android:minHeight="48dp" />
+            android:inputType="textPersonName|textCapWords" />
 
         <!-- Teléfono: inputType phone muestra el teclado numérico -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/etiqueta_telefono"
+            style="@style/EtiquetaCampo"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etTelefono"
+            style="@style/CajaCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:autofillHints="phone"
             android:hint="@string/pista_telefono"
             android:inputType="phone"
-            android:maxLength="8"
-            android:minHeight="48dp" />
+            android:maxLength="8" />
 
         <!-- Correo: inputType textEmailAddress muestra el teclado con @ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/etiqueta_correo"
+            style="@style/EtiquetaCampo"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etCorreo"
+            style="@style/CajaCampo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:autofillHints="emailAddress"
             android:hint="@string/pista_correo"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
+            android:inputType="textEmailAddress" />
 
         <!-- Botones Cancelar y Guardar, uno al lado del otro y del mismo ancho -->
         <LinearLayout
@@ -85,6 +100,7 @@
 
             <Button
                 android:id="@+id/btnCancelar"
+                style="@style/BotonSecundario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -94,6 +110,7 @@
 
             <Button
                 android:id="@+id/btnGuardar"
+                style="@style/BotonPrincipal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

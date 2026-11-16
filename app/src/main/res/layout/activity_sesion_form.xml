@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla P3: formulario para registrar una sesión de estudio -->
-<!-- ScrollView: permite desplazar el formulario cuando aparece el teclado -->
+<!-- Pantalla P3: formulario para registrar o editar una sesión de estudio.
+     Cada campo va en una caja redondeada (estilo CajaCampo) con un ícono a la izquierda.
+     Los id son los mismos de antes: SesionFormActivity no cambió -->
+<!-- ScrollView: permite desplazar el formulario (pantallas chicas o con el teclado abierto) -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -15,175 +17,181 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Título de la pantalla -->
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/titulo_nueva_sesion"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <!-- Materia: lista desplegable (Spinner) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/etiqueta_materia"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/spMateria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:minHeight="48dp" />
-
-        <!-- Fecha: no se escribe, al tocarla se abre el calendario (DatePickerDialog) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/etiqueta_fecha"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/etFecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:drawableStart="@android:drawable/ic_menu_my_calendar"
-            android:drawablePadding="8dp"
-            android:focusable="false"
-            android:importantForAutofill="no"
-            android:inputType="none"
-            android:minHeight="48dp" />
-
-        <!-- Inicio y Fin, uno al lado del otro: al tocarlos se abre el reloj (TimePickerDialog) -->
+        <!-- Título de la pantalla ("Registrar sesión" o "Editar sesión") con la flecha ← a la
+             izquierda (boton_volver.xml). marginStart -12dp: la flecha queda a la misma distancia
+             del borde que en las demás pantallas -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginStart="-12dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <include layout="@layout/boton_volver" />
+
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/titulo_nueva_sesion"
+                android:textColor="@color/texto"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- MATERIA. Un Spinner no tiene drawableStart, así que la caja es un LinearLayout
+             horizontal con el ícono (ImageView) y el Spinner al lado -->
+        <TextView
+            style="@style/EtiquetaCampo"
+            android:text="@string/etiqueta_materia" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/caja_campo"
+            android:gravity="center_vertical"
+            android:minHeight="52dp"
+            android:orientation="horizontal"
+            android:paddingStart="14dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_libro" />
+
+            <Spinner
+                android:id="@+id/spMateria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp" />
+        </LinearLayout>
+
+        <!-- FECHA: no se escribe, al tocarla se abre el calendario (DatePickerDialog) -->
+        <TextView
+            style="@style/EtiquetaCampo"
+            android:text="@string/etiqueta_fecha" />
+
+        <EditText
+            android:id="@+id/etFecha"
+            style="@style/CajaCampo"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/ic_calendario"
+            android:focusable="false"
+            android:importantForAutofill="no"
+            android:inputType="none" />
+
+        <!-- INICIO y FIN, lado a lado en una fila: cada uno ocupa la mitad (width 0dp + weight 1).
+             Al tocarlos se abre el reloj (TimePickerDialog) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="6dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/etiqueta_inicio"
-                    android:textStyle="bold" />
+                    style="@style/EtiquetaCampo"
+                    android:text="@string/etiqueta_inicio" />
 
                 <EditText
                     android:id="@+id/etInicio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@android:drawable/ic_menu_recent_history"
-                    android:drawablePadding="8dp"
+                    style="@style/CajaCampo"
+                    android:drawableStart="@drawable/ic_reloj"
                     android:focusable="false"
                     android:importantForAutofill="no"
-                    android:inputType="none"
-                    android:minHeight="48dp" />
+                    android:inputType="none" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/etiqueta_fin"
-                    android:textStyle="bold" />
+                    style="@style/EtiquetaCampo"
+                    android:text="@string/etiqueta_fin" />
 
                 <EditText
                     android:id="@+id/etFin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@android:drawable/ic_menu_recent_history"
-                    android:drawablePadding="8dp"
+                    style="@style/CajaCampo"
+                    android:drawableStart="@drawable/ic_reloj"
                     android:focusable="false"
                     android:importantForAutofill="no"
-                    android:inputType="none"
-                    android:minHeight="48dp" />
+                    android:inputType="none" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Estado: RadioGroup = solo se puede marcar una opción. Pendiente marcado por defecto -->
+        <!-- ESTADO como chips: sigue siendo un RadioGroup (solo se puede elegir uno), pero en fila y
+             cada RadioButton con el estilo ChipEstado (sin circulito, fondo verde si está elegido).
+             Pendiente marcado por defecto -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/etiqueta_estado"
-            android:textStyle="bold" />
+            style="@style/EtiquetaCampo"
+            android:text="@string/etiqueta_estado" />
 
         <RadioGroup
             android:id="@+id/rgEstado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginHorizontal="-4dp"
+            android:layout_marginBottom="16dp"
             android:checkedButton="@+id/rbPendiente"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rbPendiente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
+                style="@style/ChipEstado"
                 android:text="@string/estado_pendiente" />
 
             <RadioButton
                 android:id="@+id/rbCompletada"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
+                style="@style/ChipEstado"
                 android:text="@string/estado_completada" />
 
             <RadioButton
                 android:id="@+id/rbReprogramada"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
+                style="@style/ChipEstado"
                 android:text="@string/estado_reprogramada" />
         </RadioGroup>
 
-        <!-- Notas (opcional), varias líneas -->
+        <!-- NOTAS (opcional), varias líneas, en la misma caja (el borde se pone verde al escribir) -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/etiqueta_notas"
-            android:textStyle="bold" />
+            style="@style/EtiquetaCampo"
+            android:text="@string/etiqueta_notas" />
 
         <EditText
             android:id="@+id/etNotas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/CajaCampo"
             android:layout_marginBottom="24dp"
             android:gravity="top|start"
             android:hint="@string/pista_notas"
             android:importantForAutofill="no"
             android:inputType="textMultiLine|textCapSentences"
-            android:minHeight="48dp"
             android:minLines="2" />
 
         <!-- Terminar ahora: oculto; solo se muestra al abrir una sesión que está "En curso" -->
         <Button
             android:id="@+id/btnTerminar"
+            style="@style/BotonPrincipal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/en_curso"
-            android:minHeight="48dp"
             android:text="@string/btn_terminar_ahora"
             android:visibility="gone" />
 
-        <!-- Botones Cancelar y Guardar, uno al lado del otro y del mismo ancho -->
+        <!-- Botones Cancelar (con borde) y Guardar (verde), uno al lado del otro y del mismo ancho -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -191,20 +199,20 @@
 
             <Button
                 android:id="@+id/btnCancelar"
+                style="@style/BotonSecundario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:minHeight="48dp"
                 android:text="@string/btn_cancelar" />
 
             <Button
                 android:id="@+id/btnGuardar"
+                style="@style/BotonPrincipal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:minHeight="48dp"
                 android:text="@string/btn_guardar" />
         </LinearLayout>
     </LinearLayout>

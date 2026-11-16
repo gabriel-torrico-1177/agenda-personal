@@ -1,6 +1,7 @@
 package com.gabriel.agenda.vista;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,7 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
@@ -30,7 +31,7 @@ import java.util.Locale;
 
 // Pantalla P1: Inicio (capa vista). Muestra el progreso de la meta, la próxima sesión
 // y las sesiones de hoy. Los cálculos los hacen ControladorMeta y ControladorSesion
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends PantallaBase {
 
     private TextView tvFecha;
     private TextView tvProgreso;
@@ -64,12 +65,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         WindowCompat.enableEdgeToEdge(getWindow());
         setContentView(R.layout.activity_main);
-        // Deja espacio para la barra de estado y la de navegación del teléfono
+        // Deja espacio para las barras del teléfono. El de ARRIBA (barra de estado) va dentro de la
+        // franja verde, así la franja también pinta de verde detrás de la hora y la batería.
+        // Los demás lados quedan en la pantalla completa
+        final View franja = findViewById(R.id.franja);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
+            franja.setPadding(0, systemBars.top, 0, 0);
             return insets;
         });
+        // Íconos oscuros en la barra de estado (hora, batería): se leen mejor sobre el verde
+        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
+                .setAppearanceLightStatusBars(true);
 
         // Menú inferior con "Inicio" resaltado
         MenuInferior.configurar(this, R.id.menuInicio);
@@ -107,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         tarjetaMeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MetaActivity.class));
+                abrirFormulario(new Intent(MainActivity.this, MetaActivity.class));
             }
         });
 
@@ -126,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         btnNuevaSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SesionFormActivity.class));
+                abrirFormulario(new Intent(MainActivity.this, SesionFormActivity.class));
             }
         });
     }
@@ -178,7 +186,10 @@ public class MainActivity extends AppCompatActivity {
     private void mostrarProxima(Calendar hoy) {
         proxima = controladorSesion.proximaSesion();
         if (proxima == null) {
+            // Mensaje en gris y sin negrita, para que no parezca el nombre de una materia
             tvProximaMateria.setText(R.string.sin_proxima);
+            tvProximaMateria.setTextColor(ContextCompat.getColor(this, R.color.texto_secundario));
+            tvProximaMateria.setTypeface(null, Typeface.NORMAL);
             tvProximaHorario.setVisibility(View.GONE);
             llProxima.setClickable(false);
             return;
@@ -194,7 +205,11 @@ public class MainActivity extends AppCompatActivity {
         String horario = getString(R.string.formato_horario,
                 proxima.getHoraInicio(), proxima.getHoraFin());
 
+        // Nombre de la materia en blanco y negrita (se vuelve a poner porque la pantalla se repinta
+        // cada minuto, y antes pudo quedar en gris con el mensaje "No tienes sesiones pendientes")
         tvProximaMateria.setText(proxima.getNombreMateria());
+        tvProximaMateria.setTextColor(ContextCompat.getColor(this, R.color.texto));
+        tvProximaMateria.setTypeface(null, Typeface.BOLD);
         tvProximaHorario.setText(getString(R.string.formato_proxima, dia, horario));
         tvProximaHorario.setVisibility(View.VISIBLE);
         llProxima.setClickable(true);
@@ -204,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
     private void abrirSesion(int idSesion) {
         Intent intent = new Intent(MainActivity.this, SesionFormActivity.class);
         intent.putExtra(SesionFormActivity.EXTRA_ID, idSesion);
-        startActivity(intent);
+        abrirFormulario(intent);
     }
 
     // Fecha como AAAA-MM-DD para buscar en la base de datos (mes + 1 porque Calendar empieza en 0)

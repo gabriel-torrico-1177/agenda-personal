@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pestaña que aparece: pasa de transparente (alpha 0) a visible (alpha 1) en 150 ms.
+     decelerate: empieza rápido y frena al final -->
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="150"
+    android:fromAlpha="0"
+    android:interpolator="@android:anim/decelerate_interpolator"
+    android:toAlpha="1" />

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Marca de sesión "Completada": círculo verde relleno con un ✔ oscuro adentro. Lienzo de 24 x 24 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <path
+        android:fillColor="@color/verde"
+        android:pathData="M2,12 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" />
+    <!-- ✔: baja de (7, 12.5) a (10.5, 16) y sube hasta (17, 8.5) -->
+    <path
+        android:pathData="M7,12.5 L10.5,16 L17,8.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.5"
+        android:strokeColor="@color/texto_sobre_verde" />
+</vector>

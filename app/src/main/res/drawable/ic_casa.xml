@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de casa (menú: Inicio): techo en punta y cuerpo con una puerta. Lienzo de 24 x 24.
+     El color real lo pone drawableTint en el menú (verde si está activo, gris si no) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Contorno: sube por la pared izquierda, techo en punta (12, 3), baja por la derecha.
+         La parte de abajo deja un hueco para la puerta (de x 10 a 14) -->
+    <path
+        android:pathData="M3,11 L12,3 L21,11 M5,9.5 L5,20.5 L10,20.5 L10,14.5 L14,14.5 L14,20.5 L19,20.5 L19,9.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+</vector>
