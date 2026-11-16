@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 // R está en el paquete base (com.gabriel.agenda), por eso hay que importarlo
 import com.gabriel.agenda.R;
 import com.gabriel.agenda.controlador.ControladorMeta;
+import com.gabriel.agenda.controlador.ControladorPerfil;
 import com.gabriel.agenda.controlador.ControladorSesion;
 import com.gabriel.agenda.modelo.MetaSemanal;
 import com.gabriel.agenda.modelo.SesionEstudio;
@@ -33,6 +34,8 @@ import java.util.Locale;
 // y las sesiones de hoy. Los cálculos los hacen ControladorMeta y ControladorSesion
 public class MainActivity extends PantallaBase {
 
+    private TextView tvSaludo;
+    private TextView tvAvatar;
     private TextView tvFecha;
     private TextView tvProgreso;
     private ProgressBar pbMeta;
@@ -44,6 +47,7 @@ public class MainActivity extends PantallaBase {
 
     private ControladorMeta controladorMeta;
     private ControladorSesion controladorSesion;
+    private ControladorPerfil controladorPerfil;
     // Próxima sesión que se está mostrando (null si no hay); se usa al tocarla
     private SesionEstudio proxima;
 
@@ -83,6 +87,8 @@ public class MainActivity extends PantallaBase {
         MenuInferior.configurar(this, R.id.menuInicio);
 
         // Conecta las variables con el layout (la tarjeta viene de tarjeta_meta.xml por <include>)
+        tvSaludo = findViewById(R.id.tvSaludo);
+        tvAvatar = findViewById(R.id.tvAvatar);
         tvFecha = findViewById(R.id.tvFecha);
         tvProgreso = findViewById(R.id.tvProgreso);
         pbMeta = findViewById(R.id.pbMeta);
@@ -97,6 +103,7 @@ public class MainActivity extends PantallaBase {
 
         controladorMeta = new ControladorMeta(this);
         controladorSesion = new ControladorSesion(this);
+        controladorPerfil = new ControladorPerfil(this);
 
         // Sesiones de hoy: null en el tercer parámetro = sin botón ✕ (en Inicio no se elimina)
         adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>(), null);
@@ -137,6 +144,25 @@ public class MainActivity extends PantallaBase {
                 abrirFormulario(new Intent(MainActivity.this, SesionFormActivity.class));
             }
         });
+
+        // Tocar el avatar: abre el diálogo del nombre (con "Cancelar" y el nombre actual cargado)
+        tvAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoNombre.mostrar(MainActivity.this, false);
+            }
+        });
+
+        // Primera vez que se abre la app (todavía no hay nombre): se pide solo y no se puede cancelar
+        if (!controladorPerfil.tieneNombre()) {
+            DialogoNombre.mostrar(this, true);
+        }
+    }
+
+    // DialogoNombre llama a este método al guardar el nombre: actualiza el saludo y la inicial
+    @Override
+    public void alCambiarNombre() {
+        mostrarSaludo();
     }
 
     // Se ejecuta cada vez que la pantalla vuelve a verse (al volver de Meta o del formulario):
@@ -157,13 +183,25 @@ public class MainActivity extends PantallaBase {
         reloj.removeCallbacks(actualizarCadaMinuto);
     }
 
-    // Pinta la fecha, la meta, la próxima sesión y las sesiones de hoy
+    // Pinta el saludo, la fecha, la meta, la próxima sesión y las sesiones de hoy
     private void mostrarTodo() {
         Calendar hoy = Calendar.getInstance();
+        mostrarSaludo();
         mostrarFecha(hoy);
         mostrarMeta();
         mostrarProxima(hoy);
         adaptador.actualizar(controladorSesion.listarPorFecha(fechaParaBuscar(hoy)));
+    }
+
+    // "¡Hola, Gabriel!" y la inicial "G" en el avatar. Si todavía no hay nombre: "¡Hola!" y "?"
+    private void mostrarSaludo() {
+        if (controladorPerfil.tieneNombre()) {
+            // %1$s del string se reemplaza por el nombre
+            tvSaludo.setText(getString(R.string.saludo, controladorPerfil.obtenerNombre()));
+        } else {
+            tvSaludo.setText(R.string.saludo_sin_nombre);
+        }
+        tvAvatar.setText(controladorPerfil.obtenerInicial());
     }
 
     // "Domingo 15/11/2026"

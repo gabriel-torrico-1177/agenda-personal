@@ -63,9 +63,10 @@ public class MenuInferior {
         actual.setTypeface(null, Typeface.BOLD);
     }
 
-    // Crea y muestra el panel "Más" (BottomSheetDialog): sube desde abajo con las 4 tarjetas
-    private static void mostrarMenuMas(PantallaBase activity) {
-        BottomSheetDialog panel = new BottomSheetDialog(activity);
+    // Crea y muestra el panel "Más" (BottomSheetDialog): sube desde abajo con las 5 tarjetas.
+    // "final": la clase anónima de Mi perfil (más abajo) usa activity y panel
+    private static void mostrarMenuMas(final PantallaBase activity) {
+        final BottomSheetDialog panel = new BottomSheetDialog(activity);
         // inflate: convierte panel_mas.xml en una View; null = todavía no tiene "padre"
         View contenido = LayoutInflater.from(activity).inflate(R.layout.panel_mas, null);
         panel.setContentView(contenido);
@@ -75,6 +76,16 @@ public class MenuInferior {
         conectarTarjeta(activity, panel, contenido, R.id.tarjetaReporte, ReporteActivity.class);
         conectarTarjeta(activity, panel, contenido, R.id.tarjetaMeta, MetaActivity.class);
         conectarTarjeta(activity, panel, contenido, R.id.tarjetaContactos, ContactosActivity.class);
+
+        // Mi perfil no abre una pantalla: cierra el panel y muestra el diálogo del nombre
+        // (con "Cancelar" y el nombre actual cargado) sobre la pantalla en la que estás
+        contenido.findViewById(R.id.tarjetaPerfil).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                panel.dismiss();
+                DialogoNombre.mostrar(activity, false);
+            }
+        });
 
         panel.show();
     }

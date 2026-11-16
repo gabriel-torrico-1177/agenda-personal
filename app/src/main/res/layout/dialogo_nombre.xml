@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contenido del diálogo "¿Cómo te llamas?": un solo campo, en la misma caja redondeada de los
+     formularios (estilo CajaCampo). El título y los botones los pone el AlertDialog -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="12dp">
+
+    <!-- textCapWords: el teclado pone mayúscula al empezar cada palabra.
+         maxLength 30: un nombre largo no rompe el saludo de Inicio -->
+    <EditText
+        android:id="@+id/etNombrePerfil"
+        style="@style/CajaCampo"
+        android:autofillHints="name"
+        android:hint="@string/pista_nombre_perfil"
+        android:inputType="textPersonName|textCapWords"
+        android:maxLength="30" />
+</FrameLayout>
