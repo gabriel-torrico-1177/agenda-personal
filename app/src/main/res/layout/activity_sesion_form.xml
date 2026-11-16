@@ -172,6 +172,17 @@
             android:minHeight="48dp"
             android:minLines="2" />
 
+        <!-- Terminar ahora: oculto; solo se muestra al abrir una sesión que está "En curso" -->
+        <Button
+            android:id="@+id/btnTerminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/en_curso"
+            android:minHeight="48dp"
+            android:text="@string/btn_terminar_ahora"
+            android:visibility="gone" />
+
         <!-- Botones Cancelar y Guardar, uno al lado del otro y del mismo ancho -->
         <LinearLayout
             android:layout_width="match_parent"

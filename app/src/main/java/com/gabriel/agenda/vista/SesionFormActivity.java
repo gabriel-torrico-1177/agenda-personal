@@ -51,6 +51,7 @@ public class SesionFormActivity extends AppCompatActivity {
     private EditText etFin;
     private RadioGroup rgEstado;
     private EditText etNotas;
+    private Button btnTerminar;
 
     // Materias que se muestran en el Spinner (en el mismo orden, después de "Elija una materia")
     private List<Materia> materias;
@@ -101,6 +102,7 @@ public class SesionFormActivity extends AppCompatActivity {
         etNotas = findViewById(R.id.etNotas);
         Button btnCancelar = findViewById(R.id.btnCancelar);
         Button btnGuardar = findViewById(R.id.btnGuardar);
+        btnTerminar = findViewById(R.id.btnTerminar);
 
         llenarSpinner();
         ponerValoresIniciales();
@@ -145,6 +147,12 @@ public class SesionFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish(); // cerrar sin guardar
+            }
+        });
+        btnTerminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                terminarAhora();
             }
         });
     }
@@ -223,6 +231,11 @@ public class SesionFormActivity extends AppCompatActivity {
         }
 
         etNotas.setText(sesion.getNotas());
+
+        // "Terminar ahora" solo aparece si el controlador dice que la sesión está en curso
+        if (controlador.porcentajeEnCurso(sesion) != ControladorSesion.NO_EN_CURSO) {
+            btnTerminar.setVisibility(View.VISIBLE);
+        }
     }
 
     // Convierte "2026-11-13" en anio, mes y dia. Si la fecha es null o no tiene ese formato, no cambia nada
@@ -321,6 +334,16 @@ public class SesionFormActivity extends AppCompatActivity {
         }
         // posición 1 del Spinner = materia 0 de la lista (por el "Elija una materia" del inicio)
         return materias.get(posicion - 1).getId();
+    }
+
+    // Botón "Terminar ahora": el controlador pone el fin en la hora actual, la marca
+    // Completada y la guarda. La vista solo muestra el mensaje y, si salió bien, se cierra
+    private void terminarAhora() {
+        String mensaje = controlador.terminarAhora(idSesion);
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+        if (mensaje.equals(ControladorSesion.SESION_TERMINADA)) {
+            finish(); // vuelve al calendario o a Inicio
+        }
     }
 
     // Arma la sesión con lo elegido, pide al controlador que la registre y muestra el resultado
