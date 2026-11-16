@@ -1,6 +1,6 @@
 # Historias de usuario · Agenda de Estudio
 
-Prioridad de 100 a 500: un número mayor se desarrolla antes. Estimación en puntos de historia (total: 40).
+Prioridad de 100 a 500: un número mayor se desarrolla antes. Estimación en puntos de historia (total: 41).
 Solo cuentan como horas estudiadas las sesiones marcadas como "Completada".
 
 ## Sprint 0 (04/11 al 15/11): contactos
@@ -142,6 +142,17 @@ Pruebas de aceptación:
 - [x] Dejar una sesión como "Pendiente" y comprobar que sus horas no se suman en las estadísticas.
 - [x] Abrir "Estadísticas" en una semana sin sesiones completadas y comprobar que se indica "Aún no hay horas registradas esta semana".
 Criterios de calidad: Usabilidad: cada barra usa el color de su materia. Eficiencia: las estadísticas se calculan en menos de 1 segundo.
+
+## Mejoras: personalización
+
+### HU-16 Personalizar mi nombre · prioridad 200 · 1 punto · depende de: ninguna
+Como estudiante, quiero que la app me salude por mi nombre, para sentir que la agenda es mía.
+Pruebas de aceptación:
+- [x] Abrir la app por primera vez (sin nombre guardado), comprobar que aparece "¿Cómo te llamas?" sin botón "Cancelar", escribir "Gabriel", presionar "Guardar" y comprobar que Inicio saluda "¡Hola, Gabriel!" con la inicial "G" en el avatar.
+- [x] Dejar el nombre vacío (o solo con espacios), presionar "Guardar" y comprobar que se indica "Ingrese su nombre" y el diálogo no se cierra.
+- [x] Cerrar la app, volver a abrirla y comprobar que el saludo conserva el nombre y no se vuelve a pedir.
+- [x] Cambiar el nombre desde "Mi perfil" (panel Más) o tocando el avatar, presionar "Guardar" y comprobar que aparece "Nombre guardado" y se actualizan el saludo y la inicial.
+Criterios de calidad: Usabilidad: el diálogo aparece con el nombre actual ya cargado. Seguridad: el nombre se guarda solo en el teléfono.
 
 ## Requisitos no funcionales a cuidar mientras se programa
 - Responder en menos de 1 segundo (listas, reporte y estadísticas); funcionar sin internet; los datos no se pierden al cerrar la app.

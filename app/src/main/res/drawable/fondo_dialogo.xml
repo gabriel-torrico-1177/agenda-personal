@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo de todos los diálogos (AlertDialog): gris oscuro (tarjeta_alta) con esquinas redondeadas.
+     inset = margen transparente alrededor, para que el diálogo no toque los bordes de la pantalla -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="16dp"
+    android:insetTop="24dp"
+    android:insetRight="16dp"
+    android:insetBottom="24dp">
+    <shape android:shape="rectangle">
+        <corners android:radius="24dp" />
+        <solid android:color="@color/tarjeta_alta" />
+    </shape>
+</inset>

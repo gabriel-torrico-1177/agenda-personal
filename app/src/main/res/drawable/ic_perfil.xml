@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de perfil (panel Más: Mi perfil): una persona dentro de un círculo, como un avatar.
+     Es distinto de ic_persona (Contactos), que no tiene el círculo. Lienzo de 24 x 24 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Círculo de afuera: radio 10 con centro en (12, 12) -->
+    <path
+        android:pathData="M2,12 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+    <!-- Cabeza: círculo de radio 3 con centro en (12, 10) -->
+    <path
+        android:pathData="M9,10 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+    <!-- Hombros: un arco que llega hasta el círculo de afuera -->
+    <path
+        android:pathData="M6.2,19 a6.5,5.5 0 0,1 11.6,0"
+        android:strokeLineCap="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+</vector>

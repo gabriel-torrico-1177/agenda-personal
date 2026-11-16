@@ -2,9 +2,14 @@
     <string name="app_name">Agenda de Estudio</string>
 
     <!-- Panel principal (P1) -->
-    <string name="saludo">¡Hola, Gabriel!</string>
-    <!-- Inicial del avatar de Inicio (cambiará junto con el nombre en el issue #22) -->
-    <string name="avatar_inicial">G</string>
+    <!-- Saludo: %1$s se reemplaza por el nombre guardado ("¡Hola, Gabriel!") -->
+    <string name="saludo">¡Hola, %1$s!</string>
+    <string name="saludo_sin_nombre">¡Hola!</string>
+    <string name="cambiar_nombre">Cambiar mi nombre</string>
+
+    <!-- Diálogo del nombre y "Mi perfil" -->
+    <string name="titulo_perfil">¿Cómo te llamas?</string>
+    <string name="pista_nombre_perfil">Tu nombre</string>
     <string name="frase_motivadora">Cada hora de estudio cuenta. ¡Tú puedes!</string>
     <string name="titulo_proxima">Próxima sesión</string>
     <string name="sin_proxima">No tienes sesiones pendientes</string>
@@ -32,11 +37,13 @@
     <string name="menu_reporte">Reporte semanal</string>
     <string name="menu_meta">Meta semanal</string>
     <string name="menu_contactos">Contactos</string>
+    <string name="menu_perfil">Mi perfil</string>
     <!-- Panel "Más": descripción corta de cada tarjeta -->
     <string name="descripcion_materias">Tus materias, docentes y colores</string>
     <string name="descripcion_reporte">Horas planificadas y hechas</string>
     <string name="descripcion_meta">Horas objetivo y progreso</string>
     <string name="descripcion_contactos">Compañeros y docentes</string>
+    <string name="descripcion_perfil">Tu nombre en el saludo</string>
 
     <!-- Lista de contactos (P2) -->
     <string name="titulo_contactos">Contactos</string>

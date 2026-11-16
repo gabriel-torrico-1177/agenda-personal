@@ -164,6 +164,12 @@ public class PantallaBase extends AppCompatActivity {
         }
     }
 
+    // DialogoNombre lo llama después de guardar el nombre. Aquí no hace nada: solo Inicio
+    // (MainActivity) lo sobrescribe para actualizar el saludo y la inicial del avatar.
+    // Así el diálogo funciona igual desde cualquier pantalla (por ejemplo, desde el panel Más)
+    public void alCambiarNombre() {
+    }
+
     // Abre un formulario: sube desde abajo (y al cerrarse bajará)
     public void abrirFormulario(Intent intent) {
         intent.putExtra(EXTRA_ANIMACION, DESDE_ABAJO);

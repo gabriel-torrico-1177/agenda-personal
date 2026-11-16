@@ -47,15 +47,20 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- Avatar: círculo casi negro (circulo_avatar.xml) con la inicial "G" en verde -->
+                <!-- Avatar: círculo casi negro (circulo_avatar.xml) con la inicial del nombre en verde
+                     (la pone MainActivity). Se toca para cambiar el nombre: por eso es clickable,
+                     tiene el efecto al tocarlo (foreground) y un contentDescription para TalkBack -->
                 <TextView
+                    android:id="@+id/tvAvatar"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_marginEnd="14dp"
                     android:background="@drawable/circulo_avatar"
+                    android:clickable="true"
+                    android:contentDescription="@string/cambiar_nombre"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
-                    android:importantForAccessibility="no"
-                    android:text="@string/avatar_inicial"
                     android:textColor="@color/verde"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -69,10 +74,12 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+                    <!-- "¡Hola, Gabriel!" (lo pone MainActivity con el nombre guardado) -->
                     <TextView
+                        android:id="@+id/tvSaludo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/saludo"
+                        android:text="@string/saludo_sin_nombre"
                         android:textColor="@color/texto_sobre_verde"
                         android:textSize="24sp"
                         android:textStyle="bold" />

@@ -27,10 +27,10 @@ Cada capa solo habla con la de abajo: Vista → Controlador → DAO → SQLite.
 
 | Paquete | Clases | Regla |
 |---|---|---|
-| `com.gabriel.agenda.vista` | MainActivity, CalendarioActivity, SesionFormActivity, MateriasActivity, MateriaFormActivity, EstadisticasActivity, ReporteActivity, MetaActivity, ContactosActivity, ContactoFormActivity y los adaptadores (ContactoAdapter, MateriaAdapter, SesionAdapter). Todas las pantallas heredan de PantallaBase, que solo pone las animaciones (pestañas: fundido de 150 ms; formularios: suben al abrir y bajan al cerrar; `res/anim`) | Solo muestran datos y leen lo que escribe el usuario. **No** validan, **no** calculan horas y **no** usan SQL. |
-| `com.gabriel.agenda.controlador` | ControladorContacto, ControladorMateria, ControladorSesion, ControladorMeta, ControladorReporte, ControladorEstadisticas | Validan los datos, calculan horas y porcentajes y deciden qué hacer. Devuelven un mensaje (String) o los datos que la vista muestra. |
+| `com.gabriel.agenda.vista` | MainActivity, CalendarioActivity, SesionFormActivity, MateriasActivity, MateriaFormActivity, EstadisticasActivity, ReporteActivity, MetaActivity, ContactosActivity, ContactoFormActivity y los adaptadores (ContactoAdapter, MateriaAdapter, SesionAdapter). DialogoNombre (diálogo "¿Cómo te llamas?"). Todas las pantallas heredan de PantallaBase, que solo pone las animaciones (pestañas: fundido de 150 ms; formularios: suben al abrir y bajan al cerrar; `res/anim`) | Solo muestran datos y leen lo que escribe el usuario. **No** validan, **no** calculan horas y **no** usan SQL. |
+| `com.gabriel.agenda.controlador` | ControladorContacto, ControladorMateria, ControladorSesion, ControladorMeta, ControladorReporte, ControladorEstadisticas, ControladorPerfil | Validan los datos, calculan horas y porcentajes y deciden qué hacer. Devuelven un mensaje (String) o los datos que la vista muestra. |
 | `com.gabriel.agenda.modelo` | Contacto, Materia, SesionEstudio, MetaSemanal, FilaReporte | Clases simples con atributos privados, constructores, getters y setters. |
-| `com.gabriel.agenda.datos` | BaseDatos (extiende SQLiteOpenHelper), ContactoDAO, MateriaDAO, SesionDAO, MetaDAO | Único lugar donde hay SQL. |
+| `com.gabriel.agenda.datos` | BaseDatos (extiende SQLiteOpenHelper), ContactoDAO, MateriaDAO, SesionDAO, MetaDAO, PerfilDatos | Único lugar donde hay SQL. PerfilDatos es el único que usa `SharedPreferences` (archivo "perfil", clave "nombre"). |
 
 - Principio de responsabilidad única (SRP): cada clase con una sola tarea.
 - **No** crear interfaces extra para los DAO ni capas adicionales: el diseño debe ser simple (decisión del informe, sección 4.1).
@@ -85,13 +85,16 @@ CREATE TABLE meta_semanal (
 - MetaDAO: `guardar(meta)` (inserta o actualiza la meta de esa semana), `buscarPorSemana(lunes)`.
 - ControladorReporte: `generarReporte(lunes)` → `List<FilaReporte>` (materia, horas planificadas, horas completadas, porcentaje).
 - ControladorEstadisticas: `totalHoras(lunes)`, `variacionSemanaAnterior(lunes)` (porcentaje), `horasPorMateria(lunes)` (de mayor a menor).
+- ControladorPerfil: `guardarNombre(nombre)` (quita los espacios de los extremos; vacío: "Ingrese su nombre"), `obtenerNombre()`, `tieneNombre()`, `obtenerInicial()` (primera letra en mayúscula, o "?" si no hay nombre).
+- PerfilDatos: `guardarNombre(nombre)`, `obtenerNombre()` (devuelve "" si no hay).
 
 ## Validaciones y mensajes (deben coincidir con las pruebas de aceptación)
 - Contacto: "El nombre es obligatorio", "Ingrese un teléfono válido" (7 u 8 dígitos), "Ingrese un correo válido" (si se escribe y no tiene "@").
 - Materia: "El nombre es obligatorio", "Ya existe una materia con ese nombre" (lo decide `nombreRepetido` en el controlador: "CÁLCULO II", "Calculo II" y "Cálculo  II" cuentan como "Cálculo II"). El nombre se guarda con los espacios repetidos unidos en uno. Si no se elige color, usar `#3F51B5`. Docente opcional. Los contactos sí pueden repetirse.
 - Sesión: "Elija una materia", "La hora de fin debe ser posterior a la de inicio", "Ya tienes una sesión en ese horario" (no se puede cruzar con otra sesión del mismo día, de cualquier materia: se cruzan si inicioNueva < finOtra y finNueva > inicioOtra; si una empieza justo cuando termina la otra, sí se permite; al editar, la sesión no se compara consigo misma por su id), "No puedes completar una sesión que todavía no terminó" (si el estado es "Completada" y la fecha y la hora de fin son posteriores a ahora). Botón "Terminar ahora" (solo en una sesión "En curso"): pone como fin la hora actual y la marca "Completada" ("Sesión terminada"); si no pasó ni 1 minuto desde el inicio: "Espera al menos 1 minuto para terminar la sesión"; si ya no está en curso: "Esta sesión ya no está en curso". Estado por defecto: "Pendiente". Si no hay materias al abrir el formulario: "Primero registre una materia".
 - Meta: "Ingrese una meta entre 1 y 80 horas". Al alcanzarla: "¡Meta cumplida! Sigue así".
-- Éxito: "Contacto guardado/actualizado/eliminado", "Materia guardada/actualizada/eliminada", "Sesión guardada/actualizada/eliminada/terminada", "Meta guardada".
+- Perfil (HU-16): "Ingrese su nombre" (con `setError` en el campo; el diálogo no se cierra). La primera vez (sin nombre) el diálogo "¿Cómo te llamas?" aparece solo en Inicio y no se puede cancelar; desde el avatar o "Mi perfil" tiene "Cancelar" y el nombre actual cargado. Saludo: "¡Hola, {nombre}!" (o "¡Hola!" sin nombre) y la inicial en el avatar.
+- Éxito: "Contacto guardado/actualizado/eliminado", "Materia guardada/actualizada/eliminada", "Sesión guardada/actualizada/eliminada/terminada", "Meta guardada", "Nombre guardado".
 - Listas vacías: "Aún no tienes contactos", "No se encontraron contactos", "Aún no tienes materias", "No tienes sesiones para este día", "No hay sesiones en esta semana", "Aún no hay horas registradas esta semana".
 - Eliminar siempre con `AlertDialog` y botones "Sí" y "No": "¿Eliminar a {nombre}?", "¿Eliminar {materia}? También se borrarán sus sesiones", "¿Eliminar la sesión de {materia}?".
 - Los errores de validación se muestran en el campo con `setError(...)` (en un `Spinner` o un selector, con `Toast`). Los mensajes de éxito, con `Toast`.
@@ -106,7 +109,7 @@ CREATE TABLE meta_semanal (
 - P7 `ReporteActivity`: semana con ◀ ▶ y tabla Materia / Plan. / Hechas / % con fila de total (`TableLayout` o `ListView`).
 - P8 `MetaActivity`: horas objetivo de la semana, progreso y Guardar.
 - P9 `ContactosActivity` y P10 `ContactoFormActivity`: ya programadas.
-- Menú inferior en P1, P2, P6 (y P4, P7, P8, P9): un `LinearLayout` horizontal con 4 botones: Inicio, Calendario, Estadísticas y Más. "Más" abre un `BottomSheetDialog` (librería Material de la plantilla, layout `panel_mas.xml`) con el título "Más" y una grilla de 2 x 2 tarjetas (emoji, nombre y descripción corta): Materias, Reporte semanal, Meta semanal y Contactos. Al tocar una tarjeta se cierra el panel y se abre su pantalla. Simple, sin librerías extra.
+- Menú inferior en P1, P2, P6 (y P4, P7, P8, P9): un `LinearLayout` horizontal con 4 botones: Inicio, Calendario, Estadísticas y Más. "Más" abre un `BottomSheetDialog` (librería Material de la plantilla, layout `panel_mas.xml`) con el título "Más" y tarjetas (ícono vectorial, nombre y descripción corta) en una grilla de 2 columnas: Materias, Reporte semanal, Meta semanal, Contactos y Mi perfil. Al tocar una tarjeta se cierra el panel y se abre su pantalla (Mi perfil abre el diálogo del nombre). Simple, sin librerías extra.
 - Para las listas usar `ListView` con `BaseAdapter`, que es lo que vemos en clase.
 - Textos de la interfaz en `res/values/strings.xml`.
 
