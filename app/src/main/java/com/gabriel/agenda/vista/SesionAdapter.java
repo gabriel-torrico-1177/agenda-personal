@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ public class SesionAdapter extends BaseAdapter {
         TextView tvEstado = convertView.findViewById(R.id.tvEstado);
         ImageButton btnEliminar = convertView.findViewById(R.id.btnEliminar);
         ProgressBar pbEnCurso = convertView.findViewById(R.id.pbEnCurso);
+        ImageView ivMarca = convertView.findViewById(R.id.ivMarca);
 
         // Círculo con el color de la materia (viene del JOIN del SesionDAO)
         GradientDrawable circulo = new GradientDrawable();
@@ -110,11 +112,20 @@ public class SesionAdapter extends BaseAdapter {
             pbEnCurso.setVisibility(View.VISIBLE);
         }
 
-        // Sin listener (pantalla de Inicio): se oculta el ✕ porque ahí no se elimina
+        // Sin listener (pantalla de Inicio): se oculta el ✕ porque ahí no se elimina, y en su lugar
+        // va la marca: círculo con ✔ si la sesión está Completada, o círculo vacío si no
         if (eliminarListener == null) {
             btnEliminar.setVisibility(View.GONE);
+            if (sesion.getEstado().equals(SesionEstudio.ESTADO_COMPLETADA)) {
+                ivMarca.setImageResource(R.drawable.ic_completada);
+            } else {
+                ivMarca.setImageResource(R.drawable.ic_pendiente);
+            }
+            ivMarca.setContentDescription(sesion.getEstado()); // lo que lee TalkBack
+            ivMarca.setVisibility(View.VISIBLE);
             return convertView;
         }
+        ivMarca.setVisibility(View.GONE);
         btnEliminar.setVisibility(View.VISIBLE);
 
         // Botón ✕: avisa a la pantalla qué sesión se quiere eliminar.

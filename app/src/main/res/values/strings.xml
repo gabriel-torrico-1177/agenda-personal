@@ -3,6 +3,9 @@
 
     <!-- Panel principal (P1) -->
     <string name="saludo">¡Hola, Gabriel!</string>
+    <!-- Inicial del avatar de Inicio (cambiará junto con el nombre en el issue #22) -->
+    <string name="avatar_inicial">G</string>
+    <string name="frase_motivadora">Cada hora de estudio cuenta. ¡Tú puedes!</string>
     <string name="titulo_proxima">Próxima sesión</string>
     <string name="sin_proxima">No tienes sesiones pendientes</string>
     <string name="hoy">Hoy</string>

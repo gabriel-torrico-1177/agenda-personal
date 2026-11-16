@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Siluetas de la Catedral de Santa Cruz y el Cristo Redentor para el fondo de la franja de Inicio.
+     Son los mismos trazos del ícono (ic_launcher_foreground.xml), pero en un solo color (verde oscuro).
+     El ícono usa un lienzo de 108 x 108 con el dibujo al centro; aquí el lienzo mide 52 x 54 y el
+     group corre todo 28 a la izquierda y 22 hacia arriba (translate): el dibujo queda sin bordes vacíos.
+     La transparencia se pone en el ImageView (android:alpha) para que sea pareja en todo el dibujo -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="104dp"
+    android:height="108dp"
+    android:viewportWidth="52"
+    android:viewportHeight="54">
+
+    <group
+        android:translateX="-28"
+        android:translateY="-22">
+
+        <!-- Cristo Redentor: cabeza, brazos abiertos con túnica y pedestal -->
+        <path
+            android:fillColor="@color/verde_oscuro"
+            android:pathData="M51.5,27 A2.5,2.5 0 1,0 56.5,27 A2.5,2.5 0 1,0 51.5,27 Z" />
+        <path
+            android:fillColor="@color/verde_oscuro"
+            android:pathData="M43,29 L51.4,30.2 L56.6,30.2 L65,29 L65,31 L56.6,33 L57.5,42 L50.5,42 L51.4,33 L43,31 Z" />
+        <path
+            android:fillColor="@color/verde_oscuro"
+            android:pathData="M49,42 L59,42 L59,44 L57.5,44 L57.5,58 L50.5,58 L50.5,44 L49,44 Z" />
+
+        <!-- Catedral: dos torres con techo en punta, cuerpo y cúpula; la puerta y las ventanas
+             son huecos (evenOdd), por donde se ve el verde de la franja -->
+        <path
+            android:fillColor="@color/verde_oscuro"
+            android:fillType="evenOdd"
+            android:pathData="M32,76 L32,48 L36.5,38 L41,48 L41,58 L46,58 A8,8 0 0,1 62,58 L67,58 L67,48 L71.5,38 L76,48 L76,76 Z M50,76 L50,66 A4,4 0 0,1 58,66 L58,76 Z M35,58 L35,52 A1.5,1.5 0 0,1 38,52 L38,58 Z M70,58 L70,52 A1.5,1.5 0 0,1 73,52 L73,58 Z" />
+    </group>
+</vector>

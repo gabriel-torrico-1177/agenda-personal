@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de libro abierto (sesiones de hoy). Lienzo de 24 x 24.
+     C = curva: sus dos primeros puntos "jalan" la línea para curvarla y el tercero es donde termina -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Las dos páginas: desde el lomo (12, 6.5) la izquierda se curva hasta el borde y baja;
+         abajo vuelve curvándose al lomo (12, 20) y la derecha hace lo mismo hacia el otro lado -->
+    <path
+        android:pathData="M12,6.5 C10,5 7,4.5 3.5,5 L3.5,18.5 C7,18 10,18.5 12,20 C14,18.5 17,18 20.5,18.5 L20.5,5 C17,4.5 14,5 12,6.5 Z"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+    <!-- Lomo: la línea del centro -->
+    <path
+        android:pathData="M12,6.5 L12,20"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+</vector>

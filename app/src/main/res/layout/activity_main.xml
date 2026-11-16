@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla P1: Inicio. Saludo, fecha, progreso de la meta, próxima sesión,
-     botón "+ Nueva sesión" y sesiones de hoy. Abajo va el menú inferior -->
+<!-- Pantalla P1: Inicio. Arriba una franja verde con el avatar, el saludo, una frase y la fecha;
+     debajo, tarjetas para la meta, la próxima sesión y las sesiones de hoy, y el botón "+ Nueva sesión".
+     Abajo va el menú inferior. Los id son los mismos de antes: MainActivity no cambió -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,98 +10,197 @@
     android:orientation="vertical"
     tools:context=".vista.MainActivity">
 
-    <!-- Contenido de la pantalla: weight 1 ocupa todo el alto que deja libre el menú -->
+    <!-- 1. FRANJA VERDE (todo el ancho, esquinas de abajo redondeadas: fondo_franja.xml).
+         FrameLayout = pone sus hijos uno ENCIMA del otro: primero las siluetas (al fondo)
+         y después el texto (adelante) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fondo_franja">
+
+        <!-- Siluetas de la Catedral y el Cristo, abajo a la derecha, verde oscuro y semitransparentes
+             (alpha 0.5 = 50 %). Son solo decoración: TalkBack las salta -->
+        <ImageView
+            android:layout_width="104dp"
+            android:layout_height="108dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.5"
+            android:importantForAccessibility="no"
+            android:src="@drawable/siluetas_santa_cruz" />
+
+        <!-- Contenido de la franja: avatar con saludo y frase, y la fecha debajo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Fila: avatar a la izquierda y, a su lado, el saludo y la frase -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Avatar: círculo casi negro (circulo_avatar.xml) con la inicial "G" en verde -->
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/circulo_avatar"
+                    android:gravity="center"
+                    android:importantForAccessibility="no"
+                    android:text="@string/avatar_inicial"
+                    android:textColor="@color/verde"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Saludo y frase motivadora (texto oscuro: se lee mejor sobre el verde) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/saludo"
+                        android:textColor="@color/texto_sobre_verde"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/frase_motivadora"
+                        android:textColor="@color/texto_sobre_verde"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Fecha de hoy ("Lunes 16/11/2026"); la pone MainActivity -->
+            <TextView
+                android:id="@+id/tvFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/texto_sobre_verde"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- 2. CONTENIDO: weight 1 ocupa todo el alto que dejan libre la franja y el menú -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingTop="16dp">
+        android:paddingBottom="12dp">
 
-        <!-- Saludo y fecha de hoy ("Domingo 15/11/2026") -->
-        <TextView
+        <!-- Tarjeta de la meta (tarjeta_meta.xml: título con diana, "12 / 20 h", barra verde y mensaje).
+             Se toca para abrir Meta semanal. En un include, para cambiar el margen hay que repetir
+             layout_width y layout_height -->
+        <include
+            layout="@layout/tarjeta_meta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/saludo"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="16dp" />
 
-        <TextView
-            android:id="@+id/tvFecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:textSize="14sp" />
-
-        <!-- Tarjeta del progreso de la meta (se toca para abrir Meta semanal) -->
-        <include layout="@layout/tarjeta_meta" />
-
-        <!-- Próxima sesión: materia y "Hoy · 19:00 – 20:30" (se toca para editarla) -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/titulo_proxima"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/llProxima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:minHeight="48dp"
-            android:orientation="vertical"
-            android:paddingVertical="6dp">
+        <!-- Tarjeta de la próxima sesión: título con reloj y, debajo, la materia y "Hoy · 19:00 – 20:30" -->
+        <LinearLayout style="@style/TarjetaInicio">
 
             <TextView
-                android:id="@+id/tvProximaMateria"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                style="@style/TituloTarjeta"
+                android:drawableStart="@drawable/ic_reloj"
+                android:text="@string/titulo_proxima" />
 
-            <TextView
-                android:id="@+id/tvProximaHorario"
+            <!-- Zona que se toca para editar la próxima sesión (efecto al tocarla y 48dp mínimo) -->
+            <LinearLayout
+                android:id="@+id/llProxima"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp" />
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingVertical="4dp">
+
+                <TextView
+                    android:id="@+id/tvProximaMateria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProximaHorario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Botón para planificar una sesión (abre el formulario con la fecha de hoy) -->
+        <!-- Botón verde con texto oscuro para planificar una sesión -->
         <Button
             android:id="@+id/btnNuevaSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:text="@string/btn_nueva_sesion" />
-
-        <!-- Sesiones de hoy (las llena SesionAdapter, sin el botón ✕) -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/titulo_sesiones_hoy"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/verde"
+            android:minHeight="52dp"
+            android:text="@string/btn_nueva_sesion"
+            android:textColor="@color/texto_sobre_verde"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/lvHoy"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <!-- Mensaje cuando hoy no hay sesiones (el ListView lo muestra solo) -->
-        <TextView
-            android:id="@+id/tvVacioHoy"
-            android:layout_width="match_parent"
+        <!-- Tarjeta de las sesiones de hoy: título con libro y la lista.
+             height 0dp + weight 1: la tarjeta ocupa todo el alto que sobra, y la lista se desplaza adentro -->
+        <LinearLayout
+            style="@style/TarjetaInicio"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/lista_sesiones_vacia"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:paddingHorizontal="0dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                style="@style/TituloTarjeta"
+                android:drawableStart="@drawable/ic_libro"
+                android:paddingHorizontal="16dp"
+                android:text="@string/titulo_sesiones_hoy" />
+
+            <!-- Lista (la llena SesionAdapter: sin ✕ y con el círculo ✔ o vacío).
+                 divider = línea gris oscuro entre filas -->
+            <ListView
+                android:id="@+id/lvHoy"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="1"
+                android:divider="@color/borde"
+                android:dividerHeight="1dp" />
+
+            <!-- Mensaje cuando hoy no hay sesiones (el ListView lo muestra solo) -->
+            <TextView
+                android:id="@+id/tvVacioHoy"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/lista_sesiones_vacia"
+                android:textColor="@color/texto_secundario"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Menú inferior: pega aquí el contenido de menu_inferior.xml -->
+    <!-- 3. Menú inferior -->
     <include layout="@layout/menu_inferior" />
 </LinearLayout>

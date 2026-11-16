@@ -62,6 +62,15 @@
         android:paddingVertical="4dp"
         android:textSize="12sp" />
 
+    <!-- Marca de Inicio: círculo con ✔ (Completada) o vacío. Oculta; el adaptador la muestra solo en Inicio,
+         en el lugar del botón ✕ (que en Inicio no se usa) -->
+    <ImageView
+        android:id="@+id/ivMarca"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginHorizontal="12dp"
+        android:visibility="gone" />
+
     <!-- Botón ✕ para eliminar (48dp mínimo) -->
     <ImageButton
         android:id="@+id/btnEliminar"

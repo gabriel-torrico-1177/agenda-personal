@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Círculo del avatar de Inicio (con la inicial encima): casi negro, para que resalte sobre la franja verde -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/fondo" />
+</shape>
