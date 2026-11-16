@@ -3,6 +3,7 @@ package com.gabriel.agenda.vista;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +31,24 @@ public class PantallaBase extends AppCompatActivity {
         // Si el Intent no trae el dato (por ejemplo, Inicio al abrir la app), es una pestaña: fundido
         animacion = getIntent().getIntExtra(EXTRA_ANIMACION, FUNDIDO);
         registrarAnimaciones();
+    }
+
+    // Android lo llama justo después de setContentView (cuando la pantalla ya tiene su diseño).
+    // Si el diseño tiene la flecha ← (boton_volver.xml, id btnVolver), al tocarla se cierra la
+    // pantalla con finish(), que usa la animación de cierre de abajo. Así ninguna pantalla
+    // necesita su propio código para la flecha
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+        View btnVolver = findViewById(R.id.btnVolver);
+        if (btnVolver != null) { // las pestañas principales (Inicio, Calendario...) no la tienen
+            btnVolver.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
 
     // Abre un formulario: sube desde abajo (y al cerrarse bajará)

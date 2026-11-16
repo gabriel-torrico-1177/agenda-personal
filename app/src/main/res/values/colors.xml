@@ -10,7 +10,7 @@
 
     <!-- Verdes -->
     <color name="verde">#FF4CAF50</color>             <!-- color principal: botones, barras, activos -->
-    <color name="verde_oscuro">#FF2E7D32</color>      <!-- rellenos con texto blanco encima (día elegido, botón +) -->
+    <color name="verde_oscuro">#FF2E7D32</color>      <!-- rellenos con texto blanco encima (día elegido del calendario) -->
     <color name="verde_transparente">#334CAF50</color> <!-- verde al 20 %: fondos suaves (botón activo del menú) -->
 
     <!-- Textos -->

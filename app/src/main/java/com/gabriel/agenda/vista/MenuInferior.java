@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 
 import com.gabriel.agenda.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -56,10 +55,11 @@ public class MenuInferior {
             }
         });
 
-        // Resalta el botón de la pantalla actual: fondo verde transparente, texto verde y en negrita
+        // Resalta el botón de la pantalla actual: fondo verde transparente, texto en negrita y
+        // setSelected(true), que pone en verde el texto y el ícono (color/menu_item.xml)
         TextView actual = activity.findViewById(idActual);
         actual.setBackgroundResource(R.drawable.fondo_menu_activo);
-        actual.setTextColor(ContextCompat.getColor(activity, R.color.menu_activo_texto));
+        actual.setSelected(true);
         actual.setTypeface(null, Typeface.BOLD);
     }
 

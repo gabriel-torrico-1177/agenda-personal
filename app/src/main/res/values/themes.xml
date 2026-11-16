@@ -6,9 +6,10 @@
         <!-- Color principal: botones, barras de progreso, RadioButton marcado, cursor y línea del campo activo -->
         <item name="colorPrimary">@color/verde</item>
         <item name="colorOnPrimary">@color/texto_sobre_verde</item>
-        <!-- Versión "contenedor" del principal: botón flotante + (con el ícono blanco encima) -->
-        <item name="colorPrimaryContainer">@color/verde_oscuro</item>
-        <item name="colorOnPrimaryContainer">@color/texto</item>
+        <!-- Versión "contenedor" del principal: botón flotante +, verde con el + oscuro
+             (igual que los demás botones verdes) -->
+        <item name="colorPrimaryContainer">@color/verde</item>
+        <item name="colorOnPrimaryContainer">@color/texto_sobre_verde</item>
         <!-- Secundario y terciario también en verde: así no aparece ningún otro color de Material -->
         <item name="colorSecondary">@color/verde</item>
         <item name="colorOnSecondary">@color/texto_sobre_verde</item>
@@ -60,15 +61,21 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-    <!-- Estilo de cada botón del menú inferior: así los 4 se ven iguales sin repetir atributos -->
+    <!-- Estilo de cada botón del menú inferior: así los 4 se ven iguales sin repetir atributos.
+         Ícono arriba (drawableTop, en cada botón) y texto abajo; 56dp de alto (más de 48dp).
+         textColor y drawableTint usan color/menu_item.xml: verde si el botón está "selected", gris si no -->
     <style name="BotonMenu">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">56dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginHorizontal">2dp</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:textColor">@color/menu_item</item>
+        <item name="android:drawableTint">@color/menu_item</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
@@ -170,12 +177,12 @@
         <item name="android:focusable">true</item>
     </style>
 
-    <!-- Emoji de la tarjeta (el lector de pantalla lo salta: el nombre ya dice qué es) -->
+    <!-- Ícono vectorial de la tarjeta (ImageView de 32dp; el vector se agranda sin perder calidad).
+         El lector de pantalla lo salta: el nombre ya dice qué es -->
     <style name="TarjetaMasIcono">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">6dp</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
         <item name="android:importantForAccessibility">no</item>
     </style>
 

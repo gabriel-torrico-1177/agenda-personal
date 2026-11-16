@@ -33,9 +33,9 @@
             android:id="@+id/tarjetaMaterias"
             style="@style/TarjetaMas">
 
-            <TextView
+            <ImageView
                 style="@style/TarjetaMasIcono"
-                android:text="@string/icono_materias" />
+                android:src="@drawable/ic_libro" />
 
             <TextView
                 style="@style/TarjetaMasNombre"
@@ -50,9 +50,9 @@
             android:id="@+id/tarjetaReporte"
             style="@style/TarjetaMas">
 
-            <TextView
+            <ImageView
                 style="@style/TarjetaMasIcono"
-                android:text="@string/icono_reporte" />
+                android:src="@drawable/ic_documento" />
 
             <TextView
                 style="@style/TarjetaMasNombre"
@@ -74,9 +74,9 @@
             android:id="@+id/tarjetaMeta"
             style="@style/TarjetaMas">
 
-            <TextView
+            <ImageView
                 style="@style/TarjetaMasIcono"
-                android:text="@string/icono_meta" />
+                android:src="@drawable/ic_diana" />
 
             <TextView
                 style="@style/TarjetaMasNombre"
@@ -91,9 +91,9 @@
             android:id="@+id/tarjetaContactos"
             style="@style/TarjetaMas">
 
-            <TextView
+            <ImageView
                 style="@style/TarjetaMasIcono"
-                android:text="@string/icono_contactos" />
+                android:src="@drawable/ic_persona" />
 
             <TextView
                 style="@style/TarjetaMasNombre"

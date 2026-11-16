@@ -20,13 +20,26 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Título -->
-            <TextView
+            <!-- Título con la flecha ← a la izquierda (boton_volver.xml).
+                 marginStart -12dp: la pantalla ya tiene 16dp de margen, así la flecha queda
+                 a la misma distancia del borde que en las demás pantallas -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/titulo_meta"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:layout_marginStart="-12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <include layout="@layout/boton_volver" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/titulo_meta"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <!-- "Semana del 09/11 al 15/11" -->
             <TextView

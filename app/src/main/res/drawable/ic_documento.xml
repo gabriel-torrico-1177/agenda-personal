@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de documento (panel Más: Reporte semanal): hoja con la esquina doblada y tres renglones.
+     Lienzo de 24 x 24 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Hoja: la esquina de arriba a la derecha está cortada en diagonal (14, 3) → (19, 8) -->
+    <path
+        android:pathData="M5,3 L14,3 L19,8 L19,21 L5,21 Z M14,3 L14,8 L19,8"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/verde" />
+    <!-- Renglones de la tabla -->
+    <path
+        android:pathData="M8.5,12 L15.5,12 M8.5,15 L15.5,15 M8.5,18 L13,18"
+        android:strokeLineCap="round"
+        android:strokeWidth="1.8"
+        android:strokeColor="@color/verde" />
+</vector>

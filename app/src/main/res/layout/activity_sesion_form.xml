@@ -17,16 +17,29 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Título de la pantalla ("Nueva sesión" o "Editar sesión") -->
-        <TextView
-            android:id="@+id/tvTitulo"
+        <!-- Título de la pantalla ("Registrar sesión" o "Editar sesión") con la flecha ← a la
+             izquierda (boton_volver.xml). marginStart -12dp: la flecha queda a la misma distancia
+             del borde que en las demás pantallas -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="-12dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/titulo_nueva_sesion"
-            android:textColor="@color/texto"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <include layout="@layout/boton_volver" />
+
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/titulo_nueva_sesion"
+                android:textColor="@color/texto"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <!-- MATERIA. Un Spinner no tiene drawableStart, así que la caja es un LinearLayout
              horizontal con el ícono (ImageView) y el Spinner al lado -->
@@ -171,11 +184,10 @@
         <!-- Terminar ahora: oculto; solo se muestra al abrir una sesión que está "En curso" -->
         <Button
             android:id="@+id/btnTerminar"
+            style="@style/BotonPrincipal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/en_curso"
-            android:minHeight="48dp"
             android:text="@string/btn_terminar_ahora"
             android:visibility="gone" />
 
