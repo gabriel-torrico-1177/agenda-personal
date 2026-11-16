@@ -133,10 +133,10 @@ Criterios de calidad: Eficiencia: el reporte se calcula en menos de 1 segundo.
 ### HU-15 Ver estadísticas · prioridad 220 · 5 puntos · depende de: HU-11, HU-13
 Como estudiante, quiero ver estadísticas de mi estudio, para conocer mis avances y en qué materias debo mejorar.
 Pruebas de aceptación:
-- [ ] Abrir "Estadísticas" y comprobar que se ven las horas estudiadas en la semana y la comparación en porcentaje con la semana anterior.
-- [ ] Comprobar que se ve una barra por materia con sus horas, ordenadas de mayor a menor.
-- [ ] Dejar una sesión como "Pendiente" y comprobar que sus horas no se suman en las estadísticas.
-- [ ] Abrir "Estadísticas" en una semana sin sesiones completadas y comprobar que se indica "Aún no hay horas registradas esta semana".
+- [x] Abrir "Estadísticas" y comprobar que se ven las horas estudiadas en la semana y la comparación en porcentaje con la semana anterior.
+- [x] Comprobar que se ve una barra por materia con sus horas, ordenadas de mayor a menor.
+- [x] Dejar una sesión como "Pendiente" y comprobar que sus horas no se suman en las estadísticas.
+- [x] Abrir "Estadísticas" en una semana sin sesiones completadas y comprobar que se indica "Aún no hay horas registradas esta semana".
 Criterios de calidad: Usabilidad: cada barra usa el color de su materia. Eficiencia: las estadísticas se calculan en menos de 1 segundo.
 
 ## Requisitos no funcionales a cuidar mientras se programa

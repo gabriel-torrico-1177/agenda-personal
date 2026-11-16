@@ -27,7 +27,6 @@
     <string name="menu_reporte">Reporte semanal</string>
     <string name="menu_meta">Meta semanal</string>
     <string name="menu_contactos">Contactos</string>
-    <string name="proximamente">Próximamente</string>
 
     <!-- Lista de contactos (P2) -->
     <string name="titulo_contactos">Contactos</string>
@@ -153,6 +152,14 @@
     <!-- Semana: %1$s = lunes, %2$s = domingo → "09/11 – 15/11" -->
     <string name="formato_semana">%1$s – %2$s</string>
     <string name="reporte_vacio">No hay sesiones en esta semana</string>
+
+    <!-- Estadísticas (P6) -->
+    <string name="titulo_estadisticas">Estadísticas</string>
+    <string name="titulo_horas_estudiadas">HORAS ESTUDIADAS</string>
+    <string name="titulo_meta_corto">META SEMANAL</string>
+    <string name="titulo_horas_por_materia">Horas por materia</string>
+    <string name="estadisticas_vacio">Aún no hay horas registradas esta semana</string>
+    <string name="nota_completadas">Solo cuentan las sesiones completadas</string>
 
     <!-- Botones comunes -->
     <string name="btn_cancelar">Cancelar</string>

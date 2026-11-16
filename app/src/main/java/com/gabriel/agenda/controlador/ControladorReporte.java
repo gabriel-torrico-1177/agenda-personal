@@ -42,6 +42,7 @@ public class ControladorReporte {
             FilaReporte fila = filasPorMateria.get(sesion.getMateriaId());
             if (fila == null) {
                 fila = new FilaReporte(sesion.getNombreMateria());
+                fila.setColorMateria(sesion.getColorMateria());
                 filasPorMateria.put(sesion.getMateriaId(), fila);
             }
 

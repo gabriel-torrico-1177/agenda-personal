@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Diseño de UNA barra de las estadísticas: materia, barra de color y horas.
+     EstadisticasActivity lo infla una vez por materia -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="40dp"
+    android:orientation="horizontal">
+
+    <!-- Nombre de la materia (si es muy largo se corta con "…") -->
+    <TextView
+        android:id="@+id/tvMateria"
+        android:layout_width="104dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="14sp" />
+
+    <!-- Pista gris: ocupa todo el ancho que sobra. weightSum (se pone en el código)
+         = minutos de la materia con más horas -->
+    <LinearLayout
+        android:id="@+id/llPista"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/fondo_barra"
+        android:orientation="horizontal">
+
+        <!-- Barra de color: width 0dp + weight = minutos de esta materia (se pone en el código) -->
+        <View
+            android:id="@+id/vBarra"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <!-- Horas completadas, por ejemplo "6 h" -->
+    <TextView
+        android:id="@+id/tvHoras"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textSize="14sp" />
+</LinearLayout>
