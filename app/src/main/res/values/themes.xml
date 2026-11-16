@@ -30,4 +30,45 @@
         <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+
+    <!-- Tarjeta del panel "Más": la mitad del ancho (weight 1), borde redondeado,
+         efecto al tocarla (foreground) y mucho más alta que el mínimo de 48dp -->
+    <style name="TarjetaMas">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:minHeight">110dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/fondo_tarjeta</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- Emoji de la tarjeta (el lector de pantalla lo salta: el nombre ya dice qué es) -->
+    <style name="TarjetaMasIcono">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+
+    <!-- Nombre de la tarjeta, en negrita -->
+    <style name="TarjetaMasNombre">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Descripción corta debajo del nombre (máximo 2 líneas) -->
+    <style name="TarjetaMasDescripcion">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textSize">13sp</item>
+    </style>
 </resources>

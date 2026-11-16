@@ -106,7 +106,7 @@ CREATE TABLE meta_semanal (
 - P7 `ReporteActivity`: semana con ◀ ▶ y tabla Materia / Plan. / Hechas / % con fila de total (`TableLayout` o `ListView`).
 - P8 `MetaActivity`: horas objetivo de la semana, progreso y Guardar.
 - P9 `ContactosActivity` y P10 `ContactoFormActivity`: ya programadas.
-- Menú inferior en P1, P2, P6 (y P4, P7, P8, P9): un `LinearLayout` horizontal con 4 botones: Inicio, Calendario, Estadísticas y Más. "Más" abre un `PopupMenu` con Materias, Reporte semanal, Meta semanal y Contactos. Simple, sin librerías extra.
+- Menú inferior en P1, P2, P6 (y P4, P7, P8, P9): un `LinearLayout` horizontal con 4 botones: Inicio, Calendario, Estadísticas y Más. "Más" abre un `BottomSheetDialog` (librería Material de la plantilla, layout `panel_mas.xml`) con el título "Más" y una grilla de 2 x 2 tarjetas (emoji, nombre y descripción corta): Materias, Reporte semanal, Meta semanal y Contactos. Al tocar una tarjeta se cierra el panel y se abre su pantalla. Simple, sin librerías extra.
 - Para las listas usar `ListView` con `BaseAdapter`, que es lo que vemos en clase.
 - Textos de la interfaz en `res/values/strings.xml`.
 

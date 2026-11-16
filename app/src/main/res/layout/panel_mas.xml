@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contenido del panel "Más" (BottomSheetDialog): agarradera, título y una grilla de 2 x 2 tarjetas.
+     Cada tarjeta usa los estilos TarjetaMas... de themes.xml, así las 4 se ven iguales sin repetir atributos -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingBottom="16dp">
+
+    <!-- Rayita de arriba: indica que el panel se puede arrastrar hacia abajo para cerrarlo -->
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Título "Más" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/menu_mas"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Fila 1: Materias y Reporte semanal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tarjetaMaterias"
+            style="@style/TarjetaMas">
+
+            <TextView
+                style="@style/TarjetaMasIcono"
+                android:text="@string/icono_materias" />
+
+            <TextView
+                style="@style/TarjetaMasNombre"
+                android:text="@string/menu_materias" />
+
+            <TextView
+                style="@style/TarjetaMasDescripcion"
+                android:text="@string/descripcion_materias" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tarjetaReporte"
+            style="@style/TarjetaMas">
+
+            <TextView
+                style="@style/TarjetaMasIcono"
+                android:text="@string/icono_reporte" />
+
+            <TextView
+                style="@style/TarjetaMasNombre"
+                android:text="@string/menu_reporte" />
+
+            <TextView
+                style="@style/TarjetaMasDescripcion"
+                android:text="@string/descripcion_reporte" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Fila 2: Meta semanal y Contactos -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tarjetaMeta"
+            style="@style/TarjetaMas">
+
+            <TextView
+                style="@style/TarjetaMasIcono"
+                android:text="@string/icono_meta" />
+
+            <TextView
+                style="@style/TarjetaMasNombre"
+                android:text="@string/menu_meta" />
+
+            <TextView
+                style="@style/TarjetaMasDescripcion"
+                android:text="@string/descripcion_meta" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tarjetaContactos"
+            style="@style/TarjetaMas">
+
+            <TextView
+                style="@style/TarjetaMasIcono"
+                android:text="@string/icono_contactos" />
+
+            <TextView
+                style="@style/TarjetaMasNombre"
+                android:text="@string/menu_contactos" />
+
+            <TextView
+                style="@style/TarjetaMasDescripcion"
+                android:text="@string/descripcion_contactos" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
