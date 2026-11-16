@@ -3,17 +3,17 @@ package com.gabriel.agenda.vista;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.gabriel.agenda.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 // Maneja el menú inferior (layout menu_inferior.xml) que comparten varias pantallas (capa vista).
-// Así el código de los 4 botones y del PopupMenu está en un solo lugar y no se repite en cada Activity
+// Así el código de los 4 botones y del panel "Más" está en un solo lugar y no se repite en cada Activity
 public class MenuInferior {
 
     // Conecta los 4 botones del menú y resalta el de la pantalla actual.
@@ -48,11 +48,11 @@ public class MenuInferior {
             }
         });
 
-        // Más: muestra el PopupMenu pegado al botón
+        // Más: abre el panel que sube desde abajo
         menuMas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostrarMenuMas(activity, v);
+                mostrarMenuMas(activity);
             }
         });
 
@@ -63,29 +63,35 @@ public class MenuInferior {
         actual.setTypeface(null, Typeface.BOLD);
     }
 
-    // Crea y muestra el PopupMenu de "Más" con las opciones de res/menu/menu_mas.xml
-    private static void mostrarMenuMas(final Activity activity, View boton) {
-        PopupMenu popup = new PopupMenu(activity, boton);           // el menú aparece junto al botón
-        popup.getMenuInflater().inflate(R.menu.menu_mas, popup.getMenu()); // XML → opciones
+    // Crea y muestra el panel "Más" (BottomSheetDialog): sube desde abajo con las 4 tarjetas
+    private static void mostrarMenuMas(Activity activity) {
+        BottomSheetDialog panel = new BottomSheetDialog(activity);
+        // inflate: convierte panel_mas.xml en una View; null = todavía no tiene "padre"
+        View contenido = LayoutInflater.from(activity).inflate(R.layout.panel_mas, null);
+        panel.setContentView(contenido);
 
-        // Qué hacer cuando se toca una opción
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        // Cada tarjeta abre su pantalla (el mismo método para las 4, así no se repite el listener)
+        conectarTarjeta(activity, panel, contenido, R.id.tarjetaMaterias, MateriasActivity.class);
+        conectarTarjeta(activity, panel, contenido, R.id.tarjetaReporte, ReporteActivity.class);
+        conectarTarjeta(activity, panel, contenido, R.id.tarjetaMeta, MetaActivity.class);
+        conectarTarjeta(activity, panel, contenido, R.id.tarjetaContactos, ContactosActivity.class);
+
+        panel.show();
+    }
+
+    // Al tocar la tarjeta "idTarjeta": cierra el panel y abre la pantalla "destino"
+    private static void conectarTarjeta(final Activity activity, final BottomSheetDialog panel,
+                                        View contenido, int idTarjeta, final Class<?> destino) {
+        View tarjeta = contenido.findViewById(idTarjeta);
+        tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem opcion) {
-                int id = opcion.getItemId();
-                if (id == R.id.opcionMaterias) {
-                    abrir(activity, MateriasActivity.class);
-                } else if (id == R.id.opcionReporte) {
-                    abrir(activity, ReporteActivity.class);
-                } else if (id == R.id.opcionMeta) {
-                    abrir(activity, MetaActivity.class);
-                } else if (id == R.id.opcionContactos) {
-                    abrir(activity, ContactosActivity.class);
-                }
-                return true; // true = "ya atendí el clic"
+            public void onClick(View v) {
+                // Primero se cierra el panel: abrir() puede cerrar la pantalla actual,
+                // y un panel que sigue abierto sobre una pantalla cerrada da error
+                panel.dismiss();
+                abrir(activity, destino);
             }
         });
-        popup.show();
     }
 
     // Abre otra pantalla del menú. La pila queda siempre "Inicio → pantalla actual",

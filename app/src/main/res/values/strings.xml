@@ -27,6 +27,15 @@
     <string name="menu_reporte">Reporte semanal</string>
     <string name="menu_meta">Meta semanal</string>
     <string name="menu_contactos">Contactos</string>
+    <!-- Panel "Más": emoji y descripción corta de cada tarjeta -->
+    <string name="icono_materias">📚</string>
+    <string name="icono_reporte">📊</string>
+    <string name="icono_meta">🎯</string>
+    <string name="icono_contactos">👥</string>
+    <string name="descripcion_materias">Tus materias, docentes y colores</string>
+    <string name="descripcion_reporte">Horas planificadas y hechas</string>
+    <string name="descripcion_meta">Horas objetivo y progreso</string>
+    <string name="descripcion_contactos">Compañeros y docentes</string>
 
     <!-- Lista de contactos (P2) -->
     <string name="titulo_contactos">Contactos</string>
