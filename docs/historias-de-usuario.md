@@ -148,10 +148,10 @@ Criterios de calidad: Usabilidad: cada barra usa el color de su materia. Eficien
 ### HU-16 Personalizar mi nombre · prioridad 200 · 1 punto · depende de: ninguna
 Como estudiante, quiero que la app me salude por mi nombre, para sentir que la agenda es mía.
 Pruebas de aceptación:
-- [ ] Abrir la app por primera vez (sin nombre guardado), comprobar que aparece "¿Cómo te llamas?" sin botón "Cancelar", escribir "Gabriel", presionar "Guardar" y comprobar que Inicio saluda "¡Hola, Gabriel!" con la inicial "G" en el avatar.
-- [ ] Dejar el nombre vacío (o solo con espacios), presionar "Guardar" y comprobar que se indica "Ingrese su nombre" y el diálogo no se cierra.
-- [ ] Cerrar la app, volver a abrirla y comprobar que el saludo conserva el nombre y no se vuelve a pedir.
-- [ ] Cambiar el nombre desde "Mi perfil" (panel Más) o tocando el avatar, presionar "Guardar" y comprobar que aparece "Nombre guardado" y se actualizan el saludo y la inicial.
+- [x] Abrir la app por primera vez (sin nombre guardado), comprobar que aparece "¿Cómo te llamas?" sin botón "Cancelar", escribir "Gabriel", presionar "Guardar" y comprobar que Inicio saluda "¡Hola, Gabriel!" con la inicial "G" en el avatar.
+- [x] Dejar el nombre vacío (o solo con espacios), presionar "Guardar" y comprobar que se indica "Ingrese su nombre" y el diálogo no se cierra.
+- [x] Cerrar la app, volver a abrirla y comprobar que el saludo conserva el nombre y no se vuelve a pedir.
+- [x] Cambiar el nombre desde "Mi perfil" (panel Más) o tocando el avatar, presionar "Guardar" y comprobar que aparece "Nombre guardado" y se actualizan el saludo y la inicial.
 Criterios de calidad: Usabilidad: el diálogo aparece con el nombre actual ya cargado. Seguridad: el nombre se guarda solo en el teléfono.
 
 ## Requisitos no funcionales a cuidar mientras se programa
