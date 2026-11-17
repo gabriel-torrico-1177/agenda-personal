@@ -181,7 +181,7 @@ try {
     Nota ("validar() revisa las reglas en orden y se detiene en el primer error. " +
           "Antes quita los espacios de los extremos, pone `"Pendiente`" si el estado no es válido " +
           "y revisa el formato de la fecha y las horas.") 1330 1620 290 380
-    Nota ("Errores posibles:`r`n- Elija una materia`r`n- La fecha o la hora no son válidas`r`n" +
+    Nota ("Errores posibles:`r`n- Elija una materia`r`n- Elija la fecha y las horas`r`n" +
           "- La hora de fin debe ser posterior a la de inicio`r`n" +
           "- No puedes completar una sesión que todavía no terminó`r`n" +
           "- Ya tienes una sesión en ese horario") 1330 1620 935 1050
