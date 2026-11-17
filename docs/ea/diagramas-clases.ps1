@@ -25,7 +25,11 @@ function Recorrer($paquete) {
 # (no hay atributo duracionMinutos), por eso sigue visible
 function Marcar-Propiedades($clase) {
     $atributos = @{}
-    foreach ($a in $clase.Attributes) { $atributos[$a.Name.ToLower()] = $true }
+    foreach ($a in $clase.Attributes) {
+        $atributos[$a.Name.ToLower()] = $true
+        # Las constantes (static final) se marcan para ocultarlas en los diagramas
+        if ($a.IsStatic -and $a.IsConst) { $a.StereotypeEx = "constante"; $a.Update() | Out-Null }
+    }
     foreach ($m in $clase.Methods) {
         if ($m.Name -match '^(get|is|set)([A-Z]\w*)$' -and $atributos.ContainsKey($Matches[2].ToLower())) {
             if ($Matches[1] -eq "set") { $m.StereotypeEx = "property set" } else { $m.StereotypeEx = "property get" }
@@ -39,6 +43,7 @@ function Medir($clase, $compacta) {
     $lineas = @(); $ops = 0; $atrs = 0
     if (-not $compacta) {
         foreach ($a in $clase.Attributes) {
+            if ($a.Stereotype -eq "constante") { continue }   # quedan ocultas
             $texto = "- " + $a.Name + ": " + $a.Type
             # EA muestra el valor inicial (cortado a unas 20 letras con "...") y {readOnly} si es final
             if ($a.Default -ne "") { $texto += " = " + $a.Default.Substring(0, [Math]::Min($a.Default.Length, 20)) + "..." }
@@ -88,6 +93,7 @@ function Nuevo-Diagrama($nombre, $archivo, $filas) {
             $x += [int](($anchoCol[$celda[0]] - $m[0]) / 2)
             $o = $d.DiagramObjects.AddNew("l=$x;r=$($x + $m[0]);t=$y;b=$($y + $m[1]);", "")
             $o.ElementID = $script:clases[$celda[1]].ElementID
+            $o.FeatureStereotypesToHide = "constante"   # ocultar las constantes static final
             if ($celda[2]) {
                 # Caja compacta (clases padre o de otro módulo): solo el nombre
                 $o.ShowPublicAttributes = $false; $o.ShowPrivateAttributes = $false
