@@ -109,7 +109,7 @@ public class CalendarioActivity extends PantallaBase {
         MenuInferior.configurar(this, R.id.menuCalendario);
 
         // Lista de sesiones del día elegido; si está vacía muestra "No tienes sesiones para este día".
-        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó la papelera
         adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>(),
                 new SesionAdapter.OnEliminarListener() {
                     @Override

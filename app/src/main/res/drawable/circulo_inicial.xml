@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Círculo de la inicial de cada contacto (lista de Contactos): verde suave (20 %), con la letra verde encima -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/verde_transparente" />
+</shape>

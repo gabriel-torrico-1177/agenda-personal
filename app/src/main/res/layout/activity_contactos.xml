@@ -21,11 +21,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Título con la flecha ← a la izquierda (boton_volver.xml) -->
+            <!-- Título con la flecha ← a la izquierda (boton_volver.xml).
+                 gravity top + título de 48dp de alto: la flecha (48dp) queda a la altura del título
+                 y el contador va debajo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:gravity="top"
                 android:orientation="horizontal"
                 android:paddingStart="4dp"
                 android:paddingTop="8dp"
@@ -34,47 +36,102 @@
 
                 <include layout="@layout/boton_volver" />
 
-                <TextView
+                <!-- Título y, debajo, el contador "2 contactos" (lo llena ContactosActivity) -->
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/titulo_contactos"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="@string/titulo_contactos"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvContador"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto_secundario"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Buscador -->
+            <!-- Buscador: la misma caja redondeada de los formularios (estilo CajaCampo, borde verde
+                 al escribir) con la lupa de líneas (ic_buscar.xml) a la izquierda -->
             <EditText
                 android:id="@+id/etBuscar"
+                style="@style/CajaCampo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="8dp"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/ic_buscar"
                 android:hint="@string/pista_buscar"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:minHeight="48dp" />
+                android:inputType="textPersonName" />
 
-            <!-- Lista de contactos (la llena ContactoAdapter) -->
+            <!-- Lista de contactos (la llena ContactoAdapter).
+                 Sin líneas divisorias (cada fila ya es una tarjeta) y sin el resaltado gris de toda la fila
+                 (el efecto al tocar lo dibuja la tarjeta). paddingTop: un poco de aire debajo del buscador;
+                 paddingBottom 88dp: la última tarjeta no queda tapada por el botón + -->
             <ListView
                 android:id="@+id/lvContactos"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingBottom="88dp"
-                android:clipToPadding="false" />
+                android:clipToPadding="false"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:listSelector="@android:color/transparent"
+                android:paddingTop="8dp"
+                android:paddingBottom="88dp" />
 
-            <!-- Mensaje cuando la lista está vacía (el ListView lo muestra solo) -->
-            <TextView
-                android:id="@+id/tvVacio"
+            <!-- Lista vacía (el ListView la muestra sola con setEmptyView): ícono grande de persona,
+                 el mensaje ("Aún no tienes contactos" o "No se encontraron contactos", lo elige
+                 ContactosActivity) y la pista de qué hacer, todo centrado -->
+            <LinearLayout
+                android:id="@+id/llVacio"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="16dp"
-                android:textSize="16sp"
-                android:visibility="gone" />
+                android:visibility="gone">
+
+                <!-- tint: pinta de gris (texto_pista) el ícono ic_persona, que es verde -->
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginBottom="16dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_persona"
+                    android:tint="@color/texto_pista" />
+
+                <TextView
+                    android:id="@+id/tvVacio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="18sp" />
+
+                <!-- Pista: solo cuando no hay contactos (al buscar sin resultados se oculta) -->
+                <TextView
+                    android:id="@+id/tvPista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/pista_lista_contactos"
+                    android:textColor="@color/texto_pista"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Botón + para agregar un contacto -->

@@ -21,11 +21,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Título con la flecha ← a la izquierda (boton_volver.xml) -->
+            <!-- Título con la flecha ← a la izquierda (boton_volver.xml).
+                 gravity top + título de 48dp de alto: la flecha (48dp) queda a la altura del título
+                 y el contador va debajo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:gravity="top"
                 android:orientation="horizontal"
                 android:paddingStart="4dp"
                 android:paddingTop="8dp"
@@ -34,35 +36,86 @@
 
                 <include layout="@layout/boton_volver" />
 
-                <TextView
+                <!-- Título y, debajo, el contador "5 materias" (lo llena MateriasActivity) -->
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/titulo_materias"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="@string/titulo_materias"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvContador"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto_secundario"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Lista de materias (la llena MateriaAdapter) -->
+            <!-- Lista de materias (la llena MateriaAdapter).
+                 Sin líneas divisorias (cada fila ya es una tarjeta) y sin el resaltado gris de toda la fila
+                 (el efecto al tocar lo dibuja la tarjeta). paddingTop: un poco de aire arriba;
+                 paddingBottom 88dp: la última tarjeta no queda tapada por el botón + -->
             <ListView
                 android:id="@+id/lvMaterias"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:clipToPadding="false"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:listSelector="@android:color/transparent"
+                android:paddingTop="4dp"
                 android:paddingBottom="88dp" />
 
-            <!-- Mensaje cuando la lista está vacía (el ListView lo muestra solo) -->
-            <TextView
-                android:id="@+id/tvVacio"
+            <!-- Lista vacía (el ListView la muestra sola con setEmptyView): ícono grande de libro,
+                 el mensaje "Aún no tienes materias" y la pista de qué hacer, todo centrado -->
+            <LinearLayout
+                android:id="@+id/llVacio"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="16dp"
-                android:text="@string/lista_materias_vacia"
-                android:textSize="16sp"
-                android:visibility="gone" />
+                android:visibility="gone">
+
+                <!-- tint: pinta de gris (texto_pista) el ícono ic_libro, que es verde -->
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginBottom="16dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_libro"
+                    android:tint="@color/texto_pista" />
+
+                <TextView
+                    android:id="@+id/tvVacio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/lista_materias_vacia"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/pista_lista_materias"
+                    android:textColor="@color/texto_pista"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Botón + para agregar una materia -->

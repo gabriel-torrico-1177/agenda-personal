@@ -31,6 +31,8 @@ public class ContactosActivity extends PantallaBase {
 
     private EditText etBuscar;
     private TextView tvVacio;
+    private TextView tvPista;
+    private TextView tvContador;
     private ContactoAdapter adaptador;
     private ControladorContacto controlador;
 
@@ -50,6 +52,9 @@ public class ContactosActivity extends PantallaBase {
         // Conecta las variables con el layout
         etBuscar = findViewById(R.id.etBuscar);
         tvVacio = findViewById(R.id.tvVacio);
+        tvPista = findViewById(R.id.tvPista);
+        tvContador = findViewById(R.id.tvContador);
+        View llVacio = findViewById(R.id.llVacio);
         ListView lvContactos = findViewById(R.id.lvContactos);
         FloatingActionButton fabAgregar = findViewById(R.id.fabAgregar);
 
@@ -59,7 +64,7 @@ public class ContactosActivity extends PantallaBase {
         MenuInferior.configurar(this, R.id.menuMas);
 
         // El adaptador empieza con una lista vacía; se llena en onResume.
-        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó la papelera
         adaptador = new ContactoAdapter(this, new ArrayList<Contacto>(),
                 new ContactoAdapter.OnEliminarListener() {
                     @Override
@@ -68,8 +73,9 @@ public class ContactosActivity extends PantallaBase {
                     }
                 });
         lvContactos.setAdapter(adaptador);
-        // Si el adaptador no tiene filas, el ListView muestra tvVacio en su lugar
-        lvContactos.setEmptyView(tvVacio);
+        // Si el adaptador no tiene filas, el ListView muestra el bloque vacío en su lugar
+        // (ícono, mensaje y pista)
+        lvContactos.setEmptyView(llVacio);
 
         // Filtra la lista cada vez que cambia el texto del buscador
         etBuscar.addTextChangedListener(new TextWatcher() {
@@ -150,11 +156,20 @@ public class ContactosActivity extends PantallaBase {
         List<Contacto> contactos = controlador.buscar(texto);
         adaptador.actualizar(contactos);
 
-        // Mensaje para la lista vacía: sin contactos o búsqueda sin resultados
+        // Mensaje para la lista vacía: sin contactos (con la pista "Toca + ...")
+        // o búsqueda sin resultados (sin la pista, porque sí hay contactos guardados)
         if (texto.trim().isEmpty()) {
             tvVacio.setText(R.string.lista_contactos_vacia);
+            tvPista.setVisibility(View.VISIBLE);
         } else {
             tvVacio.setText(R.string.busqueda_sin_resultados);
+            tvPista.setVisibility(View.GONE);
         }
+
+        // Contador "2 contactos" / "1 contacto": cuenta las filas que muestra la lista
+        // (al buscar, solo las que coinciden)
+        int cantidad = adaptador.getCount();
+        tvContador.setText(getResources().getQuantityString(
+                R.plurals.contador_contactos, cantidad, cantidad));
     }
 }
