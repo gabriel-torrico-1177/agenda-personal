@@ -24,12 +24,18 @@
         android:paddingStart="16dp"
         android:paddingEnd="8dp">
 
-        <!-- Círculo de color: el adaptador le pone la forma redonda y el color de la materia -->
-        <View
+        <!-- Círculo de color de 40dp con la inicial de la materia en blanco (@color/texto) y en negrita.
+             El adaptador le pone la forma redonda, el color de la materia y la letra -->
+        <TextView
             android:id="@+id/vColor"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="14dp"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:textColor="@color/texto"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <!-- Nombre en negrita y docente debajo; ocupa todo el ancho que sobra -->
         <LinearLayout
@@ -46,12 +52,33 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvDocente"
+            <!-- Docente: ícono de persona pequeño (16dp, gris) y el nombre del docente.
+                 Si no hay docente, el adaptador oculta el ícono y escribe "Sin docente" en cursiva -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/texto_secundario"
-                android:textSize="14sp" />
+                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- tint: pinta de gris el ícono ic_persona (que es verde) -->
+                <ImageView
+                    android:id="@+id/ivDocente"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_persona"
+                    android:tint="@color/texto_secundario" />
+
+                <TextView
+                    android:id="@+id/tvDocente"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Botón eliminar: papelera de 22dp (ic_eliminar.xml) centrada en 48dp, sin agrandarse (scaleType center) -->

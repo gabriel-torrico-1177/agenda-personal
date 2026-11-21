@@ -2,18 +2,23 @@ package com.gabriel.agenda.vista;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.gabriel.agenda.R;
 import com.gabriel.agenda.modelo.Materia;
 
 import java.util.List;
+import java.util.Locale;
 
 // Adaptador: convierte cada Materia de la lista en una fila (item_materia.xml) del ListView
 public class MateriaAdapter extends BaseAdapter {
@@ -70,8 +75,9 @@ public class MateriaAdapter extends BaseAdapter {
         }
 
         final Materia materia = getItem(posicion);
-        View vColor = convertView.findViewById(R.id.vColor);
+        TextView vColor = convertView.findViewById(R.id.vColor);
         TextView tvNombre = convertView.findViewById(R.id.tvNombre);
+        ImageView ivDocente = convertView.findViewById(R.id.ivDocente);
         TextView tvDocente = convertView.findViewById(R.id.tvDocente);
         ImageButton btnEliminar = convertView.findViewById(R.id.btnEliminar);
 
@@ -80,15 +86,25 @@ public class MateriaAdapter extends BaseAdapter {
         circulo.setShape(GradientDrawable.OVAL);
         circulo.setColor(Color.parseColor(materia.getColor()));
         vColor.setBackground(circulo);
+        // Dentro del círculo, la inicial de la materia ("Cálculo II" → "C")
+        vColor.setText(inicial(materia.getNombre()));
 
         tvNombre.setText(materia.getNombre());
 
-        // El docente es opcional: si no hay, se muestra un guion
+        // El docente es opcional: si no hay, se oculta el ícono y se muestra "Sin docente"
+        // en gris más claro y en cursiva. Si hay, el ícono y el texto normal.
+        // Se ponen las dos formas cada vez porque la fila puede reutilizarse con otra materia
         String docente = materia.getDocente();
         if (docente == null || docente.isEmpty()) {
+            ivDocente.setVisibility(View.GONE);
             tvDocente.setText(R.string.sin_docente);
+            tvDocente.setTextColor(ContextCompat.getColor(context, R.color.texto_pista));
+            tvDocente.setTypeface(null, Typeface.ITALIC);
         } else {
+            ivDocente.setVisibility(View.VISIBLE);
             tvDocente.setText(docente);
+            tvDocente.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
+            tvDocente.setTypeface(null, Typeface.NORMAL);
         }
 
         // Botón eliminar (papelera): avisa a la pantalla qué materia se quiere eliminar.
@@ -101,5 +117,14 @@ public class MateriaAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    // Primera letra del nombre en mayúscula para el círculo ("cálculo II" → "C"); "?" si no hay nombre.
+    // Locale "es": las reglas de mayúsculas del español ("á" → "Á")
+    private String inicial(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return "?";
+        }
+        return nombre.trim().substring(0, 1).toUpperCase(Locale.forLanguageTag("es"));
     }
 }

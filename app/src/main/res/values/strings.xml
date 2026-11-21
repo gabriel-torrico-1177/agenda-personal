@@ -73,7 +73,7 @@
     <string name="titulo_materias">Materias</string>
     <string name="lista_materias_vacia">Aún no tienes materias</string>
     <string name="btn_agregar_materia">Agregar materia</string>
-    <string name="sin_docente">—</string>
+    <string name="sin_docente">Sin docente</string>
     <string name="btn_eliminar_materia">Eliminar materia</string>
 
     <!-- Diálogo para eliminar una materia. %1$s se reemplaza por el nombre -->
