@@ -21,11 +21,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Título con la flecha ← a la izquierda (boton_volver.xml) -->
+            <!-- Título con la flecha ← a la izquierda (boton_volver.xml).
+                 gravity top + título de 48dp de alto: la flecha (48dp) queda a la altura del título
+                 y el contador va debajo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:gravity="top"
                 android:orientation="horizontal"
                 android:paddingStart="4dp"
                 android:paddingTop="8dp"
@@ -44,6 +46,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
                         android:text="@string/titulo_contactos"
                         android:textSize="24sp"
                         android:textStyle="bold" />
