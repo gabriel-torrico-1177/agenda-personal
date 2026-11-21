@@ -43,18 +43,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Buscador -->
+            <!-- Buscador: la misma caja redondeada de los formularios (estilo CajaCampo, borde verde
+                 al escribir) con la lupa de líneas (ic_buscar.xml) a la izquierda -->
             <EditText
                 android:id="@+id/etBuscar"
+                style="@style/CajaCampo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="8dp"
+                android:layout_marginTop="4dp"
+                android:drawableStart="@drawable/ic_buscar"
                 android:hint="@string/pista_buscar"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:minHeight="48dp" />
+                android:inputType="textPersonName" />
 
             <!-- Lista de contactos (la llena ContactoAdapter).
                  Sin líneas divisorias (cada fila ya es una tarjeta) y sin el resaltado gris de toda la fila

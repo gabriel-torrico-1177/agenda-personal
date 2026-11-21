@@ -24,6 +24,20 @@
         android:paddingStart="16dp"
         android:paddingEnd="8dp">
 
+        <!-- Círculo de 44dp con la inicial del nombre: fondo verde suave (circulo_inicial.xml)
+             y la letra verde en negrita. La letra la pone ContactoAdapter -->
+        <TextView
+            android:id="@+id/tvInicial"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/circulo_inicial"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:textColor="@color/verde"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <!-- Nombre en negrita y teléfono debajo; ocupa todo el ancho que sobra -->
         <LinearLayout
             android:layout_width="0dp"
@@ -39,10 +53,15 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Teléfono con el ícono pequeño de teléfono delante (drawableStart) -->
             <TextView
                 android:id="@+id/tvTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:drawableStart="@drawable/ic_telefono"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
                 android:textColor="@color/texto_secundario"
                 android:textSize="14sp" />
         </LinearLayout>

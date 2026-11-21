@@ -12,6 +12,7 @@ import com.gabriel.agenda.R;
 import com.gabriel.agenda.modelo.Contacto;
 
 import java.util.List;
+import java.util.Locale;
 
 // Adaptador: convierte cada Contacto de la lista en una fila (item_contacto.xml) del ListView
 public class ContactoAdapter extends BaseAdapter {
@@ -69,9 +70,11 @@ public class ContactoAdapter extends BaseAdapter {
 
         // Llena la fila con los datos del contacto
         final Contacto contacto = getItem(posicion);
+        TextView tvInicial = convertView.findViewById(R.id.tvInicial);
         TextView tvNombre = convertView.findViewById(R.id.tvNombre);
         TextView tvTelefono = convertView.findViewById(R.id.tvTelefono);
         ImageButton btnEliminar = convertView.findViewById(R.id.btnEliminar);
+        tvInicial.setText(inicial(contacto.getNombre()));
         tvNombre.setText(contacto.getNombre());
         tvTelefono.setText(contacto.getTelefono());
 
@@ -85,5 +88,14 @@ public class ContactoAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    // Primera letra del nombre en mayúscula para el círculo ("ana pérez" → "A"); "?" si no hay nombre.
+    // Locale "es": las reglas de mayúsculas del español ("á" → "Á")
+    private String inicial(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return "?";
+        }
+        return nombre.trim().substring(0, 1).toUpperCase(Locale.forLanguageTag("es"));
     }
 }
