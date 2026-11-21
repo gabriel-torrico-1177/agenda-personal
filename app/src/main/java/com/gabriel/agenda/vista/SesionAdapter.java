@@ -21,7 +21,7 @@ import java.util.List;
 // Adaptador: convierte cada SesionEstudio de la lista en una fila (item_sesion.xml) del ListView
 public class SesionAdapter extends BaseAdapter {
 
-    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón ✕ de una fila
+    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón eliminar (papelera) de una fila
     // (funciona igual que View.OnClickListener, pero entrega la SesionEstudio de esa fila)
     public interface OnEliminarListener {
         void onEliminar(SesionEstudio sesion);
@@ -33,8 +33,8 @@ public class SesionAdapter extends BaseAdapter {
     // Le pregunta si una sesión está "En curso" (la vista no hace ese cálculo)
     private final ControladorSesion controlador;
 
-    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
-    // (null = la lista se muestra sin el botón ✕, como en la pantalla de Inicio)
+    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar la papelera
+    // (null = la lista se muestra sin el botón eliminar, como en la pantalla de Inicio)
     public SesionAdapter(Context context, List<SesionEstudio> sesiones,
                          OnEliminarListener eliminarListener) {
         this.context = context;
@@ -112,7 +112,7 @@ public class SesionAdapter extends BaseAdapter {
             pbEnCurso.setVisibility(View.VISIBLE);
         }
 
-        // Sin listener (pantalla de Inicio): se oculta el ✕ porque ahí no se elimina, y en su lugar
+        // Sin listener (pantalla de Inicio): se oculta la papelera porque ahí no se elimina, y en su lugar
         // va la marca: círculo con ✔ si la sesión está Completada, o círculo vacío si no
         if (eliminarListener == null) {
             btnEliminar.setVisibility(View.GONE);
@@ -128,7 +128,7 @@ public class SesionAdapter extends BaseAdapter {
         ivMarca.setVisibility(View.GONE);
         btnEliminar.setVisibility(View.VISIBLE);
 
-        // Botón ✕: avisa a la pantalla qué sesión se quiere eliminar.
+        // Botón eliminar (papelera): avisa a la pantalla qué sesión se quiere eliminar.
         // Se vuelve a asignar en cada getView porque la fila puede reutilizarse con otra sesión
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override

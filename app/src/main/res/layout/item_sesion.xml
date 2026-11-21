@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Diseño de UNA fila de la lista de sesiones: círculo de color, materia, horario, estado y ✕ -->
-<!-- blocksDescendants: el botón ✕ no "roba" el foco, así tocar la fila sigue abriendo la edición -->
+<!-- Diseño de UNA fila de la lista de sesiones: círculo de color, materia, horario, estado y botón eliminar (papelera) -->
+<!-- blocksDescendants: el botón eliminar no "roba" el foco, así tocar la fila sigue abriendo la edición -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         android:textSize="12sp" />
 
     <!-- Marca de Inicio: círculo con ✔ (Completada) o vacío. Oculta; el adaptador la muestra solo en Inicio,
-         en el lugar del botón ✕ (que en Inicio no se usa) -->
+         en el lugar del botón eliminar (que en Inicio no se usa) -->
     <ImageView
         android:id="@+id/ivMarca"
         android:layout_width="24dp"
@@ -73,12 +73,13 @@
         android:layout_marginHorizontal="12dp"
         android:visibility="gone" />
 
-    <!-- Botón ✕ para eliminar (48dp mínimo) -->
+    <!-- Botón eliminar: papelera de 22dp (ic_eliminar.xml) centrada en 48dp, sin agrandarse (scaleType center) -->
     <ImageButton
         android:id="@+id/btnEliminar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/btn_eliminar_sesion"
-        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+        android:scaleType="center"
+        android:src="@drawable/ic_eliminar" />
 </LinearLayout>

@@ -18,7 +18,7 @@ import java.util.List;
 // Adaptador: convierte cada Materia de la lista en una fila (item_materia.xml) del ListView
 public class MateriaAdapter extends BaseAdapter {
 
-    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón ✕ de una fila
+    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón eliminar (papelera) de una fila
     // (funciona igual que View.OnClickListener, pero entrega la Materia de esa fila)
     public interface OnEliminarListener {
         void onEliminar(Materia materia);
@@ -28,7 +28,7 @@ public class MateriaAdapter extends BaseAdapter {
     private List<Materia> materias;
     private final OnEliminarListener eliminarListener;
 
-    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
+    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar la papelera
     public MateriaAdapter(Context context, List<Materia> materias,
                           OnEliminarListener eliminarListener) {
         this.context = context;
@@ -91,7 +91,7 @@ public class MateriaAdapter extends BaseAdapter {
             tvDocente.setText(docente);
         }
 
-        // Botón ✕: avisa a la pantalla qué materia se quiere eliminar.
+        // Botón eliminar (papelera): avisa a la pantalla qué materia se quiere eliminar.
         // Se vuelve a asignar en cada getView porque la fila puede reutilizarse con otra materia
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override

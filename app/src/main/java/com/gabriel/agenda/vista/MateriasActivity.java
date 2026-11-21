@@ -52,7 +52,7 @@ public class MateriasActivity extends PantallaBase {
         MenuInferior.configurar(this, R.id.menuMas);
 
         // El adaptador empieza con una lista vacía; se llena en onResume.
-        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó la papelera
         adaptador = new MateriaAdapter(this, new ArrayList<Materia>(),
                 new MateriaAdapter.OnEliminarListener() {
                     @Override

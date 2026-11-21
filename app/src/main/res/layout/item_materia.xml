@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Diseño de UNA fila de la lista de materias: una tarjeta con círculo de color, nombre, docente y botón ✕ -->
+<!-- Diseño de UNA fila de la lista de materias: una tarjeta con círculo de color, nombre, docente y botón eliminar (papelera) -->
 <!-- Raíz con padding: el ListView ignora los márgenes de la raíz de cada fila, por eso el espacio
      alrededor de la tarjeta se hace con padding (16dp a los costados y 4dp + 4dp = 8dp entre tarjetas) -->
-<!-- blocksDescendants: el botón ✕ no "roba" el foco, así tocar la fila sigue abriendo la edición -->
+<!-- blocksDescendants: el botón eliminar no "roba" el foco, así tocar la fila sigue abriendo la edición -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -54,13 +54,14 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- Botón ✕ para eliminar (48dp mínimo) -->
+        <!-- Botón eliminar: papelera de 22dp (ic_eliminar.xml) centrada en 48dp, sin agrandarse (scaleType center) -->
         <ImageButton
             android:id="@+id/btnEliminar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/btn_eliminar_materia"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:scaleType="center"
+            android:src="@drawable/ic_eliminar" />
     </LinearLayout>
 </FrameLayout>

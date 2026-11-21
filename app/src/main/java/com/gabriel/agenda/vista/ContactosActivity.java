@@ -59,7 +59,7 @@ public class ContactosActivity extends PantallaBase {
         MenuInferior.configurar(this, R.id.menuMas);
 
         // El adaptador empieza con una lista vacía; se llena en onResume.
-        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó ✕
+        // El tercer parámetro es lo que pasa cuando el adaptador avisa que se tocó la papelera
         adaptador = new ContactoAdapter(this, new ArrayList<Contacto>(),
                 new ContactoAdapter.OnEliminarListener() {
                     @Override

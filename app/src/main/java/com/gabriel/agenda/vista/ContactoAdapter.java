@@ -16,7 +16,7 @@ import java.util.List;
 // Adaptador: convierte cada Contacto de la lista en una fila (item_contacto.xml) del ListView
 public class ContactoAdapter extends BaseAdapter {
 
-    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón ✕ de una fila
+    // "Aviso" que el adaptador manda a la pantalla cuando se toca el botón eliminar (papelera) de una fila
     // (funciona igual que View.OnClickListener, pero entrega el Contacto de esa fila)
     public interface OnEliminarListener {
         void onEliminar(Contacto contacto);
@@ -26,7 +26,7 @@ public class ContactoAdapter extends BaseAdapter {
     private List<Contacto> contactos;
     private final OnEliminarListener eliminarListener;
 
-    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar ✕
+    // Constructor: recibe la pantalla, la lista a mostrar y a quién avisar al tocar la papelera
     public ContactoAdapter(Context context, List<Contacto> contactos,
                            OnEliminarListener eliminarListener) {
         this.context = context;
@@ -75,7 +75,7 @@ public class ContactoAdapter extends BaseAdapter {
         tvNombre.setText(contacto.getNombre());
         tvTelefono.setText(contacto.getTelefono());
 
-        // Botón ✕: avisa a la pantalla qué contacto se quiere eliminar.
+        // Botón eliminar (papelera): avisa a la pantalla qué contacto se quiere eliminar.
         // Se vuelve a asignar en cada getView porque la fila puede reutilizarse con otro contacto
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override

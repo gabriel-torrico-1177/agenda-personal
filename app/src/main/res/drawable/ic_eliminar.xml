@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícono de papelera (botón eliminar de las listas de materias, contactos y sesiones):
+     tapa, asa, bote y dos rayas. Mismo estilo de líneas que ic_persona. Lienzo de 24 x 24 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="22dp"
+    android:height="22dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Tapa: una línea horizontal arriba -->
+    <path
+        android:pathData="M4,6.5 L20,6.5"
+        android:strokeLineCap="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/texto_secundario" />
+    <!-- Asa: una "U" invertida encima de la tapa, con esquinas redondeadas -->
+    <path
+        android:pathData="M9.5,6.5 L9.5,4.5 a1,1 0 0,1 1,-1 L13.5,3.5 a1,1 0 0,1 1,1 L14.5,6.5"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/texto_secundario" />
+    <!-- Bote: se angosta un poco hacia abajo y tiene las esquinas de abajo redondeadas -->
+    <path
+        android:pathData="M6.5,6.5 L7.4,19.1 a2,2 0 0,0 2,1.9 L14.6,21 a2,2 0 0,0 2,-1.9 L17.5,6.5"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/texto_secundario" />
+    <!-- Rayas: dos líneas verticales dentro del bote -->
+    <path
+        android:pathData="M10,10.5 L10,17 M14,10.5 L14,17"
+        android:strokeLineCap="round"
+        android:strokeWidth="2"
+        android:strokeColor="@color/texto_secundario" />
+</vector>

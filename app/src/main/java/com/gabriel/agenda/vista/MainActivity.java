@@ -105,7 +105,7 @@ public class MainActivity extends PantallaBase {
         controladorSesion = new ControladorSesion(this);
         controladorPerfil = new ControladorPerfil(this);
 
-        // Sesiones de hoy: null en el tercer parámetro = sin botón ✕ (en Inicio no se elimina)
+        // Sesiones de hoy: null en el tercer parámetro = sin papelera (en Inicio no se elimina)
         adaptador = new SesionAdapter(this, new ArrayList<SesionEstudio>(), null);
         lvHoy.setAdapter(adaptador);
         lvHoy.setEmptyView(tvVacioHoy);
