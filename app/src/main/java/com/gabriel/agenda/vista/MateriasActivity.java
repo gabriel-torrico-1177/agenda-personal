@@ -25,6 +25,7 @@ import java.util.ArrayList;
 // Pantalla P4: lista de materias ordenada A-Z con su color y su docente (capa vista)
 public class MateriasActivity extends PantallaBase {
 
+    private TextView tvContador;
     private MateriaAdapter adaptador;
     private ControladorMateria controlador;
 
@@ -43,7 +44,8 @@ public class MateriasActivity extends PantallaBase {
 
         // Conecta las variables con el layout
         ListView lvMaterias = findViewById(R.id.lvMaterias);
-        TextView tvVacio = findViewById(R.id.tvVacio);
+        View llVacio = findViewById(R.id.llVacio);
+        tvContador = findViewById(R.id.tvContador);
         FloatingActionButton fabAgregar = findViewById(R.id.fabAgregar);
 
         controlador = new ControladorMateria(this);
@@ -61,8 +63,9 @@ public class MateriasActivity extends PantallaBase {
                     }
                 });
         lvMaterias.setAdapter(adaptador);
-        // Si el adaptador no tiene filas, el ListView muestra "Aún no tienes materias"
-        lvMaterias.setEmptyView(tvVacio);
+        // Si el adaptador no tiene filas, el ListView muestra el bloque vacío
+        // (ícono, "Aún no tienes materias" y la pista)
+        lvMaterias.setEmptyView(llVacio);
 
         // Tocar una materia: abre el formulario en modo edición con su id
         lvMaterias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,8 +123,14 @@ public class MateriasActivity extends PantallaBase {
                 .show();
     }
 
-    // Pide las materias al controlador y se las pasa al adaptador
+    // Pide las materias al controlador, se las pasa al adaptador y actualiza el contador
     private void cargarLista() {
         adaptador.actualizar(controlador.listar());
+
+        // Contador "5 materias" / "1 materia": getQuantityString elige la forma según el número
+        // (el primer número elige singular o plural y el segundo reemplaza el %d)
+        int cantidad = adaptador.getCount();
+        tvContador.setText(getResources().getQuantityString(
+                R.plurals.contador_materias, cantidad, cantidad));
     }
 }

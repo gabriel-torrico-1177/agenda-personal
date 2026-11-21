@@ -52,6 +52,15 @@
     <string name="lista_contactos_vacia">Aún no tienes contactos</string>
     <string name="busqueda_sin_resultados">No se encontraron contactos</string>
     <string name="btn_eliminar_contacto">Eliminar contacto</string>
+    <string name="pista_lista_contactos">Toca + para agregar el primero</string>
+    <!-- Contador debajo del título. plurals: Android elige "one" o "other" según el número
+         (1 → "1 contacto", 0 o 2 → "2 contactos"); %d se reemplaza por el número.
+         "many" lo usan los Android nuevos en español para números como 1 000 000: igual que "other" -->
+    <plurals name="contador_contactos">
+        <item quantity="one">%d contacto</item>
+        <item quantity="many">%d contactos</item>
+        <item quantity="other">%d contactos</item>
+    </plurals>
 
     <!-- Diálogo para eliminar un contacto (P6). %1$s se reemplaza por el nombre -->
     <string name="titulo_eliminar_contacto">Eliminar contacto</string>
@@ -75,6 +84,13 @@
     <string name="btn_agregar_materia">Agregar materia</string>
     <string name="sin_docente">Sin docente</string>
     <string name="btn_eliminar_materia">Eliminar materia</string>
+    <string name="pista_lista_materias">Toca + para agregar la primera</string>
+    <!-- Contador debajo del título: "1 materia", "5 materias" (ver contador_contactos) -->
+    <plurals name="contador_materias">
+        <item quantity="one">%d materia</item>
+        <item quantity="many">%d materias</item>
+        <item quantity="other">%d materias</item>
+    </plurals>
 
     <!-- Diálogo para eliminar una materia. %1$s se reemplaza por el nombre -->
     <string name="titulo_eliminar_materia">Eliminar materia</string>

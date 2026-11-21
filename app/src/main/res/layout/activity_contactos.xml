@@ -34,13 +34,27 @@
 
                 <include layout="@layout/boton_volver" />
 
-                <TextView
+                <!-- Título y, debajo, el contador "2 contactos" (lo llena ContactosActivity) -->
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/titulo_contactos"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titulo_contactos"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvContador"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/texto_secundario"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Buscador: la misma caja redondeada de los formularios (estilo CajaCampo, borde verde
@@ -73,16 +87,47 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="88dp" />
 
-            <!-- Mensaje cuando la lista está vacía (el ListView lo muestra solo) -->
-            <TextView
-                android:id="@+id/tvVacio"
+            <!-- Lista vacía (el ListView la muestra sola con setEmptyView): ícono grande de persona,
+                 el mensaje ("Aún no tienes contactos" o "No se encontraron contactos", lo elige
+                 ContactosActivity) y la pista de qué hacer, todo centrado -->
+            <LinearLayout
+                android:id="@+id/llVacio"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="16dp"
-                android:textSize="16sp"
-                android:visibility="gone" />
+                android:visibility="gone">
+
+                <!-- tint: pinta de gris (texto_pista) el ícono ic_persona, que es verde -->
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginBottom="16dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_persona"
+                    android:tint="@color/texto_pista" />
+
+                <TextView
+                    android:id="@+id/tvVacio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="18sp" />
+
+                <!-- Pista: solo cuando no hay contactos (al buscar sin resultados se oculta) -->
+                <TextView
+                    android:id="@+id/tvPista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/pista_lista_contactos"
+                    android:textColor="@color/texto_pista"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Botón + para agregar un contacto -->
