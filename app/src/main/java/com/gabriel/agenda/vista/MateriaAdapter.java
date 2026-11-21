@@ -2,7 +2,6 @@ package com.gabriel.agenda.vista;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,18 +92,20 @@ public class MateriaAdapter extends BaseAdapter {
 
         // El docente es opcional: si no hay, se oculta el ícono y se muestra "Sin docente"
         // en gris más claro y en cursiva. Si hay, el ícono y el texto normal.
-        // Se ponen las dos formas cada vez porque la fila puede reutilizarse con otra materia
+        // Se ponen las dos formas cada vez porque la fila puede reutilizarse con otra materia.
+        // Cursiva: se inclina el texto con setTextSkewX(-0.25f) porque algunas fuentes del sistema
+        // no traen versión cursiva y setTypeface(ITALIC) las deja derechas
         String docente = materia.getDocente();
         if (docente == null || docente.isEmpty()) {
             ivDocente.setVisibility(View.GONE);
-            tvDocente.setText(R.string.sin_docente);
+            tvDocente.getPaint().setTextSkewX(-0.25f);
             tvDocente.setTextColor(ContextCompat.getColor(context, R.color.texto_pista));
-            tvDocente.setTypeface(null, Typeface.ITALIC);
+            tvDocente.setText(R.string.sin_docente);
         } else {
             ivDocente.setVisibility(View.VISIBLE);
-            tvDocente.setText(docente);
+            tvDocente.getPaint().setTextSkewX(0f);
             tvDocente.setTextColor(ContextCompat.getColor(context, R.color.texto_secundario));
-            tvDocente.setTypeface(null, Typeface.NORMAL);
+            tvDocente.setText(docente);
         }
 
         // Botón eliminar (papelera): avisa a la pantalla qué materia se quiere eliminar.
