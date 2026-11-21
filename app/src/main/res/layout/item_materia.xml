@@ -1,51 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Diseño de UNA fila de la lista de materias: círculo de color, nombre, docente y botón ✕ -->
+<!-- Diseño de UNA fila de la lista de materias: una tarjeta con círculo de color, nombre, docente y botón ✕ -->
+<!-- Raíz con padding: el ListView ignora los márgenes de la raíz de cada fila, por eso el espacio
+     alrededor de la tarjeta se hace con padding (16dp a los costados y 4dp + 4dp = 8dp entre tarjetas) -->
 <!-- blocksDescendants: el botón ✕ no "roba" el foco, así tocar la fila sigue abriendo la edición -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
-    android:gravity="center_vertical"
-    android:minHeight="56dp"
-    android:orientation="horizontal"
-    android:paddingVertical="10dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="8dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="4dp">
 
-    <!-- Círculo de color: el adaptador le pone la forma redonda y el color de la materia -->
-    <View
-        android:id="@+id/vColor"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="16dp" />
-
-    <!-- Nombre en negrita y docente debajo; ocupa todo el ancho que sobra -->
+    <!-- Tarjeta: fondo gris oscuro con borde y esquinas de 12dp (fondo_tarjeta.xml, igual que en Inicio).
+         foreground: el efecto al tocar se dibuja solo sobre la tarjeta -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="@drawable/fondo_tarjeta"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:minHeight="64dp"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp">
 
-        <TextView
-            android:id="@+id/tvNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        <!-- Círculo de color: el adaptador le pone la forma redonda y el color de la materia -->
+        <View
+            android:id="@+id/vColor"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp" />
 
-        <TextView
-            android:id="@+id/tvDocente"
-            android:layout_width="match_parent"
+        <!-- Nombre en negrita y docente debajo; ocupa todo el ancho que sobra -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDocente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_secundario"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Botón ✕ para eliminar (48dp mínimo) -->
+        <ImageButton
+            android:id="@+id/btnEliminar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/btn_eliminar_materia"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
     </LinearLayout>
-
-    <!-- Botón ✕ para eliminar (48dp mínimo) -->
-    <ImageButton
-        android:id="@+id/btnEliminar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/btn_eliminar_materia"
-        android:src="@android:drawable/ic_menu_close_clear_cancel" />
-</LinearLayout>
+</FrameLayout>

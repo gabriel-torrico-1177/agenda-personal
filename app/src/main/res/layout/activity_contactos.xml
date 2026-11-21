@@ -56,14 +56,21 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp" />
 
-            <!-- Lista de contactos (la llena ContactoAdapter) -->
+            <!-- Lista de contactos (la llena ContactoAdapter).
+                 Sin líneas divisorias (cada fila ya es una tarjeta) y sin el resaltado gris de toda la fila
+                 (el efecto al tocar lo dibuja la tarjeta). paddingTop: un poco de aire debajo del buscador;
+                 paddingBottom 88dp: la última tarjeta no queda tapada por el botón + -->
             <ListView
                 android:id="@+id/lvContactos"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingBottom="88dp"
-                android:clipToPadding="false" />
+                android:clipToPadding="false"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:listSelector="@android:color/transparent"
+                android:paddingTop="8dp"
+                android:paddingBottom="88dp" />
 
             <!-- Mensaje cuando la lista está vacía (el ListView lo muestra solo) -->
             <TextView
