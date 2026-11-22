@@ -4,8 +4,11 @@
 
     <!-- screenOrientation="portrait" en cada pantalla: la app se usa siempre en vertical,
          así no se pierden los datos elegidos en un formulario al girar el teléfono -->
+    <!-- allowBackup="false": los datos (agenda.db y el nombre) no se copian a Google Drive,
+         porque la app es "sin nube". La transferencia a un teléfono nuevo se decide
+         en data_extraction_rules.xml (Android 12 o más) -->
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"

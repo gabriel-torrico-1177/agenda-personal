@@ -1,19 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-   Sample data extraction rules file; uncomment and customize as necessary.
-   See https://developer.android.com/about/versions/12/backup-restore#xml-changes
-   for details.
--->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reglas de respaldo para Android 12 o más (API 31+).
+     La app es "sin nube": nada se copia a Google Drive.
+     Solo se permite pasar los datos a un teléfono nuevo (copia directa, sin internet). -->
 <data-extraction-rules>
+
+    <!-- Respaldo en la nube (Google Drive): se excluye todo -->
     <cloud-backup>
-        <!-- TODO: Use <include> and <exclude> to control what is backed up.
-        <include .../>
-        <exclude .../>
-        -->
+        <exclude domain="root" path="." />
+        <exclude domain="file" path="." />
+        <exclude domain="database" path="." />
+        <exclude domain="sharedpref" path="." />
+        <exclude domain="external" path="." />
     </cloud-backup>
-    <!--
+
+    <!-- Transferencia directa a un teléfono nuevo (cable o wifi, sin nube):
+         la base de datos agenda.db y el archivo "perfil" con el nombre -->
     <device-transfer>
-        <include .../>
-        <exclude .../>
+        <include domain="database" path="." />
+        <include domain="sharedpref" path="." />
     </device-transfer>
-    -->
+
 </data-extraction-rules>
