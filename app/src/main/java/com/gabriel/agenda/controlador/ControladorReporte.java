@@ -23,6 +23,14 @@ public class ControladorReporte {
     // (El mensaje "No hay sesiones en esta semana" está en strings.xml: lo muestra la vista)
     public static final String TOTAL = "Total";
 
+    // Niveles de cumplimiento de una materia (la vista elige el color de la etiqueta del %):
+    // ALTO = 80 % o más (verde), MEDIO = de 50 % a 79 % (ámbar), BAJO = menos de 50 % (rojo)
+    public static final String NIVEL_ALTO = "ALTO";
+    public static final String NIVEL_MEDIO = "MEDIO";
+    public static final String NIVEL_BAJO = "BAJO";
+    private static final int MINIMO_ALTO = 80;
+    private static final int MINIMO_MEDIO = 50;
+
     private final SesionDAO sesionDAO;
 
     // Constructor: crea el DAO con el que se leen las sesiones
@@ -76,7 +84,19 @@ public class ControladorReporte {
         return total;
     }
 
-    // Texto de horas para la tabla: 90 minutos → "1,5 h" (usa el mismo formato que la meta)
+    // Decide el nivel de cumplimiento según el porcentaje. Ejemplos: 85 → ALTO, 50 → MEDIO, 0 → BAJO.
+    // Lo decide el controlador para que la vista no haga comparaciones: solo pinta el color
+    public String nivelCumplimiento(int porcentaje) {
+        if (porcentaje >= MINIMO_ALTO) {
+            return NIVEL_ALTO;
+        }
+        if (porcentaje >= MINIMO_MEDIO) {
+            return NIVEL_MEDIO;
+        }
+        return NIVEL_BAJO;
+    }
+
+    // Texto de horas para el reporte: 90 minutos → "1,5 h" (usa el mismo formato que la meta)
     public String horasComoTexto(int minutos) {
         return ControladorMeta.horasComoTexto(minutos) + " h";
     }

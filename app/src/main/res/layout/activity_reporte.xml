@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla P7: reporte semanal. Arriba la semana con ◀ ▶, en medio la tabla y abajo el menú -->
+<!-- Pantalla P7: reporte semanal. Arriba la semana con ◀ ▶, la tarjeta de resumen, una tarjeta por materia y abajo el menú -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".vista.ReporteActivity">
 
-    <!-- Encabezado, fila 1: flecha ← (boton_volver.xml) y título -->
+    <!-- Encabezado, fila 1: flecha ← (boton_volver.xml) y título "Reporte semanal" -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:padding="0dp"
             android:text="@string/flecha_anterior" />
 
-        <!-- "09/11 – 15/11" -->
+        <!-- "Semana del 16/11 al 22/11" -->
         <TextView
             android:id="@+id/tvSemana"
             android:layout_width="wrap_content"
@@ -65,61 +65,105 @@
             android:text="@string/flecha_siguiente" />
     </LinearLayout>
 
-    <!-- ScrollView: si hay muchas materias, la tabla se desplaza -->
-    <ScrollView
-        android:id="@+id/svTabla"
+    <!-- Tarjeta de resumen (reemplaza la fila "Total"): % de la semana en grande, barra y horas.
+         Mismo estilo que la tarjeta de la meta (tarjeta_meta.xml) -->
+    <LinearLayout
+        android:id="@+id/tarjetaResumen"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/fondo_tarjeta"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Tabla: stretchColumns="0" hace que la columna Materia ocupe el ancho que sobra
-             y shrinkColumns="0" que se achique (en dos líneas) si el nombre es muy largo -->
-        <TableLayout
-            android:id="@+id/tlReporte"
+        <!-- Título con el ícono de gráfico de barras -->
+        <TextView
+            style="@style/TituloTarjeta"
+            android:drawableStart="@drawable/ic_grafico"
+            android:text="@string/titulo_cumplimiento" />
+
+        <!-- Porcentaje de la semana, por ejemplo "62 %" -->
+        <TextView
+            android:id="@+id/tvPorcentajeTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:shrinkColumns="0"
-            android:stretchColumns="0">
+            android:textColor="@color/texto"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-            <!-- Fila de títulos (siempre está; las demás filas las agrega ReporteActivity) -->
-            <TableRow android:background="@color/fila_destacada">
+        <!-- Barra de 0 a 100 (%), la misma de la meta (barra_progreso.xml) -->
+        <ProgressBar
+            android:id="@+id/pbTotal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginVertical="8dp"
+            android:max="100"
+            android:maxHeight="8dp"
+            android:minHeight="8dp"
+            android:progressDrawable="@drawable/barra_progreso" />
 
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:gravity="start"
-                    android:text="@string/col_materia"
-                    android:textStyle="bold" />
+        <!-- "5,93 h hechas de 9,5 h planificadas" -->
+        <TextView
+            android:id="@+id/tvHorasTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp" />
+    </LinearLayout>
 
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:text="@string/col_plan"
-                    android:textStyle="bold" />
+    <!-- Una tarjeta por materia (item_reporte.xml, la arma ReporteAdapter).
+         divider @null: sin líneas entre filas (el espacio lo da cada tarjeta);
+         listSelector transparente: las tarjetas no se tocan, así no se ilumina la fila -->
+    <ListView
+        android:id="@+id/lvReporte"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:paddingVertical="8dp" />
 
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:text="@string/col_hechas"
-                    android:textStyle="bold" />
-
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:text="@string/col_porcentaje"
-                    android:textStyle="bold" />
-            </TableRow>
-        </TableLayout>
-    </ScrollView>
-
-    <!-- Mensaje cuando la semana no tiene sesiones (se muestra en lugar de la tabla) -->
-    <TextView
-        android:id="@+id/tvVacio"
+    <!-- Semana sin sesiones (se muestra en lugar de la tarjeta y la lista): ícono grande
+         de gráfico, el mensaje "No hay sesiones en esta semana" y la pista, todo centrado
+         (igual que la lista vacía de Materias) -->
+    <LinearLayout
+        android:id="@+id/llVacio"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="16dp"
-        android:text="@string/reporte_vacio"
-        android:textSize="16sp"
-        android:visibility="gone" />
+        android:visibility="gone">
+
+        <!-- tint: pinta de gris (texto_pista) el ícono ic_grafico, que es verde -->
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_grafico"
+            android:tint="@color/texto_pista" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/reporte_vacio"
+            android:textColor="@color/texto_secundario"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/pista_reporte_vacio"
+            android:textColor="@color/texto_pista"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <!-- Menú inferior -->
     <include layout="@layout/menu_inferior" />

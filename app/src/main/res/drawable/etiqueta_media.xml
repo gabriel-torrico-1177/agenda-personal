@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo de la etiqueta del % en el reporte, nivel ámbar (50–79 %):
+     rectángulo con esquinas redondeadas (como fondo_estado.xml) relleno del color al 20 % -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="12dp" />
+    <solid android:color="@color/nivel_medio_fondo" />
+</shape>
