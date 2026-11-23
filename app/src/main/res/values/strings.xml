@@ -185,6 +185,10 @@
     <string name="col_porcentaje" formatted="false">%</string>
     <!-- %1$d se reemplaza por el número: "75%" -->
     <string name="formato_porcentaje">%1$d%%</string>
+    <!-- Tarjeta de resumen: %1$d = porcentaje → "62 %"; %1$s y %2$s = horas → "5,93 h hechas de 9,5 h planificadas" -->
+    <string name="titulo_cumplimiento">CUMPLIMIENTO DE LA SEMANA</string>
+    <string name="formato_porcentaje_total">%1$d %%</string>
+    <string name="formato_horas_total">%1$s hechas de %2$s planificadas</string>
     <string name="reporte_vacio">No hay sesiones en esta semana</string>
 
     <!-- Estadísticas (P6) -->

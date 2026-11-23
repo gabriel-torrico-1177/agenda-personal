@@ -65,6 +65,53 @@
             android:text="@string/flecha_siguiente" />
     </LinearLayout>
 
+    <!-- Tarjeta de resumen (reemplaza la fila "Total"): % de la semana en grande, barra y horas.
+         Mismo estilo que la tarjeta de la meta (tarjeta_meta.xml) -->
+    <LinearLayout
+        android:id="@+id/tarjetaResumen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/fondo_tarjeta"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título con el ícono de gráfico de barras -->
+        <TextView
+            style="@style/TituloTarjeta"
+            android:drawableStart="@drawable/ic_grafico"
+            android:text="@string/titulo_cumplimiento" />
+
+        <!-- Porcentaje de la semana, por ejemplo "62 %" -->
+        <TextView
+            android:id="@+id/tvPorcentajeTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/texto"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- Barra de 0 a 100 (%), la misma de la meta (barra_progreso.xml) -->
+        <ProgressBar
+            android:id="@+id/pbTotal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginVertical="8dp"
+            android:max="100"
+            android:maxHeight="8dp"
+            android:minHeight="8dp"
+            android:progressDrawable="@drawable/barra_progreso" />
+
+        <!-- "5,93 h hechas de 9,5 h planificadas" -->
+        <TextView
+            android:id="@+id/tvHorasTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp" />
+    </LinearLayout>
+
     <!-- ScrollView: si hay muchas materias, la tabla se desplaza -->
     <ScrollView
         android:id="@+id/svTabla"

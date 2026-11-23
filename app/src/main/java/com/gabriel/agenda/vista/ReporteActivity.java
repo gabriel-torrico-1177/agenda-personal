@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -36,6 +37,11 @@ public class ReporteActivity extends PantallaBase {
     private TextView tvSemana;
     private TableLayout tlReporte;
     private View svTabla;
+    // Tarjeta de resumen: "62 %", la barra y "5,93 h hechas de 9,5 h planificadas"
+    private View tarjetaResumen;
+    private TextView tvPorcentajeTotal;
+    private ProgressBar pbTotal;
+    private TextView tvHorasTotal;
     private TextView tvVacio;
     private ControladorReporte controlador;
     // Solo para el texto "Semana del 16/11 al 22/11" (el mismo que usa Estadísticas)
@@ -61,6 +67,10 @@ public class ReporteActivity extends PantallaBase {
         tvSemana = findViewById(R.id.tvSemana);
         tlReporte = findViewById(R.id.tlReporte);
         svTabla = findViewById(R.id.svTabla);
+        tarjetaResumen = findViewById(R.id.tarjetaResumen);
+        tvPorcentajeTotal = findViewById(R.id.tvPorcentajeTotal);
+        pbTotal = findViewById(R.id.pbTotal);
+        tvHorasTotal = findViewById(R.id.tvHorasTotal);
         tvVacio = findViewById(R.id.tvVacio);
         Button btnAnterior = findViewById(R.id.btnAnterior);
         Button btnSiguiente = findViewById(R.id.btnSiguiente);
@@ -107,20 +117,31 @@ public class ReporteActivity extends PantallaBase {
 
         List<FilaReporte> filas = controlador.generarReporte(fechaParaBuscar(lunes));
 
-        // Semana sin sesiones: se oculta la tabla y se muestra "No hay sesiones en esta semana"
+        // Semana sin sesiones: se ocultan la tarjeta y la tabla y se muestra "No hay sesiones en esta semana"
         if (filas.isEmpty()) {
+            tarjetaResumen.setVisibility(View.GONE);
             svTabla.setVisibility(View.GONE);
             tvVacio.setVisibility(View.VISIBLE);
             return;
         }
+        tarjetaResumen.setVisibility(View.VISIBLE);
         svTabla.setVisibility(View.VISIBLE);
         tvVacio.setVisibility(View.GONE);
 
-        // Una fila por materia y, al final, la fila de total en negrita con fondo gris
+        // Una fila por materia (el total ya no va en la tabla: va en la tarjeta de resumen)
         for (FilaReporte fila : filas) {
             agregarFila(fila, false);
         }
-        agregarFila(controlador.calcularTotal(filas), true);
+        mostrarResumen(controlador.calcularTotal(filas));
+    }
+
+    // Llena la tarjeta de resumen con el total que calculó el controlador
+    private void mostrarResumen(FilaReporte total) {
+        tvPorcentajeTotal.setText(getString(R.string.formato_porcentaje_total, total.getPorcentaje()));
+        pbTotal.setProgress(total.getPorcentaje()); // la barra va de 0 a 100
+        tvHorasTotal.setText(getString(R.string.formato_horas_total,
+                controlador.horasComoTexto(total.getMinutosCompletados()),
+                controlador.horasComoTexto(total.getMinutosPlanificados())));
     }
 
     // Agrega a la tabla una fila con 4 celdas: materia, planificadas, hechas y porcentaje
