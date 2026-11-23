@@ -16,6 +16,7 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.gabriel.agenda.R;
+import com.gabriel.agenda.controlador.ControladorMeta;
 import com.gabriel.agenda.controlador.ControladorReporte;
 import com.gabriel.agenda.modelo.FilaReporte;
 
@@ -37,6 +38,8 @@ public class ReporteActivity extends PantallaBase {
     private View svTabla;
     private TextView tvVacio;
     private ControladorReporte controlador;
+    // Solo para el texto "Semana del 16/11 al 22/11" (el mismo que usa Estadísticas)
+    private ControladorMeta controladorMeta;
 
     // Se ejecuta al abrir la pantalla
     @Override
@@ -63,6 +66,7 @@ public class ReporteActivity extends PantallaBase {
         Button btnSiguiente = findViewById(R.id.btnSiguiente);
 
         controlador = new ControladorReporte(this);
+        controladorMeta = new ControladorMeta(this);
 
         // Al abrir: la semana de hoy (retrocede desde hoy hasta el lunes)
         lunes = Calendar.getInstance();
@@ -95,11 +99,8 @@ public class ReporteActivity extends PantallaBase {
 
     // Muestra la semana y arma la tabla (o el mensaje si la semana no tiene sesiones)
     private void mostrarReporte() {
-        // "09/11 – 15/11"
-        Calendar domingo = (Calendar) lunes.clone();
-        domingo.add(Calendar.DAY_OF_MONTH, DIAS_SEMANA - 1);
-        tvSemana.setText(getString(R.string.formato_semana,
-                diaYMes(lunes), diaYMes(domingo)));
+        // "Semana del 16/11 al 22/11": el texto lo arma el controlador, igual que en Estadísticas
+        tvSemana.setText(controladorMeta.textoSemana(fechaParaBuscar(lunes)));
 
         // Borra las filas de la semana anterior: todas menos la 0, que es la de títulos
         tlReporte.removeViews(1, tlReporte.getChildCount() - 1);
@@ -148,12 +149,6 @@ public class ReporteActivity extends PantallaBase {
         }
         tableRow.addView(celda);
         return celda;
-    }
-
-    // "09/11" (día/mes) para el encabezado de la semana
-    private String diaYMes(Calendar fecha) {
-        return String.format(Locale.ROOT, "%02d/%02d",
-                fecha.get(Calendar.DAY_OF_MONTH), fecha.get(Calendar.MONTH) + 1);
     }
 
     // Fecha como AAAA-MM-DD para buscar en la base de datos (mes + 1 porque Calendar empieza en 0)

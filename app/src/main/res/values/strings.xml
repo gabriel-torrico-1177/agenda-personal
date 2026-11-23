@@ -177,7 +177,7 @@
     <string name="pista_notas">Ej.: Repasar integrales</string>
 
     <!-- Reporte semanal (P7) -->
-    <string name="titulo_reporte">Reporte</string>
+    <string name="titulo_reporte">Reporte semanal</string>
     <string name="col_materia">Materia</string>
     <string name="col_plan">Plan.</string>
     <string name="col_hechas">Hechas</string>
@@ -185,8 +185,6 @@
     <string name="col_porcentaje" formatted="false">%</string>
     <!-- %1$d se reemplaza por el número: "75%" -->
     <string name="formato_porcentaje">%1$d%%</string>
-    <!-- Semana: %1$s = lunes, %2$s = domingo → "09/11 – 15/11" -->
-    <string name="formato_semana">%1$s – %2$s</string>
     <string name="reporte_vacio">No hay sesiones en esta semana</string>
 
     <!-- Estadísticas (P6) -->

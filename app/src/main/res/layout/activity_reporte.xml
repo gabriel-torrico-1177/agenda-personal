@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".vista.ReporteActivity">
 
-    <!-- Encabezado, fila 1: flecha ← (boton_volver.xml) y título -->
+    <!-- Encabezado, fila 1: flecha ← (boton_volver.xml) y título "Reporte semanal" -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:padding="0dp"
             android:text="@string/flecha_anterior" />
 
-        <!-- "09/11 – 15/11" -->
+        <!-- "Semana del 16/11 al 22/11" -->
         <TextView
             android:id="@+id/tvSemana"
             android:layout_width="wrap_content"
