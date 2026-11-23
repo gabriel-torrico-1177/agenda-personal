@@ -77,7 +77,7 @@ public class ReporteActivity extends PantallaBase {
         controladorMeta = new ControladorMeta(this);
 
         // El adaptador empieza con una lista vacía; mostrarReporte() le pasa las filas de la semana
-        adapter = new ReporteAdapter(this, new ArrayList<FilaReporte>());
+        adapter = new ReporteAdapter(this, new ArrayList<FilaReporte>(), controlador);
         lvReporte.setAdapter(adapter);
 
         // Al abrir: la semana de hoy (retrocede desde hoy hasta el lunes)

@@ -11,8 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.gabriel.agenda.R;
 import com.gabriel.agenda.controlador.ControladorMeta;
+import com.gabriel.agenda.controlador.ControladorReporte;
 import com.gabriel.agenda.modelo.FilaReporte;
 
 import java.util.List;
@@ -24,11 +27,14 @@ public class ReporteAdapter extends BaseAdapter {
 
     private final Context context;
     private List<FilaReporte> filas;
+    // El controlador decide el nivel (ALTO, MEDIO o BAJO) de cada porcentaje
+    private final ControladorReporte controlador;
 
-    // Constructor: recibe la pantalla y la lista de filas a mostrar
-    public ReporteAdapter(Context context, List<FilaReporte> filas) {
+    // Constructor: recibe la pantalla, la lista de filas a mostrar y el controlador del reporte
+    public ReporteAdapter(Context context, List<FilaReporte> filas, ControladorReporte controlador) {
         this.context = context;
         this.filas = filas;
+        this.controlador = controlador;
     }
 
     // Cambia la lista (por ejemplo, al pasar a otra semana) y avisa al ListView que se redibuje
@@ -83,6 +89,7 @@ public class ReporteAdapter extends BaseAdapter {
 
         tvNombre.setText(fila.getMateria());
         tvPorcentaje.setText(context.getString(R.string.formato_porcentaje, fila.getPorcentaje()));
+        pintarEtiqueta(tvPorcentaje, controlador.nivelCumplimiento(fila.getPorcentaje()));
 
         // "3 / 3,5 h": horas hechas / planificadas (el formato de las horas lo da el controlador)
         tvHoras.setText(context.getString(R.string.formato_hechas_de_plan,
@@ -95,6 +102,26 @@ public class ReporteAdapter extends BaseAdapter {
         pbMateria.setProgressTintList(ColorStateList.valueOf(color));
 
         return convertView;
+    }
+
+    // Pinta la etiqueta del % según el nivel que decidió el controlador:
+    // ALTO = verde, MEDIO = ámbar, BAJO = rojo. Se pone el fondo y el color cada vez
+    // porque la tarjeta puede reutilizarse (convertView) con otra materia de otro nivel
+    private void pintarEtiqueta(TextView etiqueta, String nivel) {
+        int fondo;
+        int colorTexto;
+        if (ControladorReporte.NIVEL_ALTO.equals(nivel)) {
+            fondo = R.drawable.etiqueta_alta;
+            colorTexto = R.color.nivel_alto;
+        } else if (ControladorReporte.NIVEL_MEDIO.equals(nivel)) {
+            fondo = R.drawable.etiqueta_media;
+            colorTexto = R.color.nivel_medio;
+        } else {
+            fondo = R.drawable.etiqueta_baja;
+            colorTexto = R.color.nivel_bajo;
+        }
+        etiqueta.setBackgroundResource(fondo);
+        etiqueta.setTextColor(ContextCompat.getColor(context, colorTexto));
     }
 
     // Primera letra del nombre en mayúscula para el círculo ("cálculo II" → "C"); "?" si no hay nombre.

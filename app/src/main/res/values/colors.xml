@@ -24,8 +24,17 @@
     <color name="menu_activo_texto">@color/verde</color>
     <color name="menu_activo_fondo">@color/verde_transparente</color>
 
-    <!-- Fila de títulos y fila de total del reporte, y "pista" de las barras de las estadísticas -->
+    <!-- "Pista" gris de las barras de las estadísticas (fondo_barra.xml) -->
     <color name="fila_destacada">@color/tarjeta_alta</color>
+
+    <!-- Etiqueta del % en el reporte: texto del color y fondo del mismo color al 20 %.
+         Alto (80 % o más) = verde; medio (50–79 %) = ámbar; bajo (menos de 50 %) = rojo -->
+    <color name="nivel_alto">@color/verde</color>
+    <color name="nivel_alto_fondo">@color/verde_transparente</color>
+    <color name="nivel_medio">#FFFFB300</color>
+    <color name="nivel_medio_fondo">#33FFB300</color>
+    <color name="nivel_bajo">#FFF44336</color>
+    <color name="nivel_bajo_fondo">#33F44336</color>
 
     <!-- Sesión "En curso": verde para el borde y la barra, y el mismo verde transparente de fondo -->
     <color name="en_curso">@color/verde</color>

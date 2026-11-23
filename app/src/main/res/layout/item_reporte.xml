@@ -57,12 +57,15 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Porcentaje de la materia, por ejemplo "85 %" -->
+                <!-- Etiqueta del porcentaje, por ejemplo "85 %". El adaptador le pone el fondo
+                     (etiqueta_alta, etiqueta_media o etiqueta_baja) y el color del texto -->
                 <TextView
                     android:id="@+id/tvPorcentaje"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
                     android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
