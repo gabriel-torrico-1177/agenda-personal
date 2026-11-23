@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Diseño de UNA materia del reporte semanal: tarjeta con círculo de color, nombre, porcentaje,
+     "hechas / planificadas h" y una barra de avance con el color de la materia.
+     ReporteAdapter lo usa una vez por materia -->
+<!-- Raíz con padding: el ListView ignora los márgenes de la raíz de cada fila, por eso el espacio
+     alrededor de la tarjeta se hace con padding (igual que item_materia.xml) -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="4dp">
+
+    <!-- Tarjeta: fondo gris oscuro con borde y esquinas de 12dp (fondo_tarjeta.xml) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fondo_tarjeta"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <!-- Círculo de 34dp con la inicial de la materia. El adaptador le pone la forma
+             redonda, el color de la materia y la letra -->
+        <TextView
+            android:id="@+id/vColor"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginEnd="14dp"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:textColor="@color/texto"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Columna derecha: nombre y %, horas y barra -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Fila 1: nombre (ocupa lo que sobra) y el porcentaje a la derecha -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNombre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/texto"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Porcentaje de la materia, por ejemplo "85 %" -->
+                <TextView
+                    android:id="@+id/tvPorcentaje"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Fila 2: horas hechas / planificadas, por ejemplo "3 / 3,5 h" -->
+            <TextView
+                android:id="@+id/tvHoras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="14sp" />
+
+            <!-- Fila 3: barra de 0 a 100 (%). Usa barra_progreso.xml (la de la meta)
+                 y el adaptador cambia el verde por el color de la materia -->
+            <ProgressBar
+                android:id="@+id/pbMateria"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:maxHeight="6dp"
+                android:minHeight="6dp"
+                android:progressDrawable="@drawable/barra_progreso" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

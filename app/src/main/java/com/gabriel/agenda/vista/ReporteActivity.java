@@ -1,14 +1,10 @@
 package com.gabriel.agenda.vista;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.core.graphics.Insets;
@@ -21,12 +17,14 @@ import com.gabriel.agenda.controlador.ControladorMeta;
 import com.gabriel.agenda.controlador.ControladorReporte;
 import com.gabriel.agenda.modelo.FilaReporte;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-// Pantalla P7: reporte de la semana con una tabla Materia / Plan. / Hechas / % (capa vista).
-// Los cálculos los hace ControladorReporte; aquí solo se arma la tabla
+// Pantalla P7: reporte de la semana (capa vista). Arriba una tarjeta de resumen con el total
+// y debajo una tarjeta por materia (ListView + ReporteAdapter).
+// Los cálculos los hace ControladorReporte; aquí solo se muestran
 public class ReporteActivity extends PantallaBase {
 
     private static final int DIAS_SEMANA = 7;
@@ -35,13 +33,14 @@ public class ReporteActivity extends PantallaBase {
     private Calendar lunes;
 
     private TextView tvSemana;
-    private TableLayout tlReporte;
-    private View svTabla;
     // Tarjeta de resumen: "62 %", la barra y "5,93 h hechas de 9,5 h planificadas"
     private View tarjetaResumen;
     private TextView tvPorcentajeTotal;
     private ProgressBar pbTotal;
     private TextView tvHorasTotal;
+    // Lista con una tarjeta por materia
+    private ListView lvReporte;
+    private ReporteAdapter adapter;
     private TextView tvVacio;
     private ControladorReporte controlador;
     // Solo para el texto "Semana del 16/11 al 22/11" (el mismo que usa Estadísticas)
@@ -65,18 +64,21 @@ public class ReporteActivity extends PantallaBase {
 
         // Conecta las variables con el layout
         tvSemana = findViewById(R.id.tvSemana);
-        tlReporte = findViewById(R.id.tlReporte);
-        svTabla = findViewById(R.id.svTabla);
         tarjetaResumen = findViewById(R.id.tarjetaResumen);
         tvPorcentajeTotal = findViewById(R.id.tvPorcentajeTotal);
         pbTotal = findViewById(R.id.pbTotal);
         tvHorasTotal = findViewById(R.id.tvHorasTotal);
+        lvReporte = findViewById(R.id.lvReporte);
         tvVacio = findViewById(R.id.tvVacio);
         Button btnAnterior = findViewById(R.id.btnAnterior);
         Button btnSiguiente = findViewById(R.id.btnSiguiente);
 
         controlador = new ControladorReporte(this);
         controladorMeta = new ControladorMeta(this);
+
+        // El adaptador empieza con una lista vacía; mostrarReporte() le pasa las filas de la semana
+        adapter = new ReporteAdapter(this, new ArrayList<FilaReporte>());
+        lvReporte.setAdapter(adapter);
 
         // Al abrir: la semana de hoy (retrocede desde hoy hasta el lunes)
         lunes = Calendar.getInstance();
@@ -107,69 +109,36 @@ public class ReporteActivity extends PantallaBase {
         mostrarReporte();
     }
 
-    // Muestra la semana y arma la tabla (o el mensaje si la semana no tiene sesiones)
+    // Muestra la semana, la tarjeta de resumen y una tarjeta por materia
+    // (o el mensaje si la semana no tiene sesiones)
     private void mostrarReporte() {
         // "Semana del 16/11 al 22/11": el texto lo arma el controlador, igual que en Estadísticas
         tvSemana.setText(controladorMeta.textoSemana(fechaParaBuscar(lunes)));
 
-        // Borra las filas de la semana anterior: todas menos la 0, que es la de títulos
-        tlReporte.removeViews(1, tlReporte.getChildCount() - 1);
-
         List<FilaReporte> filas = controlador.generarReporte(fechaParaBuscar(lunes));
+        adapter.actualizar(filas); // una tarjeta por materia
 
-        // Semana sin sesiones: se ocultan la tarjeta y la tabla y se muestra "No hay sesiones en esta semana"
+        // Semana sin sesiones: se ocultan la tarjeta y la lista y se muestra "No hay sesiones en esta semana"
         if (filas.isEmpty()) {
             tarjetaResumen.setVisibility(View.GONE);
-            svTabla.setVisibility(View.GONE);
+            lvReporte.setVisibility(View.GONE);
             tvVacio.setVisibility(View.VISIBLE);
             return;
         }
         tarjetaResumen.setVisibility(View.VISIBLE);
-        svTabla.setVisibility(View.VISIBLE);
+        lvReporte.setVisibility(View.VISIBLE);
         tvVacio.setVisibility(View.GONE);
 
-        // Una fila por materia (el total ya no va en la tabla: va en la tarjeta de resumen)
-        for (FilaReporte fila : filas) {
-            agregarFila(fila, false);
-        }
         mostrarResumen(controlador.calcularTotal(filas));
     }
 
     // Llena la tarjeta de resumen con el total que calculó el controlador
     private void mostrarResumen(FilaReporte total) {
-        tvPorcentajeTotal.setText(getString(R.string.formato_porcentaje_total, total.getPorcentaje()));
+        tvPorcentajeTotal.setText(getString(R.string.formato_porcentaje, total.getPorcentaje()));
         pbTotal.setProgress(total.getPorcentaje()); // la barra va de 0 a 100
         tvHorasTotal.setText(getString(R.string.formato_horas_total,
                 controlador.horasComoTexto(total.getMinutosCompletados()),
                 controlador.horasComoTexto(total.getMinutosPlanificados())));
-    }
-
-    // Agrega a la tabla una fila con 4 celdas: materia, planificadas, hechas y porcentaje
-    private void agregarFila(FilaReporte fila, boolean esTotal) {
-        TableRow tableRow = new TableRow(this);
-        if (esTotal) {
-            tableRow.setBackgroundResource(R.color.fila_destacada);
-        }
-
-        TextView tvMateria = crearCelda(tableRow, fila.getMateria(), esTotal);
-        tvMateria.setGravity(Gravity.START); // el nombre va a la izquierda; los números, a la derecha
-        crearCelda(tableRow, controlador.horasComoTexto(fila.getMinutosPlanificados()), esTotal);
-        crearCelda(tableRow, controlador.horasComoTexto(fila.getMinutosCompletados()), esTotal);
-        crearCelda(tableRow, getString(R.string.formato_porcentaje, fila.getPorcentaje()), esTotal);
-
-        tlReporte.addView(tableRow);
-    }
-
-    // Crea una celda desde celda_reporte.xml, le pone el texto y la agrega a la fila
-    private TextView crearCelda(TableRow tableRow, String texto, boolean negrita) {
-        TextView celda = (TextView) LayoutInflater.from(this)
-                .inflate(R.layout.celda_reporte, tableRow, false);
-        celda.setText(texto);
-        if (negrita) {
-            celda.setTypeface(null, Typeface.BOLD);
-        }
-        tableRow.addView(celda);
-        return celda;
     }
 
     // Fecha como AAAA-MM-DD para buscar en la base de datos (mes + 1 porque Calendar empieza en 0)

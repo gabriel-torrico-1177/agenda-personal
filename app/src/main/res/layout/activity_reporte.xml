@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla P7: reporte semanal. Arriba la semana con ◀ ▶, en medio la tabla y abajo el menú -->
+<!-- Pantalla P7: reporte semanal. Arriba la semana con ◀ ▶, la tarjeta de resumen, una tarjeta por materia y abajo el menú -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -112,51 +112,20 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <!-- ScrollView: si hay muchas materias, la tabla se desplaza -->
-    <ScrollView
-        android:id="@+id/svTabla"
+    <!-- Una tarjeta por materia (item_reporte.xml, la arma ReporteAdapter).
+         divider @null: sin líneas entre filas (el espacio lo da cada tarjeta);
+         listSelector transparente: las tarjetas no se tocan, así no se ilumina la fila -->
+    <ListView
+        android:id="@+id/lvReporte"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:paddingVertical="8dp" />
 
-        <!-- Tabla: stretchColumns="0" hace que la columna Materia ocupe el ancho que sobra
-             y shrinkColumns="0" que se achique (en dos líneas) si el nombre es muy largo -->
-        <TableLayout
-            android:id="@+id/tlReporte"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:shrinkColumns="0"
-            android:stretchColumns="0">
-
-            <!-- Fila de títulos (siempre está; las demás filas las agrega ReporteActivity) -->
-            <TableRow android:background="@color/fila_destacada">
-
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:gravity="start"
-                    android:text="@string/col_materia"
-                    android:textStyle="bold" />
-
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:text="@string/col_plan"
-                    android:textStyle="bold" />
-
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:text="@string/col_hechas"
-                    android:textStyle="bold" />
-
-                <TextView
-                    style="@style/CeldaReporte"
-                    android:text="@string/col_porcentaje"
-                    android:textStyle="bold" />
-            </TableRow>
-        </TableLayout>
-    </ScrollView>
-
-    <!-- Mensaje cuando la semana no tiene sesiones (se muestra en lugar de la tabla) -->
+    <!-- Mensaje cuando la semana no tiene sesiones (se muestra en lugar de la tarjeta y la lista) -->
     <TextView
         android:id="@+id/tvVacio"
         android:layout_width="match_parent"
