@@ -186,6 +186,7 @@
     <!-- Tarjeta de una materia: horas hechas / planificadas → "3 / 3,5 h" -->
     <string name="formato_hechas_de_plan">%1$s / %2$s h</string>
     <string name="reporte_vacio">No hay sesiones en esta semana</string>
+    <string name="pista_reporte_vacio">Planifica una sesión en el calendario</string>
 
     <!-- Estadísticas (P6) -->
     <string name="titulo_estadisticas">Estadísticas</string>

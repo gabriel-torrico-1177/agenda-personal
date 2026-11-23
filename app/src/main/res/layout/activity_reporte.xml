@@ -125,17 +125,45 @@
         android:listSelector="@android:color/transparent"
         android:paddingVertical="8dp" />
 
-    <!-- Mensaje cuando la semana no tiene sesiones (se muestra en lugar de la tarjeta y la lista) -->
-    <TextView
-        android:id="@+id/tvVacio"
+    <!-- Semana sin sesiones (se muestra en lugar de la tarjeta y la lista): ícono grande
+         de gráfico, el mensaje "No hay sesiones en esta semana" y la pista, todo centrado
+         (igual que la lista vacía de Materias) -->
+    <LinearLayout
+        android:id="@+id/llVacio"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="16dp"
-        android:text="@string/reporte_vacio"
-        android:textSize="16sp"
-        android:visibility="gone" />
+        android:visibility="gone">
+
+        <!-- tint: pinta de gris (texto_pista) el ícono ic_grafico, que es verde -->
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_grafico"
+            android:tint="@color/texto_pista" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/reporte_vacio"
+            android:textColor="@color/texto_secundario"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/pista_reporte_vacio"
+            android:textColor="@color/texto_pista"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <!-- Menú inferior -->
     <include layout="@layout/menu_inferior" />

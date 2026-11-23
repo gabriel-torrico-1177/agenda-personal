@@ -41,7 +41,8 @@ public class ReporteActivity extends PantallaBase {
     // Lista con una tarjeta por materia
     private ListView lvReporte;
     private ReporteAdapter adapter;
-    private TextView tvVacio;
+    // Semana sin sesiones: ícono, "No hay sesiones en esta semana" y la pista
+    private View llVacio;
     private ControladorReporte controlador;
     // Solo para el texto "Semana del 16/11 al 22/11" (el mismo que usa Estadísticas)
     private ControladorMeta controladorMeta;
@@ -69,7 +70,7 @@ public class ReporteActivity extends PantallaBase {
         pbTotal = findViewById(R.id.pbTotal);
         tvHorasTotal = findViewById(R.id.tvHorasTotal);
         lvReporte = findViewById(R.id.lvReporte);
-        tvVacio = findViewById(R.id.tvVacio);
+        llVacio = findViewById(R.id.llVacio);
         Button btnAnterior = findViewById(R.id.btnAnterior);
         Button btnSiguiente = findViewById(R.id.btnSiguiente);
 
@@ -122,12 +123,12 @@ public class ReporteActivity extends PantallaBase {
         if (filas.isEmpty()) {
             tarjetaResumen.setVisibility(View.GONE);
             lvReporte.setVisibility(View.GONE);
-            tvVacio.setVisibility(View.VISIBLE);
+            llVacio.setVisibility(View.VISIBLE);
             return;
         }
         tarjetaResumen.setVisibility(View.VISIBLE);
         lvReporte.setVisibility(View.VISIBLE);
-        tvVacio.setVisibility(View.GONE);
+        llVacio.setVisibility(View.GONE);
 
         mostrarResumen(controlador.calcularTotal(filas));
     }
